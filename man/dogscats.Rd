@@ -3,7 +3,7 @@
 \docType{data}
 \name{dogscats}
 \alias{dogscats}
-\title{Veterinarian's survey of expenses of dogs and cats}
+\title{Veterinarian's survey of expenses of dogs and cats.}
 \format{A data frame with 50 observations and three variables:
 \describe{
    \item{type}{animal type (dog or cat)}

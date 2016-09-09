@@ -3,7 +3,7 @@
 \docType{data}
 \name{larkspur}
 \alias{larkspur}
-\title{Sample of pale white larkspur abundance}
+\title{Sample of pale white larkspur abundance.}
 \format{A data frame with 20 observations and two variables:
 \describe{
    \item{plants}{abundance in a sampled transect}

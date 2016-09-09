@@ -3,7 +3,7 @@
 \docType{data}
 \name{daphnia}
 \alias{daphnia}
-\title{Stratified random sample of daphnia counts}
+\title{Stratified random sample of daphnia counts.}
 \format{A data frame with 45 observations and two variables:
 \describe{
    \item{stratum}{layer from which the water sample was taken}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{radonbase}
 \alias{radonbase}
-\title{Survey of radon concentration in homes}
+\title{Survey of radon concentration in homes in Blue Ridge, VA.}
 \format{A data frame with 140 observations and two variables:
 \describe{
    \item{radon}{ground floor radon concentration in pCi/L}

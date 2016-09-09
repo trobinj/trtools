@@ -3,7 +3,7 @@
 \docType{data}
 \name{nectriacanker}
 \alias{nectriacanker}
-\title{Fixed area sample of tree diameter and abundance of nectria cankers}
+\title{Fixed area sample of tree diameter and abundance of nectria cankers.}
 \format{A data frame with 38 observations and three variables:
 \describe{
    \item{plot}{fixed area plot number}

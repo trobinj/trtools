@@ -1,6 +1,6 @@
 Package: trtools
 Type: Package
-Title: Misc tools.
+Title: Miscellaneous tools for teaching statistics, particularly regression and survey sampling.
 Version: 0.1.0
 Authors@R: person("Timothy", "Johnson", email = "trobinj@gmail.com", role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
