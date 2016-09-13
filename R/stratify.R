@@ -1,5 +1,4 @@
 stratify <- function(x, strata, breaks, plot = TRUE) {
-  # author: Timothy R. Johnson (trjohns@uidaho.edu)
   h <- hist(x, plot = FALSE, breaks = breaks)
   g <- length(h$counts)
   z <- data.frame(
@@ -20,7 +19,6 @@ stratify <- function(x, strata, breaks, plot = TRUE) {
   }
   z$stratum[is.na(z$stratum)] <- strata
   if (plot) {
-    require(ggplot2)
     p <- ggplot(data.frame(z, mids = h$mids)) +
       geom_bar(aes(x = mids, y = frequency, fill = factor(stratum)),
         color = "black", stat = "identity", width = (z$upper[1]-z$lower[1])) +
