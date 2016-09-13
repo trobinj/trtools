@@ -1,12 +1,13 @@
 Package: trtools
 Type: Package
-Title: Miscellaneous tools for teaching statistics, particularly regression and survey sampling.
+Title: Miscellaneous tools for teaching statistics.
 Version: 0.1.0
 Authors@R: person("Timothy", "Johnson", email = "trobinj@gmail.com", role = c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Description: This package includes data sets and a few utility functions that I use in my regression, survey sampling, and introductory statistics courses. This package is currently in development. 
+License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports: numDeriv (>= 2016.8-1)
+Suggests: ggplot2 (>= 2.1.0)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues
-

@@ -1,4 +1,4 @@
-#' Number of rotifers remaining in suspension by fluid density.
+#' Rotifer relative density experiment.  
 #'
 #' These data are from a study to estimate the relative density of rotifers (a micoscopic aquatic
 #' invertebrate). Batches of rotifers were put into tubes of a solution (Ficoll, a sygar polymer)

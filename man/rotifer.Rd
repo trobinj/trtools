@@ -3,7 +3,7 @@
 \docType{data}
 \name{rotifer}
 \alias{rotifer}
-\title{Number of rotifers remaining in suspension by fluid density.}
+\title{Rotifer relative density experiment.}
 \format{A data frame with 40 observations and four variables:
 \describe{
    \item{density}{density of solution}

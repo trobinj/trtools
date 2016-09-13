@@ -1,4 +1,4 @@
-#' Aerial photograph and field counts of dead trees
+#' Aerial photograph and field counts of dead trees.
 #'
 #' Counts of dead trees using aerial photographs and field counts in a 80ha
 #' parcel of land divided into 80 units. Field counts are more costly but 

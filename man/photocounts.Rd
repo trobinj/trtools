@@ -3,7 +3,7 @@
 \docType{data}
 \name{photocounts}
 \alias{photocounts}
-\title{Aerial photograph and field counts of dead trees}
+\title{Aerial photograph and field counts of dead trees.}
 \format{A data frame with 80 observations and two variables:
 \describe{
    \item{photo}{count of dead trees from aerial photograph}
