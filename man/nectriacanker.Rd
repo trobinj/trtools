@@ -11,23 +11,15 @@
    \item{cankers}{number of observed cankers on tree}
 }}
 \source{
-Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental
-sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
+Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
 
-Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources
-and the environment}. Boca Raton, FL: Chapman & Hall/CRC.
+Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources and the environment}. Boca Raton, FL: Chapman & Hall/CRC.
 }
 \usage{
 nectriacanker
 }
 \description{
-These data are from a sample of fixed area plots, each of area 0.01ha
-from a 10ha tract of land. Tree diameter and the number of cankers were
-observed for each tree in each plot.
-}
-\note{
-Gregoire and Valentine (2007) assume that no plots overlap and that no plots overlap
-the boundary of the tract.
+These data are from a sample of fixed area plots, each of area 0.01ha from a 10ha tract of land. Tree diameter and the number of cankers were observed for each tree in each plot.
 }
 \keyword{datasets}
 

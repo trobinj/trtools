@@ -10,20 +10,13 @@
    \item{basement}{does the house have a basement?}
 }}
 \source{
-Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources
-and the environment}. Boca Raton, FL: Chapman & Hall/CRC.
+Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources and the environment}. Boca Raton, FL: Chapman & Hall/CRC.
 }
 \usage{
 radonbase
 }
 \description{
-Data from a simple random survey of homes in Blue Ridge, VA, from a population of 13,895 homes. The radon
-concentration was measured in the ground floor of each home. It was also observed whether or not the home
-had a basement with concrete walls.
-}
-\note{
-These data were obtained using a simple random sampling design, not stratified random sampling. But
-the basement variable could be used for post-stratification.
+Data from a survey of homes in Blue Ridge, VA, from a population of 13,895 homes. The sampling design was simple random sampling. The radon concentration was measured in the ground floor of each home. It was also observed whether or not the home had a basement with concrete walls.
 }
 \keyword{datasets}
 
