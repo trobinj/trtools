@@ -1,7 +1,7 @@
 #' Confidence and prediction intervals for the expected/future response of a nonlinear regression model.
 #'
 #' \code{nlsint} computes approximate confidence intervals for the expected response and prediction intervals
-#' for the future response of a nonlinear regression model of class \code{nls}. 
+#' for the future response of a nonlinear regression model of class \code{nls}.
 #' 
 #' @param object An object of class \code{nls} (i.e., an estimated nonlinear regression model). 
 #' @param newdata Data frame of variables at which to compute confidence/prediction intervals.
