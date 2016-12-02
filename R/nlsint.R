@@ -18,8 +18,10 @@
 #' data <- data.frame(conc = seq(0.02, 1.10, by = 0.01))
 #' nlsint(model, newdata = data)
 #' nlsint(model, newdata = data, interval = "prediction") 
+#' @importFrom stats coef formula qt vcov
+#' @export
 nlsint <- function(object, newdata = eval(object$call$data),
-  interval = c("confidence", "prediction"), level = 0.95) {
+                   interval = c("confidence", "prediction"), level = 0.95) {
   
   if (class(object) != "nls") stop("nls objects only")
   
@@ -28,26 +30,29 @@ nlsint <- function(object, newdata = eval(object$call$data),
   p.names <- names(coef(object))       
   x.names <- names(object$dataClasses)
   
-  for (i in 1:length(x.names)) {
-      assign(x.names[i], newdata[[x.names[i]]])
+  if ("ii" %in% x.names) stop("iterator variable (ii) same as variable name")
+  if ("ii" %in% p.names) stop("iterator variable (ii) same as parameter name")
+  
+  for (ii in 1:length(x.names)) {
+    assign(x.names[ii], newdata[[x.names[ii]]])
   }
-
+  
   f <- function(theta) {
-    for (i in 1:length(p.names)) {
-      assign(p.names[i], theta[i])
+    for (ii in 1:length(p.names)) {
+      assign(p.names[ii], theta[ii])
     }
     eval(parse(text = as.character(formula(object))[3]))
   }
   
-  dmat <- jacobian(f, coef(object))
+  dmat <- numDeriv::jacobian(f, coef(object))
   vmat <- vcov(object)
   
   df <- summary(object)$df[2]
   yh <- f(coef(object))
   va <- diag(dmat %*% vmat %*% t(dmat))
   se <- switch(type,
-    confidence = sqrt(va), 
-    prediction = sqrt(va + summary(object)$sigma^2)
+               confidence = sqrt(va), 
+               prediction = sqrt(va + summary(object)$sigma^2)
   )
   lw <- yh - qt(level + (1 - level)/2, df) * se
   up <- yh + qt(level + (1 - level)/2, df) * se 
