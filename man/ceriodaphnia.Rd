@@ -4,26 +4,19 @@
 \name{ceriodaphnia}
 \alias{ceriodaphnia}
 \title{Ceriodaphnia toxicity study.}
-\format{A data frame with 70 observations and three variables:
+\format{A data frame with 50 observations and two variables:
 \describe{
-   \item{count}{number of organisms}
-   \item{concentration}{concentration of a component of jet engine fuel}
-   \item{strain}{strain of \emph{Ceriodaphnia}}
+   \item{concentration}{percent concentration of effluent}
+   \item{count}{number of young produced}
 }}
 \source{
-Myers, R. H., Montgomery, D. C., Vining, G. G., & Robinson, T. J. (2010). 
-\emph{Generalized linear models with applications in engineering and the sciences}. 
-Hoboken, New Jersey: Wiley.
+Bailer, A. J. & Oris, J. T. (1997). Estimating inhibition concentrations for differing response scales using generalized linear models. \emph{Environmental Toxicology and Chemistry}, \emph{16}, 1554-1559.
 }
 \usage{
 ceriodaphnia
 }
 \description{
-Data from a study of the effect of varying concentrations of a component of jet engine
-fuel on reproduction of two strains \emph{Ceriodaphnia}.
-}
-\note{
-No original source for the data is given so they are presumed to be simulated.
+Data from a study of the number of young produced by Ceriodaphnia dubia exposed for seven days to varying concentrations of effluent.
 }
 \keyword{datasets}
 

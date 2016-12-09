@@ -25,8 +25,7 @@ stratified random sampling design with counties as strata. See Nolan and
 Speed (2009) for details about the sampling design.
 }
 \note{
-As noted by Nolan and Speed (2009) there was some non-response but
-no information is given for non-responders.
+As noted by Nolan and Speed (2009) there was some non-response but no information is given for non-responders.
 }
 \keyword{datasets}
 

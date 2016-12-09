@@ -12,8 +12,7 @@
 #'    \item{radon}{radon concentration in pCi/L}
 #' }
 #'
-#' @note As noted by Nolan and Speed (2009) there was some non-response but
-#' no information is given for non-responders.
+#' @note As noted by Nolan and Speed (2009) there was some non-response but no information is given for non-responders.
 #'
 #' @source Nolan, D. & Speed, T. P. (2009). \emph{Stat Labs: Mathematical statistics through applications}. New York: Springer.
 #'
