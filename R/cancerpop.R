@@ -1,0 +1,20 @@
+#' Population data for breast cancer mortality.
+#'
+#' These data are county-level breast cancer mortality for white women in counties in North Carolina, South Carolina, and Georgia with populations of less than 100,000 white women.
+#'
+#' @format A data frame with 393 observations and two variables:
+#' \describe{
+#'    \item{mortality}{number of documented deaths in white women due to breast cancer in 1950-1969}
+#'    \item{women}{population of white women in 1960}
+#' }
+#' 
+#' @note These data were obtained from \link{http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html}. They are featured in Royall and Cumberland (1981a, 1981b) and Valliant, Dorfman, and Royall (2000). The population data are from the U.S. Census. The mortality data are from Mason and McKay (1974). 
+#'
+#' @source Mason, T. J. & McKay, F. W. (1974). \emph{U.S. cancer mortality by county: 1950-1969}. DHEW publication no. (NIH) 74-615. Washington, DC: U.S. Government Printing Office.
+#' 
+#' Royall, R. M. & Cumberland, W. G. (1981a). An empirical study of the ratio estimator and estimators of its variance. \emph{Journal of the American Statistical Association}, \emph{76}, 66-77.
+#' 
+#' Royal, R. M. & Cumberland, W. G. (1981b). The finite population linear regression estimator and estimators of its variance --- an empirical study. \emph{Journal of the American Statisticial Association}, \emph{76}, 924-930.
+#' 
+#' Valliant, R., Dorfman, A. H., & Royall, R. M. (2000). \emph{Finite population sampling and inference: A prediction approach}. New York: Wiley. 
+"cancerpop"
