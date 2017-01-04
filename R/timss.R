@@ -10,7 +10,7 @@
 #'    \item{sex}{sex of student (female or male)}
 #'    \item{language}{how often the language of the test is spoken at home (always, sometimes, or never)}
 #'    \item{math}{mathematics test score}
-#'    \item{ethnicity}{student's ethnic category (white non-hispanic, black, hispanic, asian, native american, or other)}
+#'    \item{ethnicity}{ethnic category of student (white non-hispanic, black, hispanic, asian, native american, or other)}
 #'    \item{science}{science test score}
 #'    \item{community}{type of locatin of school (village or rural area, outskirts of town or city, close to center of a town or city}
 #' }
