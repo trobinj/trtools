@@ -1,4 +1,4 @@
-#' Matched case-control study of risk of driving on herniated discs.
+#' Risk of driving on herniated discs.
 #'
 #' These data are from a 1:1 matched case control study to investigate the risk of driving on lower back pain caused by acute herniated lumbar intervertebral discs. A total of 217 cases were individuals between the ages of 20 and 64 living in New Haven, Connecticut. For each case a control was selected from patients admitted to the same hospital as the case, and matched with the case based on sex and age (within 10 years). 
 #'
