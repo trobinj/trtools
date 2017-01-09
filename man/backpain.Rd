@@ -3,7 +3,7 @@
 \docType{data}
 \name{backpain}
 \alias{backpain}
-\title{Matched case-control study of risk of driving on herniated discs.}
+\title{Risk of driving on herniated discs.}
 \format{A data frame with 434 observations and four variables.
 \describe{
    \item{group}{case or control}

@@ -12,16 +12,13 @@
    \item{count}{number of skylark fledglings}
 }}
 \source{
-Source: Tjur, T. (1998). Nonlinear regression, quasi likelihood, and overdispersion
-in generalized linear models. \emph{American Statistician}, \emph{52}, 222-227.
+Tjur, T. (1998). Nonlinear regression, quasi likelihood, and overdispersion in generalized linear models. \emph{American Statistician}, \emph{52}, 222-227.
 }
 \usage{
 skylark
 }
 \description{
-The data are from a cross-over design in which four fields were either sprayed
-or not on each of fou consecutive years. For each field on each year, the number
-of skylark fledglings produced was recorded.
+The data are from a cross-over design in which four fields were either sprayed or not on each of four consecutive years. For each field on each year, the number of skylark fledglings produced was recorded.
 }
 \keyword{datasets}
 
