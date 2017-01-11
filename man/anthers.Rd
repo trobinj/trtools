@@ -3,7 +3,7 @@
 \docType{data}
 \name{anthers}
 \alias{anthers}
-\title{Effect of storage temperature and force on embryogenic anthers.}
+\title{Effects of storage temperature and force on producing embryogenic anthers.}
 \format{A data frame with 6 observations and four variables:
 \describe{
    \item{storage}{storage temperature of anthers (control or cold)}
