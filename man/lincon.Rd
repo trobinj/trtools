@@ -4,7 +4,7 @@
 \alias{lincon}
 \title{Linear combinations of regression model parameters.}
 \usage{
-lincon(model, a, level = 0.95, cnames = NULL, fcov = vcov, ...)
+lincon(model, a, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} are accepted.}
@@ -13,9 +13,9 @@ lincon(model, a, level = 0.95, cnames = NULL, fcov = vcov, ...)
 
 \item{level}{Confidence level in (0,1).}
 
-\item{cnames}{Vector of names for the linear combination(s).}
-
 \item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
+
+\item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.
