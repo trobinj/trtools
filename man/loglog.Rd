@@ -9,7 +9,7 @@
 loglog
 }
 \description{
-This is the log-log link function for generalized linear models, usually binomially-distributed response variables.
+This is the log-log link function for generalized linear models, usually with a binomially-distributed response variable.
 }
 \details{
 The log-log link function is defined as \eqn{\log[-\log[E(Y_i)]]}, where \eqn{Y_i} is the response variable (i.e., a proportion in the case of a binomial distribution). Note that using the log-log link function for the proportion of ``successes'' is the same as using the complementary log-log link function for the proportion of ``failures'' in a generalized linear model. The coefficients from the two models only differ by sign.
