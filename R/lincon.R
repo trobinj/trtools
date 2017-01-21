@@ -5,7 +5,6 @@
 #' @param model Model object. Currently only objects of class \code{lm} are accepted.
 #' @param a Vector or matrix defining the linear combination(s).
 #' @param level Confidence level in (0,1).
-#' @param cnames Vector of names for the linear combination(s). 
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
