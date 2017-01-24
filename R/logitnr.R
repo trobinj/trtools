@@ -12,7 +12,7 @@
 #' # obtain starting values with the natural respone parameter set to 0
 #' tmp <- glm(cbind(total-y, y) ~ density + species, family = binomial(link = logitnr(0)), data = rotifer)
 #' # use starting values with a fixed natural response parameter of 0.1
-#' glm(cbind(total-y, y) ~ density + species, family = binoimal(link = logitnr(0.1), data = rotifer, start = coef(tmp)))
+#' glm(cbind(total-y, y) ~ density + species, family = binomial(link = logitnr(0.1), data = rotifer, start = coef(tmp)))
 #' @export
 logitnr <- function(nrp = 0) {
   linkfun <- function(y) {

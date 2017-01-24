@@ -7,7 +7,7 @@
 #'    \item{study}{integer identifier for the study}
 #'    \item{treatment}{treatment condition (beta-blockers, sclerotherapy, or control group)}
 #'    \item{bleeding}{number of patients that showed bleeding}
-#'    \item{censored}{total number of patients}
+#'    \item{total}{total number of patients}
 #' }
 #'
 #' @note These data are originally from Pagliaro et al. (1992) and are also featured in Collett (2003).

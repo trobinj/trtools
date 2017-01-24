@@ -13,6 +13,7 @@
 #'    \item{ethnicity}{ethnic category of student (white non-hispanic, black, hispanic, asian, native american, or other)}
 #'    \item{science}{science test score}
 #'    \item{community}{type of locatin of school (village or rural area, outskirts of town or city, close to center of a town or city}
+#'    \item{enrollment}{number of students enrolled at the school}
 #' }
 #' 
 #' @note These data were obtained from \link{http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html}. They are featured in Valliant, Dorfman, and Royall (2000). According to Vallian et al. (2000) these data are from third grade students in schools in the United States. For more information about the data and design see TIMSS (1996). 
