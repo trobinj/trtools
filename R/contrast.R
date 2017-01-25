@@ -1,18 +1,18 @@
 #' Inferences for contrasts for linear models (experimental).
 #' 
-#' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts.
+#' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters. 
 #' 
 #' @param model Model object. Currently only objects of class \code{lm} are accepted.
 #' @param a List or data frame defining a linear combination. 
 #' @param b List or data frame defining a linear combination. 
-#' @param a2 List or data frame defining a linear combination. 
-#' @param b2 List or data frame defining a linear combination.
+#' @param u List or data frame defining a linear combination. 
+#' @param v List or data frame defining a linear combination.
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param cnames Labels for the contrasts.
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
-#' @details Details go here. 
+#' @details Assuming a (generalized) linear model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. 
 #' 
 #' @export
 contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...) {

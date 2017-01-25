@@ -4,8 +4,7 @@
 \alias{contrast}
 \title{Inferences for contrasts for linear models (experimental).}
 \usage{
-contrast(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NULL,
-  ...)
+contrast(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} are accepted.}
@@ -14,9 +13,9 @@ contrast(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NULL,
 
 \item{b}{List or data frame defining a linear combination.}
 
-\item{a2}{List or data frame defining a linear combination.}
+\item{u}{List or data frame defining a linear combination.}
 
-\item{b2}{List or data frame defining a linear combination.}
+\item{v}{List or data frame defining a linear combination.}
 
 \item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
 
@@ -27,9 +26,9 @@ contrast(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NULL,
 \item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
-This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts.
+This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters.
 }
 \details{
-Details go here.
+Assuming a (generalized) linear model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots \beta_p x_{ip}}, many contrasts can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}.
 }
 
