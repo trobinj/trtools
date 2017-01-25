@@ -15,41 +15,64 @@
 #' @details Details go here. 
 #' 
 #' @export
-contrast <- function(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NULL, ...) {
+contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...) {
   if (class(model) != "lm") stop("function currently only works for lm objects")
   formula.rhs <- as.formula(paste("~", strsplit(as.character(formula(model)), "~")[[3]]))
-  dat <- model.matrix(model)
+  
+  dat <- model.frame(model)
   for (i in names(dat)) {
     if (is.character(dat[[i]])) {
       dat[[i]] <- as.factor(dat[[i]])
     }
   }
-  ma1 <- as.data.frame(a)
-  tmp <- intersect(names(ma1), names(model.frame(model)))
-  for (i in tmp) {
-    if (is.factor(model.frame(model)[[i]])) {
-      ma1[[i]] <- fct_relevel(ma1[[i]], levels(model.frame(model)[[i]]))
-      attributes(ma1[[i]]) <- attributes(model.frame(model)[[i]])
-    }
+  
+  if (all(missing(a), missing(b), missing(u), missing(v))) {
+    stop("no contrast(s) specified")
   }
-  ma1 <- model.matrix(formula.rhs, ma1)
-  if (!missing(b)) {
-    mb1 <- as.data.frame(b)
-    tmp <- intersect(names(mb1), names(model.frame(model)))
+  
+  foo <- function(mat, dat) {
+    mat <- as.data.frame(mat)
+    tmp <- intersect(names(mat), names(dat))
+    if (length(setdiff(names(mat), names(dat))) > 0) {
+      stop(paste("variable(s)", setdiff(names(mat), names(dat)), "not found"))
+    }
     for (i in tmp) {
-      if (is.factor(model.frame(model)[[i]])) {
-        mb1[[i]] <- fct_relevel(mb1[[i]], levels(model.frame(model)[[i]]))
-        attributes(mb1[[i]]) <- attributes(model.frame(model)[[i]])
+      if (is.factor(dat[[i]])) {
+        if (length(setdiff(levels(mat[[i]]), levels(dat[[i]]))) > 0) {
+          stop(paste("level(s)", setdiff(levels(mat[[i]]), levels(dat[[i]])), "not found"))
+        }
+        mat[[i]] <- factor(mat[[i]], levels = levels(dat[[i]]))
+        attributes(mat[[i]]) <- attributes(dat[[i]])
       }
     }
-    mb1 <- model.matrix(formula.rhs, mb1)
-  } 
-  else {
-    mb1 <- 0
+    return(model.matrix(formula.rhs, mat))
   }
-  if (!missing(a2)) {ma2 <- model.matrix(formula.rhs, as.data.frame(a2))} else {ma2 <- 0}
-  if (!missing(b2)) {mb2 <- model.matrix(formula.rhs, as.data.frame(b2))} else {mb2 <- 0}
-  mm <- ma1 - mb1 - ma2 + mb2
+  
+  if (!missing(a)) {
+    ma <- foo(a, dat)
+  }
+  else {
+    ma <- 0
+  }
+  if (!missing(b)) {
+    mb <- foo(b, dat)
+  }
+  else {
+    mb <- 0
+  }
+  if (!missing(u)) {
+    mu <- foo(u, dat)
+  }
+  else {
+    mu <- 0
+  }
+  if (!missing(v)) {
+    mv <- foo(v, dat)
+  }
+  else {
+    mv <- 0
+  }
+  mm <- ma - mb - mu + mv
   se <- sqrt(diag(mm %*% fcov(model, ...) %*% t(mm)))
   pe <- mm %*% coef(model)
   df <- summary(model)$df[2]
@@ -57,8 +80,8 @@ contrast <- function(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NU
   up <- pe + qt(level + (1 - level)/2, df) * se 
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  out <- cbind(pe, se, ts, pv, lw, up)
-  colnames(out) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)", "lower", "upper")
+  out <- cbind(pe, se, lw, up, ts, df, pv)
+  colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
   rownames(out) <- cnames
   return(out)
 }
