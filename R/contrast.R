@@ -18,8 +18,35 @@
 contrast <- function(model, a, b, a2, b2, fcov = vcov, level = 0.95, cnames = NULL, ...) {
   if (class(model) != "lm") stop("function currently only works for lm objects")
   formula.rhs <- as.formula(paste("~", strsplit(as.character(formula(model)), "~")[[3]]))
-  ma1 <- model.matrix(formula.rhs, as.data.frame(a))
-  if (!missing(b)) {mb1 <- model.matrix(formula.rhs, as.data.frame(b))} else {mb1 <- 0}
+  dat <- model.matrix(model)
+  for (i in names(dat)) {
+    if (is.character(dat[[i]])) {
+      dat[[i]] <- as.factor(dat[[i]])
+    }
+  }
+  ma1 <- as.data.frame(a)
+  tmp <- intersect(names(ma1), names(model.frame(model)))
+  for (i in tmp) {
+    if (is.factor(model.frame(model)[[i]])) {
+      ma1[[i]] <- fct_relevel(ma1[[i]], levels(model.frame(model)[[i]]))
+      attributes(ma1[[i]]) <- attributes(model.frame(model)[[i]])
+    }
+  }
+  ma1 <- model.matrix(formula.rhs, ma1)
+  if (!missing(b)) {
+    mb1 <- as.data.frame(b)
+    tmp <- intersect(names(mb1), names(model.frame(model)))
+    for (i in tmp) {
+      if (is.factor(model.frame(model)[[i]])) {
+        mb1[[i]] <- fct_relevel(mb1[[i]], levels(model.frame(model)[[i]]))
+        attributes(mb1[[i]]) <- attributes(model.frame(model)[[i]])
+      }
+    }
+    mb1 <- model.matrix(formula.rhs, mb1)
+  } 
+  else {
+    mb1 <- 0
+  }
   if (!missing(a2)) {ma2 <- model.matrix(formula.rhs, as.data.frame(a2))} else {ma2 <- 0}
   if (!missing(b2)) {mb2 <- model.matrix(formula.rhs, as.data.frame(b2))} else {mb2 <- 0}
   mm <- ma1 - mb1 - ma2 + mb2
