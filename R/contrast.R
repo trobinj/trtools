@@ -18,18 +18,15 @@
 contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...) {
   if (class(model) != "lm") stop("function currently only works for lm objects")
   formula.rhs <- as.formula(paste("~", strsplit(as.character(formula(model)), "~")[[3]]))
-  
   dat <- model.frame(model)
   for (i in names(dat)) {
     if (is.character(dat[[i]])) {
       dat[[i]] <- as.factor(dat[[i]])
     }
   }
-  
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
-  
   foo <- function(mat, dat) {
     mat <- as.data.frame(mat)
     tmp <- intersect(names(mat), names(dat))
@@ -47,7 +44,6 @@ contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL
     }
     return(model.matrix(formula.rhs, mat))
   }
-  
   if (!missing(a)) {
     ma <- foo(a, dat)
   }
