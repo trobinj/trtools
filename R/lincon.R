@@ -23,6 +23,6 @@ lincon <- function(model, a, level = 0.95, fcov = vcov, ...) {
   pv <- 2*pt(-abs(ts), df)
   out <- cbind(pe, se, lw, up, ts, df, pv)
   colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
-  rownames(out) <- apply(a, 1, paste, collapse = ",")
+  rownames(out) <- apply(MASS::fractions(a), 1, paste, collapse = ",")
   return(out)
 }
