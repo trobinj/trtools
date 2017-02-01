@@ -21,8 +21,8 @@ lincon <- function(model, a, level = 0.95, fcov = vcov, ...) {
   up <- pe + qt(level + (1 - level)/2, df) * se 
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  out <- cbind(pe, se, ts, pv, lw, up)
-  colnames(out) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)", "lower", "upper")
+  out <- cbind(pe, se, lw, up, ts, df, pv)
+  colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
   rownames(out) <- apply(a, 1, paste, collapse = ",")
   return(out)
 }
