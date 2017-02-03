@@ -2,7 +2,7 @@
 #' 
 #' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.
 #' 
-#' @param model Model object. Currently only objects of class \code{lm} are accepted.
+#' @param model Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.
 #' @param a Vector or matrix defining the linear combination(s).
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
@@ -12,7 +12,9 @@
 #' 
 #' @export
 lincon <- function(model, a, level = 0.95, fcov = vcov, ...) {
-  if (class(model) != "lm") stop("function currently only works for lm objects")
+  if (!(class(model) %in% c("lm","nls"))) {
+    stop("function currently only works for lm and nls objects")
+  }
   if (is.vector(a)) a <- matrix(a, nrow = 1)
   se <- sqrt(diag(a %*% fcov(model, ...) %*% t(a)))
   pe <- a %*% coef(model)

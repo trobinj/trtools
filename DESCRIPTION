@@ -7,6 +7,6 @@ Description: This package includes data sets and a few utility functions that I 
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Imports: numDeriv (>= 2016.8-1), ggplot2 (>= 2.2.0)
+Imports: numDeriv (>= 2016.8-1), ggplot2 (>= 2.2.0), MASS (>= 7.3-45)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues
