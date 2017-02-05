@@ -78,6 +78,6 @@ contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL
   pv <- 2*pt(-abs(ts), df)
   out <- cbind(pe, se, lw, up, ts, df, pv)
   colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
-  rownames(out) <- cnames
+  rownames(out) <- ifelse(is.null(cnames), "", cnames)
   return(out)
 }
