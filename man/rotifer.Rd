@@ -29,4 +29,3 @@ These data are also in the \strong{MASS} package (see \code{\link[MASS]{rotifer}
 \code{\link[MASS]{rotifer}}
 }
 \keyword{datasets}
-

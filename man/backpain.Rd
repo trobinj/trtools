@@ -28,4 +28,3 @@ These data are from a 1:1 matched case control study to investigate the risk of 
 These data are featured in Collett (2003). The study is described in Kelsey and Hardy (1975) and Holford, White, and Kelsey (1978).
 }
 \keyword{datasets}
-

@@ -36,4 +36,3 @@ data <- data.frame(conc = seq(0.02, 1.10, by = 0.01))
 nlsint(model, newdata = data)
 nlsint(model, newdata = data, interval = "prediction") 
 }
-

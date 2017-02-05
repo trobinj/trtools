@@ -27,4 +27,3 @@ Data from a randomized clinical trial comparing two antibiotics, amoxicillin and
 Details concerning the source of these data can be found in Mandel et al. (1982). These data are also featured in Rosner (1989). Note that the data are formatted in aggregate form so that the \code{count} variable reflects the number of children with a given combination of values of the other variables.
 }
 \keyword{datasets}
-

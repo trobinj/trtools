@@ -23,4 +23,3 @@ dungcrabs
 Data collected from a study of the change in the carapace size of female dungeness crabs (\emph{Metacarcinus magister}) before and after molting. Crabs were either captured prior to molting and then allowed to molt in captivitiy, or were re-captured after being measured and tagged. See Nolan and Speed (2009) and Hankin et al. (1989) for details.
 }
 \keyword{datasets}
-

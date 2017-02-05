@@ -23,4 +23,3 @@ Simple random sample of patient records of a veterinarian. The data can be post-
 These data are presumed to be simulated.
 }
 \keyword{datasets}
-

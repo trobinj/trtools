@@ -19,4 +19,3 @@ snowgauge
 Data collected from snow gauge that measures snow density using detected gamma photon counts from a radioactive source. Observations of the "gain" (an amplified count) at several known densities of polyethylene blocks to simulate snow were observed.
 }
 \keyword{datasets}
-

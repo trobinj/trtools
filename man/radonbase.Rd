@@ -19,4 +19,3 @@ radonbase
 Data from a survey of homes in Blue Ridge, VA, from a population of 13,895 homes. The sampling design was simple random sampling. The radon concentration was measured in the ground floor of each home. It was also observed whether or not the home had a basement with concrete walls.
 }
 \keyword{datasets}
-

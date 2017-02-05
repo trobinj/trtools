@@ -24,4 +24,3 @@ Sample of 20 one-meter belt transects to estimate the abundance of pale white la
 Although not stated explicitly in the source, the sample was presumably obtained using simple random sampling.
 }
 \keyword{datasets}
-

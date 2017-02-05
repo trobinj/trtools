@@ -28,4 +28,3 @@ Data from an experiment investigating the effects of storage temperature and cen
 The data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008).
 }
 \keyword{datasets}
-

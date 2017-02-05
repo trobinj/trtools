@@ -26,4 +26,3 @@ Data from an observational study that compared the effectiveness of several trea
 Julious and Mullee (1994) used these data from Charig et al. (1986) to illustrate Simpson's paradox by comparing percutaneous nephrolithotomy with the open surgical methods (i.e., nephrolithotomy and pyelolithotomy, pyelolithotomy, and ureterolithotomy) grouped into a single treatment condition. The paradox is observed when the methods are compared with and without controlling for stone size. This example is also discussed at \url{https://en.wikipedia.org/wiki/Simpson's_paradox}.
 }
 \keyword{datasets}
-

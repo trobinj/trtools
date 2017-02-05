@@ -26,4 +26,3 @@ Grouped survival data for diabetic men by age and insulin dependence.
 Julious and Mullee (1994) used these data from the Poole diabetic cohort to illustrate Simpson's paradox which occurs when the relationship between insulin dependence and survival is examined with and without controlling for age. The data are described by Gatling, Mullee, and Hill (1988) although they do not discuss survival. The time point at which survival time was dichotomized is not given.
 }
 \keyword{datasets}
-

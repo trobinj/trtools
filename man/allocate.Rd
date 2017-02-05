@@ -41,4 +41,3 @@ allocate(Ni = c(155,62,93), si = c(5,15,10), ci = c(9,9,16), ev = 1)
 # allocation for total survey cost fixed at 500
 allocate(Ni = c(155,62,93), si = c(5,15,10), ci = c(9,9,16), ct = 500)
 }
-

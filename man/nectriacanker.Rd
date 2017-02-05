@@ -22,4 +22,3 @@ nectriacanker
 These data are from a sample of fixed area plots, each of area 0.01ha from a 10ha tract of land. Tree diameter and the number of cankers were observed for each tree in each plot.
 }
 \keyword{datasets}
-

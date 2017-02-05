@@ -7,7 +7,7 @@
 lincon(model, a, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
-\item{model}{Model object. Currently only objects of class \code{lm} are accepted.}
+\item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
 
 \item{a}{Vector or matrix defining the linear combination(s).}
 
@@ -23,4 +23,3 @@ This is a function allows one to obtain standard inferences (i.e., point estimat
 \details{
 For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact or Wald test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
 }
-

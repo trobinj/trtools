@@ -21,4 +21,3 @@ bole
 Data from a stratified random sample of 0.1ha circular plots where total standing tree bole volume was recorded for the trees within each plot. The total area of the softwood, mixed, and hardwood strata are 42541ha, 17250ha, and 32435ha, respectively.
 }
 \keyword{datasets}
-

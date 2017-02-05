@@ -26,4 +26,3 @@ The data include the results from several clinical trials that examined one or t
 These data are originally from Pagliaro et al. (1992) and are also featured in Collett (2003).
 }
 \keyword{datasets}
-

@@ -20,4 +20,3 @@ model.loglog <- glm(cbind(y, total-y) ~ density + species, family = binomial(lin
 model.cloglog <- glm(cbind(total-y, y) ~ density + species, family = binomial(link = cloglog), data = rotifer)
 }
 \keyword{datasets}
-

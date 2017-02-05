@@ -28,4 +28,3 @@ Speed (2009) for details about the sampling design.
 As noted by Nolan and Speed (2009) there was some non-response but no information is given for non-responders.
 }
 \keyword{datasets}
-

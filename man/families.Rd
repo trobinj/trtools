@@ -21,4 +21,3 @@ These data are from a hypothetical survey of family income and food expenditure.
 is given about the population.
 }
 \keyword{datasets}
-

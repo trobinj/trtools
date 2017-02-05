@@ -38,4 +38,3 @@ set.seed(101)
 x <- rnorm(10000, 20, 3)
 stratify(x, strata = 4, breaks = 25)
 }
-

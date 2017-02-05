@@ -22,4 +22,3 @@ watercolumn
 These data are the total and dissolved phosphorus concentrations in water column samples from Willow Creek Reservoir in Heppner, Oregon. Each observation of concentration is the mean concentration of three replicate samples.
 }
 \keyword{datasets}
-

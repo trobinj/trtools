@@ -14,6 +14,7 @@
 #' 
 #' @details Assuming a (generalized) linear model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. 
 #' 
+#' @importFrom stats as.formula model.frame model.matrix pt
 #' @export
 contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...) {
   if (class(model) != "lm") stop("function currently only works for lm objects")

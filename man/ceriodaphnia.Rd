@@ -19,4 +19,3 @@ ceriodaphnia
 Data from a study of the number of young produced by Ceriodaphnia dubia exposed for seven days to varying concentrations of effluent.
 }
 \keyword{datasets}
-

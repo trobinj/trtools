@@ -32,4 +32,3 @@ These data are from the Third International Mathematics and Science Study that a
 These data were obtained from \link{http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html}. They are featured in Valliant, Dorfman, and Royall (2000). According to Vallian et al. (2000) these data are from third grade students in schools in the United States. For more information about the data and design see TIMSS (1996).
 }
 \keyword{datasets}
-

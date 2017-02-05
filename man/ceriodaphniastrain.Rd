@@ -23,4 +23,3 @@ Data from a study of the effect of varying concentrations of a component of jet 
 No original source for the data is given so they are presumed to be simulated.
 }
 \keyword{datasets}
-

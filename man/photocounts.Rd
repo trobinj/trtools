@@ -24,4 +24,3 @@ Counts of dead trees using aerial photographs and field counts in a 80ha parcel 
 These data can be treated as a census of the land parcel.
 }
 \keyword{datasets}
-
