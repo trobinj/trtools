@@ -4,12 +4,14 @@
 \alias{lincon}
 \title{Linear combinations of regression model parameters.}
 \usage{
-lincon(model, a, level = 0.95, fcov = vcov, ...)
+lincon(model, a, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
 
 \item{a}{Vector or matrix defining the linear combination(s).}
+
+\item{cnames}{Optional vector of contrast names.}
 
 \item{level}{Confidence level in (0,1).}
 

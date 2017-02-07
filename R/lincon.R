@@ -4,6 +4,7 @@
 #' 
 #' @param model Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.
 #' @param a Vector or matrix defining the linear combination(s).
+#' @param cnames Optional vector of contrast names.
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param ... Arguments to pass to \code{fcov}.
@@ -12,7 +13,7 @@
 #' @importFrom stats pt
 #' @importFrom MASS fractions
 #' @export
-lincon <- function(model, a, level = 0.95, fcov = vcov, ...) {
+lincon <- function(model, a, cnames, level = 0.95, fcov = vcov, ...) {
   if (!(class(model) %in% c("lm","nls"))) {
     stop("function currently only works for lm and nls objects")
   }
@@ -26,6 +27,14 @@ lincon <- function(model, a, level = 0.95, fcov = vcov, ...) {
   pv <- 2*pt(-abs(ts), df)
   out <- cbind(pe, se, lw, up, ts, df, pv)
   colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
-  rownames(out) <- apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = ""))
+  if (missing(cnames)) {
+    rownames(out) <- apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = ""))
+  }
+  else if (!cnames) {
+    rownames(out) <- ""  
+  }
+  else {
+    rownames(out) <- cnames
+  }
   return(out)
 }
