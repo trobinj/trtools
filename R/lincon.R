@@ -30,7 +30,7 @@ lincon <- function(model, a, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(cnames)) {
     rownames(out) <- apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = ""))
   }
-  else if (!cnames) {
+  else if (is.logical(cnames) && !cnames) {
     rownames(out) <- ""  
   }
   else {
