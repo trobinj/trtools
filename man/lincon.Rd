@@ -9,7 +9,7 @@ lincon(model, a, cnames, level = 0.95, fcov = vcov, ...)
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
 
-\item{a}{Vector or matrix defining the linear combination(s).}
+\item{a}{Vector or matrix defining the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function.}
 
 \item{cnames}{Optional vector of contrast names. If left missing the contrast coefficients are shown. If FALSE then no names are shown.}
 
@@ -24,4 +24,14 @@ This is a function allows one to obtain standard inferences (i.e., point estimat
 }
 \details{
 For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
+}
+\examples{
+myreg <- lm(Gas ~ Insul + Temp + Insul:Temp, data = MASS::whiteside)
+# same as summary(myreg)
+lincon(myreg)
+# slope with respect to temperature after insulation
+lincon(myreg, a = c(0,0,1,1))
+# change in expected gas consumption at five degrees celsius from adding insulation
+lincon(myreg, a = c(0,1,0,5))
+
 }

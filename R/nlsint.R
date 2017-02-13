@@ -19,8 +19,7 @@
 #' @importFrom stats pt
 #' @importFrom numDeriv jacobian
 #' @export
-nlsint <- function(object, newdata = eval(object$call$data),
-  interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, ...) {
+nlsint <- function(object, newdata = eval(object$call$data), interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, ...) {
   if (class(object) != "nls") stop("nls objects only")
   type <- match.arg(interval)
   p.names <- names(coef(object))       
