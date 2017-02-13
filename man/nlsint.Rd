@@ -2,37 +2,33 @@
 % Please edit documentation in R/nlsint.R
 \name{nlsint}
 \alias{nlsint}
-\title{Confidence and prediction intervals for the expected/future response of a nonlinear regression model.}
+\title{Confidence and prediction intervals for the (expected) response of a nonlinear regression model (experimental).}
 \usage{
 nlsint(object, newdata = eval(object$call$data), interval = c("confidence",
-  "prediction"), level = 0.95)
+  "prediction"), fcov = vcov, level = 0.95, ...)
 }
 \arguments{
-\item{object}{An object of class \code{nls} (i.e., an estimated nonlinear regression model).}
+\item{object}{Model object of class \code{nls}.}
 
-\item{newdata}{Data frame of variables at which to compute confidence/prediction intervals.
-Defaults to the same data frame used to create \code{object}.}
+\item{newdata}{An optional data frame in which to look for variables with which to predict. If omitted the data frame used in creating the model object is used.}
 
-\item{interval}{Type of interval (confidence or prediction).}
+\item{interval}{Type of interval calculation (confidence or prediction).}
 
-\item{level}{Confidence/tolerance level.}
-}
-\value{
-A data frame of the predicted response, the standard error or prediction error, and the lower
-and upper bound of the confidence/prediction interval at each set of variable values in \code{newdata}.
+\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
+
+\item{level}{Confidence level in (0,1).}
+
+\item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
-\code{nlsint} computes approximate confidence intervals for the expected response and prediction intervals
-for the future response of a nonlinear regression model of class \code{nls}.
+This function computes approximate confidence intervals for the expected response as well as prediction intervals for a nonlinear regression model. It is designed to behave similarly to the \code{predict} function.
 }
 \details{
-Standard errors and the estimated expected response are obtained using the delta method based
-on the numerical derivatives and the estimated covariance matrix of the model parameters. The prediction 
-use the estimated error variance and implicitly assumes identically distributed normal errors.
+Standard errors for confidence intervals are estimated using the delta method. Derivatives are computed numerically rather than analytically to permit a wider range of models. Prediction intervals assume normally-distributed responses with variance inversely proportional to any specified weights, or homoscedastic error if no weights are specified.
 }
 \examples{
-model <- nls(rate ~ Vm * conc / (K + conc), start = c(Vm = 200, K = 0.1), data = subset(Puromycin, state == "treated"))
-data <- data.frame(conc = seq(0.02, 1.10, by = 0.01))
-nlsint(model, newdata = data)
-nlsint(model, newdata = data, interval = "prediction") 
+myreg <- nls(rate ~ (t1 + t3 * (state == "treated")) * conc /
+ (t2 + t4 * (state == "treated") + conc), data = Puromycin,
+ start = c(t1 = 150, t2 = 0, t3 = 0.05, t4 = 0), data = Puromycin) 
+nlsint(myreg, interval = "confidence")
 }

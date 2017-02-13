@@ -4,12 +4,12 @@
 #' 
 #' @param model Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.
 #' @param a Vector or matrix defining the linear combination(s).
-#' @param cnames Optional vector of contrast names.
+#' @param cnames Optional vector of contrast names. If left missing the contrast coefficients are shown. If FALSE then no names are shown. 
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
-#' @details For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact or Wald test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters. 
+#' @details For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters. 
 #' @importFrom stats pt
 #' @importFrom MASS fractions
 #' @export

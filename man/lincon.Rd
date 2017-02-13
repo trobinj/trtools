@@ -11,7 +11,7 @@ lincon(model, a, cnames, level = 0.95, fcov = vcov, ...)
 
 \item{a}{Vector or matrix defining the linear combination(s).}
 
-\item{cnames}{Optional vector of contrast names.}
+\item{cnames}{Optional vector of contrast names. If left missing the contrast coefficients are shown. If FALSE then no names are shown.}
 
 \item{level}{Confidence level in (0,1).}
 
@@ -23,5 +23,5 @@ lincon(model, a, cnames, level = 0.95, fcov = vcov, ...)
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.
 }
 \details{
-For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact or Wald test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
+For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
 }
