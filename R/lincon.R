@@ -29,7 +29,7 @@ lincon <- function(model, a, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
     a <- diag(length(coef(model)))
     if (missing(cnames)) {
-      cnames <- names(coef(m))  
+      cnames <- names(coef(model))  
     }
   }
   else if (is.vector(a)) {
