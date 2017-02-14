@@ -15,6 +15,8 @@
 #' lincon(myreg)
 #' # slope with respect to temperature after insulation
 #' lincon(myreg, a = c(0,0,1,1))
+#' # expected gas consumption before and after insulation at 5 degrees celsius
+#' lincon(myreg, a = matrix(c(1,0,5,0,1,1,5,5), 2, 4, byrow = TRUE), cnames = c("Before","After"))
 #' # change in expected gas consumption at five degrees celsius from adding insulation
 #' lincon(myreg, a = c(0,1,0,5))
 #'
