@@ -73,6 +73,19 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
   else {
     mv <- 0
   }
+  rowmax <- max(unlist(lapply(list(ma, mb, mu, mv), function(x) ifelse(is.matrix(x), nrow(x), 0))))
+  if (is.matrix(ma) && nrow(ma) == 1) {
+    ma <- ma[rep(1, rowmax),]
+  }
+  if (is.matrix(mb) && nrow(mb) == 1) {
+    mb <- mb[rep(1, rowmax),]
+  }
+  if (is.matrix(mu) && nrow(mu) == 1) {
+    mu <- mu[rep(1, rowmax),]
+  }
+  if (is.matrix(mv) && nrow(mv) == 1) {
+    mv <- mv[rep(1, rowmax),]
+  }
   mm <- ma - mb - mu + mv
   se <- sqrt(diag(mm %*% fcov(model, ...) %*% t(mm)))
   pe <- mm %*% coef(model)
@@ -97,7 +110,7 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
     colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
   }
   if (missing(cnames)) {
-    rownames(out) <- rep("", nrow(a))
+    rownames(out) <- rep("", nrow(out))
   }
   else {
     rownames(out) <- cnames
