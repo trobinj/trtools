@@ -86,7 +86,10 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
   if (is.matrix(mv) && nrow(mv) == 1) {
     mv <- mv[rep(1, rowmax),]
   }
-  mm <- ma - mb - mu + mv
+  mm <- as.matrix(ma - mb - mu + mv)
+  if (ncol(mm) == 1) {
+    mm <- t(mm)
+  }
   se <- sqrt(diag(mm %*% fcov(model, ...) %*% t(mm)))
   pe <- mm %*% coef(model)
   if (missing(df)) {
