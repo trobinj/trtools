@@ -29,6 +29,6 @@ Standard errors for confidence intervals are estimated using the delta method. D
 \examples{
 myreg <- nls(rate ~ (t1 + t3 * (state == "treated")) * conc /
  (t2 + t4 * (state == "treated") + conc), data = Puromycin,
- start = c(t1 = 150, t2 = 0, t3 = 0.05, t4 = 0), data = Puromycin) 
+ start = c(t1 = 150, t2 = 0, t3 = 0.05, t4 = 0)) 
 nlsint(myreg, interval = "confidence")
 }

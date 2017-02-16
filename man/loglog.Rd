@@ -16,7 +16,9 @@ The log-log link function is defined as \eqn{\log[-\log[E(Y_i)]]}, where \eqn{Y_
 }
 \examples{
 # the following produce the same results up to a reversal of the sign of the coefficients
-model.loglog <- glm(cbind(y, total-y) ~ density + species, family = binomial(link = loglog), data = rotifer)
-model.cloglog <- glm(cbind(total-y, y) ~ density + species, family = binomial(link = cloglog), data = rotifer)
+model.loglog <- glm(cbind(y, total-y) ~ density + species, 
+ family = binomial(link = loglog), data = rotifer)
+model.cloglog <- glm(cbind(total-y, y) ~ density + species, 
+ family = binomial(link = cloglog), data = rotifer)
 }
 \keyword{datasets}

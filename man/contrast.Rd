@@ -4,7 +4,7 @@
 \alias{contrast}
 \title{Inferences for contrasts for linear models (experimental).}
 \usage{
-contrast(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...)
+contrast(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} are accepted.}
@@ -17,11 +17,15 @@ contrast(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...)
 
 \item{v}{List or data frame defining a linear combination.}
 
-\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
+\item{df}{Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.}
+
+\item{tf}{Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios).}
+
+\item{cnames}{Labels for the contrasts.}
 
 \item{level}{Confidence level in (0,1).}
 
-\item{cnames}{Labels for the contrasts.}
+\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
 
 \item{...}{Arguments to pass to \code{fcov}.}
 }

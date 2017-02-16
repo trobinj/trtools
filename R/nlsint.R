@@ -16,7 +16,7 @@
 #'  (t2 + t4 * (state == "treated") + conc), data = Puromycin,
 #'  start = c(t1 = 150, t2 = 0, t3 = 0.05, t4 = 0)) 
 #' nlsint(myreg, interval = "confidence")
-#' @importFrom stats pt
+#' @importFrom stats pt formula weights
 #' @importFrom numDeriv jacobian
 #' @export
 nlsint <- function(object, newdata = eval(object$call$data), interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, ...) {

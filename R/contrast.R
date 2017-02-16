@@ -7,17 +7,21 @@
 #' @param b List or data frame defining a linear combination. 
 #' @param u List or data frame defining a linear combination. 
 #' @param v List or data frame defining a linear combination.
+#' @param df Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.  
+#' @param tf Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios). 
+#' @param cnames Labels for the contrasts.
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
-#' @param cnames Labels for the contrasts.
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
 #' @details Assuming a (generalized) linear model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. 
 #' 
-#' @importFrom stats as.formula model.frame model.matrix pt
+#' @importFrom stats formula as.formula model.frame model.matrix pt
 #' @export
-contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL, ...) {
-  if (class(model) != "lm") stop("function currently only works for lm objects")
+contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+  if (!any(class(model) %in% c("lm","glm"))) {
+    stop("function currently only works for lm and glm objects")
+  }
   formula.rhs <- as.formula(paste("~", strsplit(as.character(formula(model)), "~")[[3]]))
   dat <- model.frame(model)
   for (i in names(dat)) {
@@ -72,13 +76,31 @@ contrast <- function(model, a, b, u, v, fcov = vcov, level = 0.95, cnames = NULL
   mm <- ma - mb - mu + mv
   se <- sqrt(diag(mm %*% fcov(model, ...) %*% t(mm)))
   pe <- mm %*% coef(model)
-  df <- summary(model)$df[2]
+  if (missing(df)) {
+    if (("glm" %in% class(model)) && (family(model)[1] %in% c("binomial","poisson"))) {
+      df <- Inf
+    }
+    else {
+      df <- summary(model)$df[2]
+    }
+  }
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  out <- cbind(pe, se, lw, up, ts, df, pv)
-  colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
-  rownames(out) <- ifelse(is.null(cnames), "", cnames)
+  if (!missing(tf)) {
+    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    colnames(out) <- c("f(Estimate)", "Std. Error", "f(Lower)", "f(Upper)", "t value", "df", "Pr(>|t|)")
+  }
+  else {
+    out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("Estimate", "Std. Error", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
+  }
+  if (missing(cnames)) {
+    rownames(out) <- rep("", nrow(a))
+  }
+  else {
+    rownames(out) <- cnames
+  }
   return(out)
 }
