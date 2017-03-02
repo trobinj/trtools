@@ -4,8 +4,8 @@
 #'
 #' @format A data frame with 126 observations on two variables:
 #' \describe{
-#'    \item{dose}{dose of radiation in Gy (gray)}
-#'    \item{crypts}{number of surviving jejunal crypts}
+#'    \item{dose:}{dose of radiation in Gy (gray)}
+#'    \item{crypts:}{number of surviving jejunal crypts}
 #' }
 #'
 #' @note A complication with these data is that the number of jejnual crypts prior to exposure to radiation is unknown and cannot be determined postmortem. The distribution of the number of surviving crypts given the dose appears to exhibit \emph{underdispersion} if a Poisson distribution is assumed.  

@@ -4,10 +4,10 @@
 #'
 #' @format A data frame with 434 observations and four variables.
 #' \describe{
-#'    \item{group}{case or control}
-#'    \item{driver}{whether or not the individual is a driver (no or yes)}
-#'    \item{residence}{residence of individual (city or suburban)}
-#'    \item{set}{integer-valued identifier for a matched pair of individuals}
+#'    \item{group:}{case or control}
+#'    \item{driver:}{whether or not the individual is a driver (no or yes)}
+#'    \item{residence:}{residence of individual (city or suburban)}
+#'    \item{set:}{integer-valued identifier for a matched pair of individuals}
 #' }
 #'
 #' @note These data are featured in Collett (2003). The study is described in Kelsey and Hardy (1975) and Holford, White, and Kelsey (1978).

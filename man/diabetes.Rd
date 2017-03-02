@@ -6,10 +6,10 @@
 \title{Survival of diabetic patients.}
 \format{A data frame with four observations and four variables.
 \describe{
-   \item{age}{40 or younger, or older than 40}
-   \item{insulin}{dependence on insulin (yes or no)}
-   \item{dead}{number of deceased individuals}
-   \item{censored}{number of individuals with alive or right-censored survival times}
+   \item{age:}{40 or younger, or older than 40}
+   \item{insulin:}{dependence on insulin (yes or no)}
+   \item{dead:}{number of deceased individuals}
+   \item{censored:}{number of individuals with alive or right-censored survival times}
 }}
 \source{
 Gatling, W., Mullee, M., & Hill, R. (1988). General characteristics of a community-based diabetic population. \emph{Practical diabetes}, \emph{5}, 104-107.

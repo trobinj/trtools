@@ -4,10 +4,10 @@
 #'
 #' @format A data frame with 6 observations and four variables:
 #' \describe{
-#'    \item{storage}{storage temperature of anthers (control or cold)}
-#'    \item{force}{force (g) from the centrifuge}
-#'    \item{y}{number of embryogenic anthers}
-#'    \item{n}{total number of anthers}
+#'    \item{storage:}{storage temperature of anthers (control or cold)}
+#'    \item{force:}{force (g) from the centrifuge}
+#'    \item{y:}{number of embryogenic anthers}
+#'    \item{n:}{total number of anthers}
 #' }
 #'
 #' @note The data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008). 

@@ -6,8 +6,8 @@
 \title{Population data for breast cancer mortality.}
 \format{A data frame with 393 observations and two variables:
 \describe{
-   \item{mortality}{number of documented deaths in white women due to breast cancer in 1950-1969}
-   \item{women}{population of white women in 1960}
+   \item{mortality:}{number of documented deaths in white women due to breast cancer in 1950-1969}
+   \item{women:}{population of white women in 1960}
 }}
 \source{
 Mason, T. J. & McKay, F. W. (1974). \emph{U.S. cancer mortality by county: 1950-1969}. DHEW publication no. (NIH) 74-615. Washington, DC: U.S. Government Printing Office.

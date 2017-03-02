@@ -4,10 +4,10 @@
 #'
 #' @format A data frame with 12 observations and four variables:
 #' \describe{
-#'    \item{size}{kidney stone size (less or greater than or equal to 2cm)}
-#'    \item{treatment}{treatment method as a combination of nephrolithotomy and pyelolithotomy (nephr/pyelo), pyelolithotomy (pyelo), ureterolithotomy (uretero), percutaneous nephrolithotomy (perc/nephro), ESWL (extracorporeal shock wave lithotripsy), or percutaneous nephrolithotomy with extracorporeal shock wave lithotripsy (perc/nephro/ESWL)}
-#'    \item{success}{number of successful treatments}
-#'    \item{total}{total number of treatments}
+#'    \item{size:}{kidney stone size (less or greater than or equal to 2cm)}
+#'    \item{treatment:}{treatment method as a combination of nephrolithotomy and pyelolithotomy (nephr/pyelo), pyelolithotomy (pyelo), ureterolithotomy (uretero), percutaneous nephrolithotomy (perc/nephro), ESWL (extracorporeal shock wave lithotripsy), or percutaneous nephrolithotomy with extracorporeal shock wave lithotripsy (perc/nephro/ESWL)}
+#'    \item{success:}{number of successful treatments}
+#'    \item{total:}{total number of treatments}
 #' }
 #'
 #' @note Julious and Mullee (1994) used these data from Charig et al. (1986) to illustrate Simpson's paradox by comparing percutaneous nephrolithotomy with the open surgical methods (i.e., nephrolithotomy and pyelolithotomy, pyelolithotomy, and ureterolithotomy) grouped into a single treatment condition. The paradox is observed when the methods are compared with and without controlling for stone size. This example is also discussed at \url{https://en.wikipedia.org/wiki/Simpson's_paradox}. 

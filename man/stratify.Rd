@@ -31,7 +31,8 @@ See Dalenius and Hodges (1959) or Cochran (1977) for details. Ideally the auxili
 }
 \examples{
 # replication of an example from Cochran (1977)
-x <- rep(seq(2.5, 97.5, by = 5), c(3464, 2516, 2157, 1581, 1142, 746, 512, 376, 265, 207, 126, 107, 82, 50, 39, 25, 16, 19, 2, 3))
+x <- rep(seq(2.5, 97.5, by = 5), c(3464, 2516, 2157, 1581, 1142, 
+  746, 512, 376, 265, 207, 126, 107, 82, 50, 39, 25, 16, 19, 2, 3))
 stratify(x, strata = 5, breaks = seq(0, 100, by = 5))
 # artificial data with a normally-distributed auxiliary variable
 set.seed(101)

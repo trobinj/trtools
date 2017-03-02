@@ -4,9 +4,9 @@
 #'
 #' @format A data frame with 50 observations and three variables:
 #' \describe{
-#'    \item{type}{animal type (dog or cat)}
-#'    \item{visits}{number of visits}
-#'    \item{expenses}{total expenses in dollars}
+#'    \item{type:}{animal type (dog or cat)}
+#'    \item{visits:}{number of visits}
+#'    \item{expenses:}{total expenses in dollars}
 #' }
 #'
 #' @note These data are presumed to be simulated.

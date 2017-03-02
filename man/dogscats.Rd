@@ -6,9 +6,9 @@
 \title{Veterinarian's survey of expenses of dogs and cats.}
 \format{A data frame with 50 observations and three variables:
 \describe{
-   \item{type}{animal type (dog or cat)}
-   \item{visits}{number of visits}
-   \item{expenses}{total expenses in dollars}
+   \item{type:}{animal type (dog or cat)}
+   \item{visits:}{number of visits}
+   \item{expenses:}{total expenses in dollars}
 }}
 \source{
 Levy, P. S., & Lemeshow, S. (1999). \emph{Sampling of populations: Methods and applications} (3rd Edition). New York: Wiley.

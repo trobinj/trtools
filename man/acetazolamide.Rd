@@ -6,8 +6,8 @@
 \title{Effect of acetazolamide on forelimb malformation.}
 \format{A data frame with 588 observations and two variables:
 \describe{
-   \item{dose}{dose (mg/kg)}
-   \item{limbs}{number of malformed limbs}
+   \item{dose:}{dose (mg/kg)}
+   \item{limbs:}{number of malformed limbs}
 }}
 \source{
 L. B. Holmes, Kawanishi, H., & Munz, A. (1988). Acetazolamide: Maternal toxicity, pattern of malformations, and litter effect. \emph{Taratology}, \emph{37}, 335-342.

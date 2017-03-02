@@ -6,10 +6,10 @@
 \title{Traffic accident rate.}
 \format{A data frame 16 observations and four variables:
 \describe{
-   \item{accidents}{number of accidents}
-   \item{years}{number of years of observation}
-   \item{location}{monitored location (one of eight)}
-   \item{treatment}{before or after introduction of traffic control measures}
+   \item{accidents:}{number of accidents}
+   \item{years:}{number of years of observation}
+   \item{location:}{monitored location (one of eight)}
+   \item{treatment:}{before or after introduction of traffic control measures}
 }}
 \source{
 Pawitan, Y. (2013). \emph{In all likelihood: Statistical modeling and inference using likelihood}. Oxford University Press.

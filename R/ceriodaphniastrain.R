@@ -4,9 +4,9 @@
 #'
 #' @format A data frame with 70 observations and three variables:
 #' \describe{
-#'    \item{count}{number of organisms}
-#'    \item{concentration}{concentration of a component of jet engine fuel}
-#'    \item{strain}{strain of \emph{Ceriodaphnia}}
+#'    \item{count:}{number of organisms}
+#'    \item{concentration:}{percent concentration of a component of jet engine fuel}
+#'    \item{strain:}{strain of \emph{Ceriodaphnia}}
 #' }
 #' 
 #' @note No original source for the data is given so they are presumed to be simulated. 

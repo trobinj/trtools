@@ -6,10 +6,10 @@
 \title{Effects of storage temperature and force on producing embryogenic anthers.}
 \format{A data frame with 6 observations and four variables:
 \describe{
-   \item{storage}{storage temperature of anthers (control or cold)}
-   \item{force}{force (g) from the centrifuge}
-   \item{y}{number of embryogenic anthers}
-   \item{n}{total number of anthers}
+   \item{storage:}{storage temperature of anthers (control or cold)}
+   \item{force:}{force (g) from the centrifuge}
+   \item{y:}{number of embryogenic anthers}
+   \item{n:}{total number of anthers}
 }}
 \source{
 Dobson, A. J. & Barnett, A. G. (2008). \emph{An introduction to generalized linear models} (3rd Edition). Boca Raton, FL: CRC Press.

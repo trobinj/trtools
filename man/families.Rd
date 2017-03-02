@@ -6,9 +6,9 @@
 \title{Survey of weekly family income and food expenditure.}
 \format{A data frame with 33 observations and three variables:
 \describe{
-   \item{size}{number of family members}
-   \item{income}{weekly family income}
-   \item{cost}{weekly family expenditure on food}
+   \item{size:}{number of family members}
+   \item{income:}{weekly family income}
+   \item{cost:}{weekly family expenditure on food}
 }}
 \source{
 Cochran, W. G. (1977). \emph{Sampling techniques} (3rd Edition). New York: Wiley.

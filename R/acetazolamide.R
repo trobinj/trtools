@@ -4,8 +4,8 @@
 #'
 #' @format A data frame with 588 observations and two variables:
 #' \describe{
-#'    \item{dose}{dose (mg/kg)}
-#'    \item{limbs}{number of malformed limbs}
+#'    \item{dose:}{dose (mg/kg)}
+#'    \item{limbs:}{number of malformed limbs}
 #' }
 #'
 #' @note The fetuses may have been nested within litters. Litter membership of each fetus, however, is unknown. The data are from Holmes, Kawanishi, and Munz (1988) and are featured in Ramsey and Schafer (1997). 
