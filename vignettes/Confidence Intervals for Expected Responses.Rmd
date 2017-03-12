@@ -1,0 +1,110 @@
+---
+title: "Confidence Intervals for Expected Responses"
+author: "Timothy R. Johnson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Confidence Intervals for Expected Responses}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "")
+```
+
+```{r, echo = FALSE}
+library(trtools)
+```
+
+The `glmint` and `nlsint` compute confidence intervals for the expected response --- i.e. $E(Y)$ --- of a generalized or nonlinear model, respectively. The `nlsint` function will also compute prediction intervals assuming a normally-distributed response. These functions are primary intended for use in producing plots of confidence/prediction intervals/bands of the (expected) response. 
+
+## Generalized Linear Models
+
+The `glmint` function computes Wald confidence intervals for $E(Y_i)$ for a generalized linear model of the form
+$$
+  g[E(Y_i)] = \eta_i
+$$
+where $g$ is the link function and $\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}$ is the linear predictor. The `predict` function computes $\hat\eta_i = \hat\beta_0 + \hat\beta_1 x_{i1} + \cdots + \hat\beta_p x_{ip}$ and the standard error of $\hat\eta_i$. The confidence interval for $g[E(Y_i)]$ is then 
+$$
+  \hat\eta_i \pm t\sqrt{\widehat{\text{Var}}(\hat\eta_i)},
+$$
+and the confidence interval for $E(Y_i)$ is then
+$$
+  \left[ g^{-1}\left(\hat\eta_i - t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right), g^{-1}\left(\hat\eta_i + t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right) \right].
+$$
+Here $t$ is the quantile from the $t$ distribution with degrees of freedom equal to the residual degrees of freedom, except for models where the dispersion parameter ($\phi$) is fixed at one (e.g., Poisson and binomial models) where $t$ is replaced with a quantile from the standard normal distribution. The `glmint` function computes the confidence interval for $\eta_i$ and then finds the inverse link function and maps the confidence interval to the scale of the response variable to create a confidence interval for $E(Y_i)$. 
+
+For an example consider a logistic regression model for the `rotifer` data, using quasilikelihood to account for the overdispersion. The model is estimated as
+```{r}
+m <- glm(cbind(y,total-y) ~ density + species, family = quasibinomial, data = rotifer)
+```
+Point estimates and confidence intervals for the expected response can be computed and plotted as follows.
+```{r, fig.width = 7, fig.height = 5, fig.align = "center"}
+d <- expand.grid(density = seq(1.01, 1.07, by = 0.001), species = c("kc","pm"))
+d <- cbind(d, glmint(m, newdata = d))
+head(d)
+library(ggplot2)
+p <- ggplot(rotifer, aes(x = density))
+p <- p + geom_ribbon(aes(ymin = low, ymax = upp), data = d, alpha = 0.2)
+p <- p + geom_line(aes(y = fit), data = d)
+p <- p + geom_point(aes(y = y/total)) + facet_wrap(~ species)
+p <- p + xlab("Solution Density") + ylab("(Expected) Proportion of Rotifer Remaining in Suspension")
+p
+```
+
+## Nonlinear Regression Models
+
+The `nlsint` function is an alternative to the `predict.nls` function. It is designed to work like `predict.nls` but, unlike `predict.nls`, it will also compute confidence or prediction intervals. These are computed using the delta method. For a nonlinear regression model of the form $E(Y_i) = f(\theta_1,\theta_2,\dots,\theta_q,\mathbf{x}_i)$, the variance of $\hat{Y}_i$ is estimated by $\hat{V}(\hat{Y}_i) = \mathbf{d}_i' {\bf\Sigma} \mathbf{d}_i$ where $\bf\Sigma$ is the estimated covariance matrix of $\hat{\theta}_1, \hat{\theta}_2, \dots, \hat{\theta}_q$, and the $j$-th element of $\mathbf{d}_i$ is 
+$$
+  d_{ij} = \frac{\partial f(\theta_1,\theta_2,\dots,\theta_q,\mathbf{x}_i)}{\partial \theta_j}
+$$
+evaluated at $\hat{\theta}_1, \hat{\theta}_2, \dots, \hat{\theta}_q$. The first-order partial derivatives are computed numerically by `nlsint` using the `jacobian` function from the **numDeriv** package. The square root of $\hat{V}(\hat{Y}_i)$ is then the estimated standard error of $E(Y_i)$. The standard error of $Y_i-\hat{Y}_i$ (i.e., the *prediction error*) is estimated by the square root of $\hat{V}(\hat{Y}_i) + \hat{\sigma}^2$ where
+$$
+  \hat{\sigma}^2 = (n - q)^{-1}\sum_{i=1}^n w_i(y_i - \hat{y}_i)^2.
+$$
+As with any method based on asymptotic arguments, the confidence intervals produced by `nlsint` should be considered as only approximate in the finite sample case, particularly with smaller samples.
+
+For an example consider a Michaelis-Menten regression model for the data in the `Puromycin` data frame. The model used here is
+$$
+  E(Y_i) = \frac{(\theta_1 + \theta_3 d_i)x_i}{\theta_2 + \theta_4 d_i + x_i},
+$$
+where $Y_i$ is the reaction rate, $x_i$ is the substrate concentration, and $d_i$ is an indicator variable for the treated cells. Thus the model can be written case-wise as
+$$
+  E(Y_i) = 
+  \begin{cases}
+    \theta_1 x_i/(\theta_2 + x_i), & \text{if the $i$-th observation is of untreated cells}, \\
+    (\theta_1 + \theta_3)x_i/(\theta_2 + \theta_4 + x_i), & \text{if the $i$-th observation is of treated cells}.
+  \end{cases}
+$$
+This model can be estimated using `nls` as follows.
+
+```{r puromycin-nls}
+myreg <- nls(rate ~ (t1 + t3 * (state == "treated")) * conc / (t2 + t4 * (state == "treated") + conc), start = c(t1 = 150, t2 = 0, t3 = 0.05, t4 = 0), data = Puromycin)
+summary(myreg)$coefficients
+```
+
+Confidence intervals for the expected response, and prediction intervals for a response for given values of `conc` and `state` can be computed as follows.
+
+```{r}
+mydat <- expand.grid(conc = seq(0.02, 1.10, length = 100), state = c("treated","untreated"))
+mydat.conf <- cbind(mydat, nlsint(myreg, mydat, interval = "confidence"))
+head(mydat.conf)
+mydat.pred <- cbind(mydat, nlsint(myreg, mydat, interval = "prediction"))
+head(mydat.pred)
+```
+
+These results can then be used to plot the confidence and prediction bands around the expected/predicted response. 
+
+```{r, fig.width = 7, fig.height = 5, fig.align = "center"}
+library(ggplot2)
+p <- ggplot(Puromycin, aes(x = conc))
+p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr), data = mydat.pred, alpha = 0.2)
+p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr), data = mydat.conf, alpha = 0.4)
+p <- p + geom_line(aes(y = fit), data = mydat.conf)
+p <- p + geom_point(aes(y = rate)) + facet_wrap(~ state)
+p <- p + xlab("Substrate Concentration (ppm)") + ylab("Reaction Rate (counts/min/min)")
+p
+```
+
+

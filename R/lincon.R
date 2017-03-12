@@ -55,11 +55,10 @@ lincon <- function(model, a, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   pv <- 2*pt(-abs(ts), df)
   if (!missing(tf)) {
     out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    colnames(out) <- c("f(Estimate)", "SE", "f(Lower)", "f(Upper)", "t value", "df", "Pr(>|t|)")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
-    colnames(out) <- c("Estimate", "SE", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
+    colnames(out) <- c("estim", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
   if (missing(cnames)) {
     rownames(out) <- apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = ""))
