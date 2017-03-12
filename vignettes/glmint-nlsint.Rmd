@@ -18,7 +18,11 @@ knitr::opts_chunk$set(echo = TRUE, comment = "")
 library(trtools)
 ```
 
-The `glmint` and `nlsint` compute confidence intervals for the expected response --- i.e. $E(Y)$ --- of a generalized or nonlinear model, respectively. The `nlsint` function will also compute prediction intervals assuming a normally-distributed response. These functions are primary intended for use in producing plots of confidence/prediction intervals/bands of the (expected) response. 
+The `glmint` and `nlsint` compute confidence intervals for the expected response --- i.e. $E(Y)$ --- of a generalized or nonlinear model, respectively. The `nlsint` function will also compute prediction intervals assuming a normally-distributed response. These functions are primary intended for use in producing plots of confidence/prediction intervals/bands of the (expected) response. This vignette briefly describes what these functions do and provides some examples of their use. To run the examples it is necessary to load the `trtools` and `ggplot2` packages:
+```{r}
+library(trtools)
+library(ggplot2)
+```
 
 ## Generalized Linear Models
 
@@ -26,17 +30,38 @@ The `glmint` function computes Wald confidence intervals for $E(Y_i)$ for a gene
 $$
   g[E(Y_i)] = \eta_i
 $$
-where $g$ is the link function and $\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}$ is the linear predictor. The `predict` function computes $\hat\eta_i = \hat\beta_0 + \hat\beta_1 x_{i1} + \cdots + \hat\beta_p x_{ip}$ and the standard error of $\hat\eta_i$. The confidence interval for $g[E(Y_i)]$ is then 
+where $g$ is the link function and $\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}$ is the linear predictor. The `predict` function computes $\hat\eta_i = \hat\beta_0 + \hat\beta_1 x_{i1} + \cdots + \hat\beta_p x_{ip}$ and the standard error of $\hat\eta_i$. A confidence interval for $g[E(Y_i)]$ is 
 $$
-  \hat\eta_i \pm t\sqrt{\widehat{\text{Var}}(\hat\eta_i)},
+  \hat\eta_i \pm t\sqrt{\widehat{\text{Var}}(\hat\eta_i)} \Leftrightarrow 
+  \left[\hat\eta_i - t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}, 
+  \hat\eta_i + t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right],
 $$
-and the confidence interval for $E(Y_i)$ is then
+and therefore a confidence interval for $E(Y_i)$ is
 $$
   \left[ g^{-1}\left(\hat\eta_i - t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right), g^{-1}\left(\hat\eta_i + t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right) \right].
 $$
 Here $t$ is the quantile from the $t$ distribution with degrees of freedom equal to the residual degrees of freedom, except for models where the dispersion parameter ($\phi$) is fixed at one (e.g., Poisson and binomial models) where $t$ is replaced with a quantile from the standard normal distribution. The `glmint` function computes the confidence interval for $\eta_i$ and then finds the inverse link function and maps the confidence interval to the scale of the response variable to create a confidence interval for $E(Y_i)$. 
 
-For an example consider a logistic regression model for the `rotifer` data, using quasilikelihood to account for the overdispersion. The model is estimated as
+For an example consider a Poisson regression model for the `daphniastrat` data. The model is 
+```{r}
+m <- glm(count ~ layer, family = poisson, data = daphniastrat)
+```
+Point estimates and confidence intervals for the expected response can be computed and plotted as follows.
+```{r, fig.width = 7, fig.height = 3, fig.align = "center"}
+m <- glm(count ~ layer, family = poisson, data = daphniastrat)
+d <- data.frame(layer = levels(daphniastrat$layer))
+d <- cbind(d, glmint(m, newdata = d))
+
+p <- ggplot(daphniastrat, aes(x = layer, y = count))
+p <- p + geom_jitter(height = 0, width = 0.1) 
+p <- p + coord_flip() + xlab("") + ylab("(Expected) Daphnia Per Liter")
+p <- p + geom_pointrange(aes(y = fit, ymin = low, ymax = upp), 
+  data = d, shape = 21, fill = "white")
+plot(p)
+```
+Note the reordering of the levels of `layer` by depth. 
+
+For another example consider a logistic regression model for the `rotifer` data, using quasilikelihood to account for the overdispersion. The model is estimated as
 ```{r}
 m <- glm(cbind(y,total-y) ~ density + species, family = quasibinomial, data = rotifer)
 ```
