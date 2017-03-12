@@ -59,7 +59,6 @@ p <- p + geom_pointrange(aes(y = fit, ymin = low, ymax = upp),
   data = d, shape = 21, fill = "white")
 plot(p)
 ```
-Note the reordering of the levels of `layer` by depth. 
 
 For another example consider a logistic regression model for the `rotifer` data, using quasilikelihood to account for the overdispersion. The model is estimated as
 ```{r}
