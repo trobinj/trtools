@@ -3,6 +3,7 @@ title: "Confidence Intervals for Expected Responses"
 author: "Timothy R. Johnson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+fontsize: 12pt
 vignette: >
   %\VignetteIndexEntry{Confidence Intervals for Expected Responses}
   %\VignetteEngine{knitr::rmarkdown}
@@ -107,4 +108,6 @@ p <- p + xlab("Substrate Concentration (ppm)") + ylab("Reaction Rate (counts/min
 p
 ```
 
-
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>
