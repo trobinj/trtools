@@ -40,7 +40,7 @@ and therefore a confidence interval for $E(Y_i)$ is
 $$
   \left[ g^{-1}\left(\hat\eta_i - t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right), g^{-1}\left(\hat\eta_i + t\sqrt{\widehat{\text{Var}}(\hat\eta_i)}\right) \right].
 $$
-Here $t$ is the quantile from the $t$ distribution with degrees of freedom equal to the residual degrees of freedom, except for models where the dispersion parameter ($\phi$) is fixed at one (e.g., Poisson and binomial models) where $t$ is replaced with a quantile from the standard normal distribution. The `glmint` function computes the confidence interval for $\eta_i$ and then finds the inverse link function and maps the confidence interval to the scale of the response variable to create a confidence interval for $E(Y_i)$. 
+Here $t$ is the quantile from the $t$ distribution with degrees of freedom equal to the residual degrees of freedom, except for models where the dispersion parameter ($\phi$) is fixed at one (e.g., Poisson and binomial models) where $t$ is replaced with a quantile from the standard normal distribution. The `glmint` function simply computes the confidence interval for $\eta_i$ using the output of the `predict` function and then finds the inverse link function and maps the confidence interval to the scale of the response variable to create a confidence interval for $E(Y_i)$. 
 
 For an example consider a Poisson regression model for the `daphniastrat` data. The model is 
 ```{r}
