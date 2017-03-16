@@ -20,7 +20,7 @@ dsurvbin(data, y, event, case.name = "case", time.name = "t",
 
 \item{resp.name:}{Variable name for the binary response variables.}
 
-\item{open:}{Logical for whether the observed time point should be considered as corresponding to an open time interval where the right endpoint is infinity (effectively equivalent to assuming that the maximum observed value of \code{y} is right-censored). Default is FALSE.}
+\item{open:}{Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an open time interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1} by definition. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.}
 
 \item{reverse:}{Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE.}
 }
@@ -28,5 +28,19 @@ dsurvbin(data, y, event, case.name = "case", time.name = "t",
 This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time.
 }
 \details{
-Assuming survival time is integer-valued as \eqn{T = 1,2,\dots,k}, the probability of a given response can be modeled as \eqn{P(T = 1) = 1 - \lambda(1)} and \deqn{P(T = t) = \lambda(t)(1 - \lambda(j-1))(1 - \lambda(j-2))\dots(1 - \lambda(1))} for \eqn{T > 1}, where \eqn{\lambda(t) = P(T = t|T \ge t)} is the hazard function. If we define a set of binary response variables as \eqn{Y_k = 1} if \eqn{k = t} and \eqn{Y_k = 0} if \eqn{t > k}, then \eqn{P(T = 1) = P(Y_1 = 1)} and \deqn{P(T = t) = P(Y_t = 1)P(Y_{t-1} = 0)P(Y_{t-2} = 0)\dots P(Y_1 = 0)} for \eqn{T > 1}. Thus the likelihood function for \eqn{T} is equivalent to that of the product of \eqn{T} independent binary responses, and so discrete survival time can be modeled as a set of binary response variables using logistic regression or other models for independent binary responses.
+Assuming survival time is integer-valued as \eqn{T = 1,2,\dots,k}, the probability of a given response can be modeled as \eqn{P(T = 1) = \lambda(1)} and \deqn{P(T = t) = \lambda(t)(1 - \lambda(j-1))(1 - \lambda(j-2))\dots(1 - \lambda(1))} for \eqn{T > 1}, where \eqn{\lambda(t) = P(T = t|T \ge t)} is the hazard function. If we define a set of binary response variables as \eqn{Y_k = 1} if \eqn{k = t} and \eqn{Y_k = 0} if \eqn{t > k}, then \eqn{P(T = 1) = P(Y_1 = 1)} and \deqn{P(T = t) = P(Y_t = 1)P(Y_{t-1} = 0)P(Y_{t-2} = 0)\dots P(Y_1 = 0)} for \eqn{T > 1}. If \eqn{Y} is censored at \eqn{T = t}, meaning that it is only known that \eqn{T > t}, then \deqn{P(T = t) = (1 - \lambda(t))(1 - \lambda(t-1)\dots (1 - \lambda(1)) = P(Y_t = 0)P(Y_{t-1} = 0) \dots P(Y_1 = 0).} Because the likelihood function for \eqn{T} is equivalent to that of the product of \eqn{T} independent binary responses, and so discrete survival time can be modeled as a set of binary response variables using logistic regression or other models for independent binary responses. 
+
+A related case is the continuation ratio or sequential regression model for ordinal response variables. There \eqn{T} represents an ordinal response (not necessarily time) and typically one models \eqn{P(T > t|T \ge t)} and assumes that a response will necessarily be in the last category if it is not in the previous category meaning that \eqn{P(T = k|T \ge k) = 1} if \eqn{k} is the highest "value" of \eqn{T}. This is effectively equivalent to a discrete survival modeling the probability that the event does not occur and all observations of \eqn{Y = k} are censored at \eqn{Y = k - 1}. This can be achieved by using the \code{open = TRUE} and \code{reverse = TRUE} (see the example below).
+}
+\examples{
+
+# setup for discrete survival model where the first five times are right-censored
+setup for discrete survival model where the first five times are right-censored
+d <- data.frame(time = rep(1:5, 2), x = rnorm(10), status = rep(0:1, each = 5))
+dsurvbin(d, "time", "status")
+
+# setup for a continuation ratio (sequential regression) model
+d <- data.frame(time = rep(1:5, 2), x = rnorm(10))
+dsurvbin(d, "time", open = TRUE, reverse = TRUE)
+  
 }
