@@ -18,16 +18,13 @@
 #' @importFrom reshape2 melt
 #' @importFrom dplyr arrange
 #' @examples 
-#' 
 #' # setup for discrete survival model where the first five times are right-censored
 #' setup for discrete survival model where the first five times are right-censored
 #' d <- data.frame(time = rep(1:5, 2), x = rnorm(10), status = rep(0:1, each = 5))
 #' dsurvbin(d, "time", "status")
-#' 
 #' # setup for a continuation ratio (sequential regression) model
 #' d <- data.frame(time = rep(1:5, 2), x = rnorm(10))
 #' dsurvbin(d, "time", open = TRUE, reverse = TRUE)
-#'   
 #' @export
 dsurvbin <- function(data, y, event, case.name = "case", time.name = "t", resp.name = "y", 
   open = FALSE, reverse = FALSE) {
