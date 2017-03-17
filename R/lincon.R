@@ -64,6 +64,7 @@ lincon <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) 
       up <- tmp
     }
     out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    message("Note: Point estimates and confidence interval endpoints have been transformed.")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)

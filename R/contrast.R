@@ -102,7 +102,7 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
       lw <- up
       up <- tmp
     }
-    message("Note: Point estimate and confidence interval endpoints have been transformed.")
+    message("Note: Point estimates and confidence interval endpoints have been transformed.")
     out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
   }
   else {
