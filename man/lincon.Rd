@@ -4,12 +4,14 @@
 \alias{lincon}
 \title{Linear combinations of regression model parameters.}
 \usage{
-lincon(model, a, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+lincon(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
 
-\item{a}{Vector or matrix defining the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function.}
+\item{a}{Vector or matrix defining the \eqn{a_j} coefficients of the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function.}
+
+\item{b}{A scalar or vector defining the \eqn{b} coefficient(s) of the linear combination. Assumed to be zero if missing.}
 
 \item{df}{Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.}
 
@@ -27,7 +29,7 @@ lincon(model, a, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.
 }
 \details{
-For a regression model with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \eqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p}. Inferences are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
+For a regression model with a linear component (e.g., linear and generalized linear models) with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \deqn{l = a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p + b.} For a nonlinear regression model with parameters \eqn{\theta_1, \theta_2, \dots, \theta_q} a linear combination is defined as \deqn{l = a_1\theta_1 + a_2\theta_2 + \cdots + a_q\theta_q + b.} Inferences for \eqn{l} are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters.
 }
 \examples{
 myreg <- lm(Gas ~ Insul + Temp + Insul:Temp, data = MASS::whiteside)

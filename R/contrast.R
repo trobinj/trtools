@@ -22,76 +22,68 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
   if (!any(class(model) %in% c("lm","glm"))) {
     stop("function currently only works for lm and glm objects")
   }
-  formula.rhs <- as.formula(paste("~", strsplit(as.character(formula(model)), "~")[[3]]))
-  dat <- model.frame(model)
-  for (i in names(dat)) {
-    if (is.character(dat[[i]])) {
-      dat[[i]] <- as.factor(dat[[i]])
-    }
-  }
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
-  foo <- function(mat, dat) {
-    mat <- as.data.frame(mat)
-    tmp <- intersect(names(mat), names(dat))
-    if (length(setdiff(names(mat), names(dat))) > 0) {
-      stop(paste("variable(s)", setdiff(names(mat), names(dat)), "not found"))
-    }
-    for (i in tmp) {
-      if (is.factor(dat[[i]])) {
-        if (length(setdiff(levels(mat[[i]]), levels(dat[[i]]))) > 0) {
-          stop(paste("level(s)", setdiff(levels(mat[[i]]), levels(dat[[i]])), "not found"))
-        }
-        mat[[i]] <- factor(mat[[i]], levels = levels(dat[[i]]))
-        attributes(mat[[i]]) <- attributes(dat[[i]])
-      }
-    }
-    return(model.matrix(formula.rhs, mat))
+  eta <- function(theta, model, data) {
+    model$coefficients <- theta
+    predict(model, as.data.frame(data))
   }
   if (!missing(a)) {
-    ma <- foo(a, dat)
+    ma <- jacobian(eta, coef(model), model = model, data = a)
+    pa <- predict(model, as.data.frame(a))
   }
   else {
     ma <- 0
+    pa <- 0
   }
   if (!missing(b)) {
-    mb <- foo(b, dat)
+    mb <- jacobian(eta, coef(model), model = model, data = b)
+    pb <- predict(model, as.data.frame(b))
   }
   else {
     mb <- 0
+    pb <- 0
   }
   if (!missing(u)) {
-    mu <- foo(u, dat)
+    mu <- jacobian(eta, coef(model), model = model, data = u)
+    pu <- predict(model, as.data.frame(u))
   }
   else {
     mu <- 0
+    pu <- 0
   }
   if (!missing(v)) {
-    mv <- foo(v, dat)
+    mv <- jacobian(eta, coef(model), model = model, data = v)
+    pv <- predict(model, as.data.frame(v))
   }
   else {
     mv <- 0
+    pv <- 0
   }
   rowmax <- max(unlist(lapply(list(ma, mb, mu, mv), function(x) ifelse(is.matrix(x), nrow(x), 0))))
   if (is.matrix(ma) && nrow(ma) == 1) {
     ma <- ma[rep(1, rowmax),]
+    pa <- pa[rep(1, rowmax)]
   }
   if (is.matrix(mb) && nrow(mb) == 1) {
     mb <- mb[rep(1, rowmax),]
+    pb <- pb[rep(1, rowmax)]
   }
   if (is.matrix(mu) && nrow(mu) == 1) {
     mu <- mu[rep(1, rowmax),]
+    pu <- pu[rep(1, rowmax)]
   }
   if (is.matrix(mv) && nrow(mv) == 1) {
     mv <- mv[rep(1, rowmax),]
+    pv <- pv[rep(1, rowmax)]
   }
   mm <- as.matrix(ma - mb - mu + mv)
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
   se <- sqrt(diag(mm %*% fcov(model, ...) %*% t(mm)))
-  pe <- mm %*% coef(model)
+  pe <- pa - pb - pu + pv
   if (missing(df)) {
     if (("glm" %in% class(model)) && (family(model)[1] %in% c("binomial","poisson"))) {
       df <- Inf
@@ -105,13 +97,18 @@ contrast <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vco
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
   if (!missing(tf)) {
+    if (any(tf(lw) > tf(up))) {
+      tmp <- lw
+      lw <- up
+      up <- tmp
+    }
+    message("Note: Point estimate and confidence interval endpoints have been transformed.")
     out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    colnames(out) <- c("f(Estimate)", "SE", "f(Lower)", "f(Upper)", "t value", "df", "Pr(>|t|)")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
-    colnames(out) <- c("Estimate", "SE", "Lower", "Upper", "t value", "df", "Pr(>|t|)")
   }
+  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
