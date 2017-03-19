@@ -2,14 +2,14 @@
 #' 
 #' This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function.
 #' 
-#' @param data: The data frame containing the time variable.
-#' @param y: Name of the time variable in \code{data}.
-#' @param event: Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.
-#' @param case.name: Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time). 
-#' @param time.name: Variable name prefix for the time point of each binary response.
-#' @param resp.name: Variable name for the binary response variables.
-#' @param open: Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.
-#' @param reverse: Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE. 
+#' @param data The data frame containing the time variable.
+#' @param y Name of the time variable in \code{data}.
+#' @param event Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.
+#' @param case.name Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time). 
+#' @param time.name Variable name prefix for the time point of each binary response.
+#' @param resp.name Variable name for the binary response variables.
+#' @param open Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.
+#' @param reverse Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE. 
 #' 
 #' @details Assuming survival time is integer-valued as \eqn{T = 1,2,\dots,k}, the probability of a given response can be modeled as \eqn{P(T = 1) = \lambda(1)} and \deqn{P(T = t) = \lambda(t)(1 - \lambda(j-1))(1 - \lambda(j-2))\dots(1 - \lambda(1))} for \eqn{T > 1}, where \eqn{\lambda(t) = P(T = t|T \ge t)} is the hazard function. If we define a set of binary response variables as \eqn{Y_k = 1} if \eqn{k = t} and \eqn{Y_k = 0} if \eqn{t > k}, then \eqn{P(T = 1) = P(Y_1 = 1)} and \deqn{P(T = t) = P(Y_t = 1)P(Y_{t-1} = 0)P(Y_{t-2} = 0)\dots P(Y_1 = 0)} for \eqn{T > 1}. If \eqn{Y} is censored at \eqn{T = t}, meaning that it is only known that \eqn{T > t}, then \deqn{P(T = t) = (1 - \lambda(t))(1 - \lambda(t-1))\dots (1 - \lambda(1)) = P(Y_t = 0)P(Y_{t-1} = 0) \dots P(Y_1 = 0).} Because the likelihood function for \eqn{T} is equivalent to that of the product of \eqn{T} independent binary responses, discrete survival time can be modeled as a set of binary response variables using logistic regression or other models for independent binary responses to model the hazard function. 
 #' 
@@ -19,7 +19,6 @@
 #' @importFrom dplyr arrange
 #' @examples 
 #' # setup for discrete survival model where the first five times are right-censored
-#' setup for discrete survival model where the first five times are right-censored
 #' d <- data.frame(time = rep(1:5, 2), x = rnorm(10), status = rep(0:1, each = 5))
 #' dsurvbin(d, "time", "status")
 #' # setup for a continuation ratio (sequential regression) model

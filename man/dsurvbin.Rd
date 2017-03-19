@@ -8,21 +8,21 @@ dsurvbin(data, y, event, case.name = "case", time.name = "t",
   resp.name = "y", open = FALSE, reverse = FALSE)
 }
 \arguments{
-\item{data:}{The data frame containing the time variable.}
+\item{data}{The data frame containing the time variable.}
 
-\item{y:}{Name of the time variable in \code{data}.}
+\item{y}{Name of the time variable in \code{data}.}
 
-\item{event:}{Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.}
+\item{event}{Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.}
 
-\item{case.name:}{Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time).}
+\item{case.name}{Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time).}
 
-\item{time.name:}{Variable name prefix for the time point of each binary response.}
+\item{time.name}{Variable name prefix for the time point of each binary response.}
 
-\item{resp.name:}{Variable name for the binary response variables.}
+\item{resp.name}{Variable name for the binary response variables.}
 
-\item{open:}{Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.}
+\item{open}{Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.}
 
-\item{reverse:}{Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE.}
+\item{reverse}{Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE.}
 }
 \description{
 This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function.
@@ -34,7 +34,6 @@ A related case is the continuation ratio or sequential regression model for ordi
 }
 \examples{
 # setup for discrete survival model where the first five times are right-censored
-setup for discrete survival model where the first five times are right-censored
 d <- data.frame(time = rep(1:5, 2), x = rnorm(10), status = rep(0:1, each = 5))
 dsurvbin(d, "time", "status")
 # setup for a continuation ratio (sequential regression) model

@@ -21,6 +21,6 @@ accidents
 Data from an observational study that recorded the number of accidents at eight locations before and after installation of traffic control measures.
 }
 \note{
-The data are from an example from Pawitan (2013). No other source is given so the data are assumed to be artificial.
+The data are from an example from Pawitan (2013). No other source is given so the data may be simulated.
 }
 \keyword{datasets}

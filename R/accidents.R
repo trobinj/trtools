@@ -10,7 +10,7 @@
 #'    \item{treatment:}{before or after introduction of traffic control measures}
 #' }
 #'
-#' @note The data are from an example from Pawitan (2013). No other source is given so the data are assumed to be artificial. 
+#' @note The data are from an example from Pawitan (2013). No other source is given so the data may be simulated. 
 #'
 #' @source Pawitan, Y. (2013). \emph{In all likelihood: Statistical modeling and inference using likelihood}. Oxford University Press. 
 #' 

@@ -6,9 +6,9 @@
 \title{Fixed area sample of tree diameter and abundance of nectria cankers.}
 \format{A data frame with 38 observations and three variables:
 \describe{
-   \item{plot}{fixed area plot number}
-   \item{dbh}{tree diameter at breast height in cm}
-   \item{cankers}{number of observed cankers on tree}
+   \item{plot:}{fixed area plot number}
+   \item{dbh:}{tree diameter at breast height in cm}
+   \item{cankers:}{number of observed cankers on tree}
 }}
 \source{
 Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
