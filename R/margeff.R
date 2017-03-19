@@ -1,6 +1,6 @@
 #' Estimation of marginal effects regression models (experimental). 
 #' 
-#' This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. 
+#' This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
 #' 
 #' @param model Model object of class \code{lm}, \code{glm}, or \code{nls}.
 #' @param a List or data frame defining values of the explanatory variables.
@@ -19,8 +19,8 @@
 #'  family = binomial, data = insecticide) 
 #' # discrete marginal effect of increasing deposit from 4 to 6 for each insecticide  
 #' margeff(m, 
-#'  a = list(deposit = 3, insectide = levels(insecticide$insecticide)),
-#'  b = list(deposit = 2, insectide = levels(insecticide$insecticide)),
+#'  a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
+#'  b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
 #'  cnames = levels(insecticide$insecticide))
 #' # approximate "instantaneous" marginal effects for each insecticide at a deposit of 5 
 #' margeff(m, 
