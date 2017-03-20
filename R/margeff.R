@@ -1,4 +1,4 @@
-#' Estimation of marginal effects regression models (experimental). 
+#' Estimation of marginal effects of regression models (experimental). 
 #' 
 #' This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
 #' 

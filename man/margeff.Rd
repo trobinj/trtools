@@ -2,7 +2,7 @@
 % Please edit documentation in R/margeff.R
 \name{margeff}
 \alias{margeff}
-\title{Estimation of marginal effects regression models (experimental).}
+\title{Estimation of marginal effects of regression models (experimental).}
 \usage{
 margeff(model, a, b, df, cnames, percent = FALSE, delta = 1, level = 0.95,
   fcov = vcov, ...)
