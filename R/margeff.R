@@ -50,7 +50,7 @@ margeff <- function(model, a, b, df, cnames, pchange = FALSE,
       names(theta) <- names(coef(model))
       pa <- with(c(theta, as.data.frame(a)), eval(parse(text = as.character(formula(model)))))
       pb <- with(c(theta, as.data.frame(b)), eval(parse(text = as.character(formula(model)))))
-      return((pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta))
+      return((pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta))
     }
   }
   else {
@@ -58,7 +58,7 @@ margeff <- function(model, a, b, df, cnames, pchange = FALSE,
       model$coefficients <- theta
       pa <- predict(model, as.data.frame(a), type = "response")
       pb <- predict(model, as.data.frame(b), type = "response")
-      return((pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta))
+      return((pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta))
     }    
   }
   if (missing(df)) {
