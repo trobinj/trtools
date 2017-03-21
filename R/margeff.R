@@ -71,7 +71,7 @@ margeff <- function(model, a, b, df, cnames, pchange = FALSE,
   }
   pa <- predict(model, as.data.frame(a), type = "response")
   pb <- predict(model, as.data.frame(b), type = "response")
-  pe <- (pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta)
+  pe <- (pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta)
   gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
     delta = delta, pchange = pchange)
   se <- sqrt(diag(gr %*% fcov(model, ...) %*% t(gr)))
