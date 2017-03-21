@@ -4,7 +4,7 @@
 \alias{margeff}
 \title{Estimation of marginal effects of regression models (experimental).}
 \usage{
-margeff(model, a, b, df, cnames, percent = FALSE, delta = 1, level = 0.95,
+margeff(model, a, b, df, cnames, pchange = FALSE, delta = 1, level = 0.95,
   fcov = vcov, ...)
 }
 \arguments{
@@ -18,7 +18,7 @@ margeff(model, a, b, df, cnames, percent = FALSE, delta = 1, level = 0.95,
 
 \item{cnames}{Optional names for the marginal effects.}
 
-\item{percent}{Logical for whether or not to compute percent change (default is FALSE).}
+\item{pchange}{Logical for whether or not to compute percent change (default is FALSE).}
 
 \item{delta}{Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}.}
 
@@ -55,5 +55,5 @@ margeff(m,
 margeff(m, 
  a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
  b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
- cnames = levels(insecticide$insecticide), percent = TRUE)
+ cnames = levels(insecticide$insecticide), pchange = TRUE)
 }

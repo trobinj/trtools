@@ -7,7 +7,7 @@
 #' @param b List or data frame defining values of the explanatory variables.
 #' @param df Degrees of freedom for the confidence interval. If omitted it is extracted from the model object.
 #' @param cnames Optional names for the marginal effects.
-#' @param percent Logical for whether or not to compute percent change (default is FALSE). 
+#' @param pchange  Logical for whether or not to compute percent change (default is FALSE). 
 #' @param delta Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}. 
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
@@ -36,19 +36,30 @@
 #' margeff(m, 
 #'  a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
 #'  b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
-#'  cnames = levels(insecticide$insecticide), percent = TRUE)
+#'  cnames = levels(insecticide$insecticide), pchange = TRUE)
 #' @importFrom stats predict
 #' @export
-margeff <- function(model, a, b, df, cnames, percent = FALSE, 
+margeff <- function(model, a, b, df, cnames, pchange = FALSE, 
   delta = 1, level = 0.95, fcov = vcov, ...) {
-  if (!any(class(model) %in% c("lm","glm"))) {
-    stop("function currently only works for lm and glm objects")
+  if (!any(class(model) %in% c("lm","glm","nls"))) {
+    stop("function currently only works for lm, glm, and nls objects")
   }
-  f <- function(theta, model, a, b, delta, percent) {
-    model$coefficients <- theta
-    pa <- predict(model, as.data.frame(a), type = "response")
-    pb <- predict(model, as.data.frame(b), type = "response")
-    return((pa - pb)/delta / (percent * pb / 100 + (1 - percent) * delta))
+  if (class(model) == "nls") {
+    f <- function(theta, model, a, b, delta, pchange) {
+      theta <- as.list(theta)
+      names(theta) <- names(coef(model))
+      pa <- with(c(theta, as.data.frame(a)), eval(parse(text = as.character(formula(model)))))
+      pb <- with(c(theta, as.data.frame(b)), eval(parse(text = as.character(formula(model)))))
+      return((pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta))
+    }
+  }
+  else {
+    f <- function(theta, model, a, b, delta, pchange) {
+      model$coefficients <- theta
+      pa <- predict(model, as.data.frame(a), type = "response")
+      pb <- predict(model, as.data.frame(b), type = "response")
+      return((pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta))
+    }    
   }
   if (missing(df)) {
     if (("glm" %in% class(model)) && (family(model)[1] %in% c("binomial","poisson"))) {
@@ -60,9 +71,9 @@ margeff <- function(model, a, b, df, cnames, percent = FALSE,
   }
   pa <- predict(model, as.data.frame(a), type = "response")
   pb <- predict(model, as.data.frame(b), type = "response")
-  pe <- (pa - pb)/delta / (percent * pb / 100 + (1 - percent) * delta)
+  pe <- (pa - pb)/delta / (pchange * pb / 100 + (1 - pchange) * delta)
   gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
-    delta = delta, percent = percent)
+    delta = delta, pchange = pchange)
   se <- sqrt(diag(gr %*% fcov(model, ...) %*% t(gr)))
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 

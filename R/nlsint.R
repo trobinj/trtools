@@ -22,23 +22,15 @@
 nlsint <- function(object, newdata = eval(object$call$data), interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, ...) {
   if (class(object) != "nls") stop("nls objects only")
   type <- match.arg(interval)
-  p.names <- names(coef(object))       
-  x.names <- names(object$dataClasses)
-  if ("ii" %in% x.names) stop("iterator variable (ii) same as variable name")
-  if ("ii" %in% p.names) stop("iterator variable (ii) same as parameter name")
-  for (ii in 1:length(x.names)) {
-    assign(x.names[ii], newdata[[x.names[ii]]])
+  f <- function(theta, object, data) {
+    theta <- as.list(theta)
+    names(theta) <- names(coef(object))
+    return(with(c(theta, data), eval(parse(text = as.character(formula(object))))))
   }
-  f <- function(theta) {
-    for (ii in 1:length(p.names)) {
-      assign(p.names[ii], theta[ii])
-    }
-    eval(parse(text = as.character(formula(object))[3]))
-  }
-  dmat <- jacobian(f, coef(object))
+  dmat <- jacobian(f, coef(object), object = object, data = newdata)
   vmat <- fcov(object, ...)
   df <- summary(object)$df[2]
-  yh <- f(coef(object))
+  yh <- f(coef(object), object, newdata)
   va <- diag(dmat %*% vmat %*% t(dmat))
   if (is.null(weights(object))) {
     wi <- 1
