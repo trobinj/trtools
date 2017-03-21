@@ -44,7 +44,7 @@ margeff <- function(model, a, b, df, cnames, pchange = FALSE,
   if (!any(class(model) %in% c("lm","glm","nls"))) {
     stop("function currently only works for lm, glm, and nls objects")
   }
-  if (class(model) == "nls") {
+  if ("nls" %in% class(model)) {
     f <- function(theta, model, a, b, delta, pchange) {
       theta <- as.list(theta)
       names(theta) <- names(coef(model))
