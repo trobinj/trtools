@@ -4,8 +4,8 @@
 \alias{margeff}
 \title{Estimation of marginal effects of regression models (experimental).}
 \usage{
-margeff(model, a, b, df, cnames, pchange = FALSE, delta = 1, level = 0.95,
-  fcov = vcov, ...)
+margeff(model, a, b, df, cnames, type = c("difference", "percent", "factor"),
+  pchange = FALSE, delta = 1, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object of class \code{lm}, \code{glm}, or \code{nls}.}
@@ -18,7 +18,7 @@ margeff(model, a, b, df, cnames, pchange = FALSE, delta = 1, level = 0.95,
 
 \item{cnames}{Optional names for the marginal effects.}
 
-\item{pchange}{Logical for whether or not to compute percent change (default is FALSE).}
+\item{type}{Type of marginal effect (difference, percent, or factor).}
 
 \item{delta}{Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}.}
 
@@ -32,11 +32,13 @@ margeff(model, a, b, df, cnames, pchange = FALSE, delta = 1, level = 0.95,
 This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
 }
 \details{
-A (discrete) marginal effect is defined as \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. 
+A (discrete) marginal effect is defined as the difference \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. Also typically \eqn{\delta} would be set to one unless a change of scale is desired or one wishes to approximate the instantaneous marginal effect (see below). 
 
-For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated accurately by setting \eqn{\delta} to a sufficiently small number. 
+For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated accurately by setting \eqn{\delta} to a sufficiently small number.
 
-The discrete marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response.
+A marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
+
+Finally the marginal effect can be defined by the factor \eqn{[E(Y|X = a)/E(Y|X = b)]}.
 }
 \examples{
 m <- glm(cbind(deaths, total - deaths) ~ insecticide * deposit, 
@@ -55,5 +57,5 @@ margeff(m,
 margeff(m, 
  a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
  b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
- cnames = levels(insecticide$insecticide), pchange = TRUE)
+ cnames = levels(insecticide$insecticide), type = "percent")
 }

@@ -7,17 +7,19 @@
 #' @param b List or data frame defining values of the explanatory variables.
 #' @param df Degrees of freedom for the confidence interval. If omitted it is extracted from the model object.
 #' @param cnames Optional names for the marginal effects.
-#' @param pchange  Logical for whether or not to compute percent change (default is FALSE). 
+#' @param type Type of marginal effect (difference, percent, or factor).
 #' @param delta Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}. 
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
-#' @details A (discrete) marginal effect is defined as \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. 
+#' @details A (discrete) marginal effect is defined as the difference \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. Also typically \eqn{\delta} would be set to one unless a change of scale is desired or one wishes to approximate the instantaneous marginal effect (see below). 
 #' 
-#' For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated accurately by setting \eqn{\delta} to a sufficiently small number. 
+#' For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated accurately by setting \eqn{\delta} to a sufficiently small number.
 #' 
-#' The discrete marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
+#' A marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
+#' 
+#' Finally the marginal effect can be defined by the factor \eqn{[E(Y|X = a)/E(Y|X = b)]}. 
 #' 
 #' @examples 
 #' m <- glm(cbind(deaths, total - deaths) ~ insecticide * deposit, 
@@ -36,29 +38,38 @@
 #' margeff(m, 
 #'  a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
 #'  b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
-#'  cnames = levels(insecticide$insecticide), pchange = TRUE)
+#'  cnames = levels(insecticide$insecticide), type = "percent")
 #' @importFrom stats predict
 #' @export
-margeff <- function(model, a, b, df, cnames, pchange = FALSE, 
+margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "factor"), pchange = FALSE, 
   delta = 1, level = 0.95, fcov = vcov, ...) {
   if (!any(class(model) %in% c("lm","glm","nls"))) {
     stop("function currently only works for lm, glm, and nls objects")
   }
+  type <- match.arg(type)
   if ("nls" %in% class(model)) {
-    f <- function(theta, model, a, b, delta, pchange) {
+    f <- function(theta, model, a, b, type, delta) {
       theta <- as.list(theta)
       names(theta) <- names(coef(model))
       pa <- with(c(theta, as.data.frame(a)), eval(parse(text = as.character(formula(model)))))
       pb <- with(c(theta, as.data.frame(b)), eval(parse(text = as.character(formula(model)))))
-      return((pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta))
+      out <- switch(type,
+       difference = (pa - pb)/delta,
+       percent = 100 * (pa/pb - 1),
+       factor = pa/pb)
+      return(out)
     }
   }
   else {
-    f <- function(theta, model, a, b, delta, pchange) {
+    f <- function(theta, model, a, b, type, delta) {
       model$coefficients <- theta
       pa <- predict(model, as.data.frame(a), type = "response")
       pb <- predict(model, as.data.frame(b), type = "response")
-      return((pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta))
+      out <- switch(type,
+        difference = (pa - pb)/delta,
+        percent = 100 * (pa/pb - 1),
+        factor = pa/pb)
+      return(out)
     }    
   }
   if (missing(df)) {
@@ -71,9 +82,12 @@ margeff <- function(model, a, b, df, cnames, pchange = FALSE,
   }
   pa <- predict(model, as.data.frame(a), type = "response")
   pb <- predict(model, as.data.frame(b), type = "response")
-  pe <- (pa - pb) / (pchange * pb / 100 + (1 - pchange) * delta)
+  pe <- switch(type,
+    difference = (pa - pb)/delta,
+    percent = 100 * (pa/pb - 1),
+    factor = pa/pb)
   gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
-    delta = delta, pchange = pchange)
+    type = type, delta = delta)
   se <- sqrt(diag(gr %*% fcov(model, ...) %*% t(gr)))
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 
