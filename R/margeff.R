@@ -7,8 +7,8 @@
 #' @param b List or data frame defining values of the explanatory variables.
 #' @param df Degrees of freedom for the confidence interval. If omitted it is extracted from the model object.
 #' @param cnames Optional names for the marginal effects.
-#' @param type Type of marginal effect (difference, percent, or factor).
-#' @param delta Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}. 
+#' @param type Type of marginal effect (difference, percent, or factor). Difference is the default. 
+#' @param delta Divisor for the marginal effect (default is one). This has no effect unless \code{type = "difference"}. 
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
 #' @param ... Arguments to pass to \code{fcov}.

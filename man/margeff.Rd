@@ -18,9 +18,9 @@ margeff(model, a, b, df, cnames, type = c("difference", "percent", "factor"),
 
 \item{cnames}{Optional names for the marginal effects.}
 
-\item{type}{Type of marginal effect (difference, percent, or factor).}
+\item{type}{Type of marginal effect (difference, percent, or factor). Difference is the default.}
 
-\item{delta}{Divisor for the marginal effect (default is one). This has no effect of \code{percent = TRUE}.}
+\item{delta}{Divisor for the marginal effect (default is one). This has no effect unless \code{type = "difference"}.}
 
 \item{level}{Confidence level in (0,1).}
 
