@@ -1,6 +1,6 @@
 #' Estimation of marginal effects of regression models (experimental). 
 #' 
-#' This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
+#' This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models as the difference or ratio of expected responses. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
 #' 
 #' @param model Model object of class \code{lm}, \code{glm}, or \code{nls}.
 #' @param a List or data frame defining values of the explanatory variables.

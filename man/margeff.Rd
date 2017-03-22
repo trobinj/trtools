@@ -29,7 +29,7 @@ margeff(model, a, b, df, cnames, type = c("difference", "percent", "factor"),
 \item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
-This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
+This function estimates discrete marginal effects (i.e., changes in the expected response) for (generalized) linear and nonlinear regression models as the difference or ratio of expected responses. It can also approximate "instantaneous" marginal effects. The standard error of the marginal effect is computed using the delta method with numerical differentiation.
 }
 \details{
 A (discrete) marginal effect is defined as the difference \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. Also typically \eqn{\delta} would be set to one unless a change of scale is desired or one wishes to approximate the instantaneous marginal effect (see below). 
