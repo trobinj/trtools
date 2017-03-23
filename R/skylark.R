@@ -4,11 +4,15 @@
 #'
 #' @format A data frame with 16 observations and four variables:
 #' \describe{
-#'    \item{year}{year on which the observation was made}
-#'    \item{field}{identifier for the field}
-#'    \item{spray}{was the field sprayed that year?}
-#'    \item{count}{number of skylark fledglings}
+#'    \item{year:}{year on which the observation was made}
+#'    \item{field:}{identifier for the field}
+#'    \item{spray:}{was the field sprayed that year?}
+#'    \item{count:}{number of skylark fledglings}
 #' }
+#' 
+#' @details These data are from a study discussed by Odderskær et al. (1997) and were featured in Tjur's (1998) article on overdispersion in generalized linear models. 
 #'
-#' @source Tjur, T. (1998). Nonlinear regression, quasi likelihood, and overdispersion in generalized linear models. \emph{American Statistician}, \emph{52}, 222-227.
+#' @source Odderskær, P., Prang, A., Eknegaard, N., & Andersen, P. N. (1997). Skylark reproduction in pesticide treated fields (Comparative studies of Alauda arvensis breeding performance in sprayed and unsprayed barley fields). Bekæmpelsesmiddelforskning fra Miljøstyrelsennr. 32, National Environmental Research Institute, Ministry of the Environmnent and Energy, Denmark: Danish Environmental Protection Agency. 
+#' 
+#' Tjur, T. (1998). Nonlinear regression, quasi likelihood, and overdispersion in generalized linear models. \emph{American Statistician}, \emph{52}, 222-227.
 "skylark"
