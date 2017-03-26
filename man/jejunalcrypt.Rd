@@ -20,7 +20,4 @@ jejunalcrypt
 \description{
 Data from an experiment where mice were exposed to a single dose of radiation. The mice were then sacrificed and the number of surviving jejunal crypts (intestinal glands in the small intestine) were counted.
 }
-\note{
-A complication with these data is that the number of jejnual crypts prior to exposure to radiation is unknown and cannot be determined postmortem. The distribution of the number of surviving crypts given the dose appears to exhibit \emph{underdispersion} if a Poisson distribution is assumed.
-}
 \keyword{datasets}
