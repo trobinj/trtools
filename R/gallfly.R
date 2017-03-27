@@ -6,10 +6,10 @@
 #' \describe{
 #'    \item{y:}{number of eggs or gall-cells}
 #'    \item{years:}{year of observations (1935 or 1936)}
-#'    \item{stage:}{developmental stage observed (egg or gall-cell)}
+#'    \item{stage:}{developmental stage observed (egg or gall)}
 #' }
 #'
-#' @note These data were used by Finney and Varley (1955) as an example of a truncated Poisson distribution. For reasons that are not entirely clear, no flower heads with zero eggs or gall-cells were reported. The original source of the data is Varley (1947). 
+#' @note These data were used by Finney and Varley (1955) as an example for modeling using a truncated Poisson distribution. For reasons that are not entirely clear, no flower heads with zero eggs or gall-cells were reported. The original source of the data is Varley (1947). 
 #'
 #' @source Finney, D. J. & Varley, G. C. (1955). An example of the truncated Poisson distribution. \emph{Biometrics}, \emph{11}, 387-394.
 #' 
