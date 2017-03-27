@@ -5,7 +5,7 @@
 \title{Estimation of marginal effects of regression models (experimental).}
 \usage{
 margeff(model, a, b, df, cnames, type = c("difference", "percent", "factor"),
-  pchange = FALSE, delta = 1, level = 0.95, fcov = vcov, ...)
+  delta = 1, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object of class \code{lm}, \code{glm}, or \code{nls}.}
@@ -41,21 +41,21 @@ A marginal effect can also be defined as the percent change in the expected resp
 Finally the marginal effect can be defined by the factor \eqn{[E(Y|X = a)/E(Y|X = b)]}.
 }
 \examples{
-m <- glm(cbind(deaths, total - deaths) ~ insecticide * deposit, 
+m <- glm(cbind(deaths, total - deaths) ~ insecticide * log2(deposit), 
  family = binomial, data = insecticide) 
 # discrete marginal effect of increasing deposit from 4 to 6 for each insecticide  
 margeff(m, 
- a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
- b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
+ a = list(deposit = 6, insecticide = levels(insecticide$insecticide)),
+ b = list(deposit = 4, insecticide = levels(insecticide$insecticide)),
  cnames = levels(insecticide$insecticide))
 # approximate "instantaneous" marginal effects for each insecticide at a deposit of 5 
 margeff(m, 
- a = list(deposit = 5 + 0.001, insectide = levels(insecticide$insecticide)),
- b = list(deposit = 5, insectide = levels(insecticide$insecticide)),
+ a = list(deposit = 5 + 0.001, insecticide = levels(insecticide$insecticide)),
+ b = list(deposit = 5, insecticide = levels(insecticide$insecticide)),
  cnames = levels(insecticide$insecticide), delta = 0.001)
 # percent change in expected proportion of deaths when increasing deposit from 4 to 6
 margeff(m, 
- a = list(deposit = 6, insectide = levels(insecticide$insecticide)),
- b = list(deposit = 4, insectide = levels(insecticide$insecticide)),
+ a = list(deposit = 6, insecticide = levels(insecticide$insecticide)),
+ b = list(deposit = 4, insecticide = levels(insecticide$insecticide)),
  cnames = levels(insecticide$insecticide), type = "percent")
 }
