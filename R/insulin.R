@@ -10,7 +10,7 @@
 #'    \item{ratio:}{ratio of standard insulin to A1-B29 suberoyl insulin}
 #' }
 #' 
-#' @details These data were featured in Darby and Ellis (1976) and also McCullagh and Nelder (1989). 
+#' @details These data were featured in Darby and Ellis (1976) and also McCullagh and Nelder (1989). In particular see the latter for a discussion of a nonlinear gamma regression model for these data.
 #'
 #' @source Darby, S. C. & Ellis, M. J. (1976). A test of synergism between two drugs. \emph{Applied Statistics}, \emph{25}, 296-299.
 #' 

@@ -7,8 +7,8 @@
 \format{A data frame with 56 observations and four variables:
 \describe{
    \item{y:}{conversion of (3-3H) glucose to toluene-extractable lipids in isolated rat fat cells}
-   \item{insulin1:}{dose of standard insulin (pmol / liter)}
-   \item{insulin2:}{dose of A1-B29 suberoyl insulin (pmol / liter)}
+   \item{insulin1:}{dose of standard insulin (pmol/liter)}
+   \item{insulin2:}{dose of A1-B29 suberoyl insulin (pmol/liter)}
    \item{ratio:}{ratio of standard insulin to A1-B29 suberoyl insulin}
 }}
 \source{
@@ -23,6 +23,6 @@ insulin
 The data are from a study designed to determine if the effect of two insulins is additive or synergistic.
 }
 \details{
-These data were featured in Darby and Ellis (1976) and also McCullagh and Nelder (1989).
+These data were featured in Darby and Ellis (1976) and also McCullagh and Nelder (1989). In particular see the latter for a discussion of a nonlinear gamma regression model for these data.
 }
 \keyword{datasets}
