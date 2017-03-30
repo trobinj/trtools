@@ -17,8 +17,6 @@ stratify(x, strata, breaks, plot = TRUE)
 \item{strata}{Number of strata.}
 
 \item{breaks}{Breaks for the auxiliary variable expressed as a vector of cut points.}
-
-\item{plot}{Logical value for an optional histogram.}
 }
 \value{
 A list object including a data frame giving the strata assignment of the elements and the cut points that define the strata in terms of the auxiliary variable.
