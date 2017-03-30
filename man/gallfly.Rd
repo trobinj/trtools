@@ -7,7 +7,7 @@
 \format{A data frame 1411 observations and three variables:
 \describe{
    \item{y:}{number of eggs or gall-cells}
-   \item{years:}{year of observations (1935 or 1936)}
+   \item{year:}{year of observations (1935 or 1936)}
    \item{stage:}{developmental stage observed (egg or gall)}
 }}
 \source{
