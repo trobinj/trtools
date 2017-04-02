@@ -5,7 +5,6 @@
 #' @param x An auxiliary variable to be used for stratification.
 #' @param strata Number of strata.
 #' @param breaks Breaks for the auxiliary variable expressed as a vector of cut points. 
-#' @param plot Logical value for an optional histogram.
 #'
 #' @details See Dalenius and Hodges (1959) or Cochran (1977) for details. Ideally the auxiliary variable should be strongly correlated with the target variable. 
 #' 
@@ -25,7 +24,6 @@
 #' x <- rnorm(10000, 20, 3)
 #' stratify(x, strata = 4, breaks = 25)
 #' @importFrom graphics hist
-#' @import ggplot2
 #' @export
 stratify <- function(x, strata, breaks, plot = TRUE) {
 h <- hist(x, plot = FALSE, breaks = breaks)
@@ -47,15 +45,5 @@ for (i in 1:(strata - 1)) {
   z$stratum[c(1:g) <= tmp & is.na(z$stratum)] <- i
 }
 z$stratum[is.na(z$stratum)] <- strata
-if (plot) {
-  p <- ggplot(data.frame(z, mids = h$mids)) +
-    geom_bar(aes(x = mids, y = freq, fill = factor(stratum)),
-             color = "black", stat = "identity", width = (z$upper[1]-z$lower[1])) +
-    guides(fill = guide_legend(override.aes = list(colour = NULL), title = "Stratum")) +
-    theme_bw() + xlab("Stratification Variable") + ylab("Frequency") +
-    theme(rect = element_rect(fill = "transparent", color = NA), 
-          panel.background = element_rect(fill = "transparent", color = NA))
-  plot(p)
-}
 return(list(output = z, cutpoints = k))
 }

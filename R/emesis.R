@@ -1,0 +1,17 @@
+#' Motion sickness study.
+#'
+#' The data are from an experiment that investigated sickness from simulated sea motion. Subjects were put into a cabin mounted on a hydraulic piston and subjected to vertical motion for up to two hours. The length of time until each subject vomited was recorded. Note that some observations are right-censored. 
+#'
+#' @format A data frame with 49 observations and three variables:
+#' \describe{
+#'    \item{minutes:}{minutes until the subjected vomited}
+#'    \item{censored:}{whether or not the time is censored (yes or no)}
+#'    \item{motion:}{simulated sea motion condition (a: frequency of 0.167 Hz and acceleration of 0.111g, b: frequency of 0.333Hz and acceleration of 0.222g)}
+#' }
+#' 
+#' @details These data are from Burns (1984) but are also featured in Hand et al. (1994). 
+#'
+#' @source Burns, K. C. (1984). Motion sickness incidence: Distribution of time to first emesis and comparison of some complex motion conditions. \emph{Aviation Space and Environmental Medicine}, \emph{56}, 521-527.
+#' 
+#' Hand, D. J., Daly, F., McConway, K., Lunn, D., & Ostrowski, E. (1994). \emph{A handbook of small data sets}. Chapman & Hall. 
+"emesis"
