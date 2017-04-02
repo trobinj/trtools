@@ -4,7 +4,7 @@
 #'
 #' @format A data frame with 49 observations and three variables:
 #' \describe{
-#'    \item{minutes:}{minutes until the subjected vomited}
+#'    \item{minutes:}{minutes until the subjecte vomited}
 #'    \item{censored:}{whether or not the time is censored (yes or no)}
 #'    \item{motion:}{simulated sea motion condition (a: frequency of 0.167 Hz and acceleration of 0.111g, b: frequency of 0.333Hz and acceleration of 0.222g)}
 #' }
