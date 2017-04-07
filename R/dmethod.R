@@ -40,6 +40,3 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, B = 0, lev
   out <- data.frame(estimate = pe, se = sqrt(va), lower = lw, upper = up)
   return(out)
 }
-
-dmethod(model, myfunc, mynames, cfunc = cfunc, B = 1000)
-dmethod(model, myfunc, mynames, cfunc = cfunc)
