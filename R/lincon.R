@@ -68,8 +68,8 @@ lincon <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) 
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
-    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
+  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
