@@ -7,7 +7,7 @@
 Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 }
 \usage{
-dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, B = 0,
+dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B = 0,
   level = 0.95, ...)
 }
 \arguments{
@@ -20,6 +20,8 @@ dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, B = 0,
 \item{cfunc}{Function for extracting the parameter estimates from \code{object} (default is \code{coef}).}
 
 \item{vfunc}{Function for extracting the estimated covariance matrix of the estimator from \code{object} (default is \code{vcov}).}
+
+\item{tfunc}{Function for transforming the result of \code{pfunc} for cases when the sampling distribution is thought to be more approximately normal on some other scale (e.g., log).}
 
 \item{B}{Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead.}
 

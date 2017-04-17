@@ -19,7 +19,7 @@ Siegel, S. & Castellan, N. J. (1988). \emph{Nonparametric statistics for the beh
 synchrony
 }
 \description{
-Data from a study that investigated if 10- to 16-week old infants are aware of the synchrony between lip movements and speech sounds. Infants were placed in a soundproof room with a window through which they could see person speaking. The sound of the speech (delivered through a speaker) was either synchronous or out of synchrony due to a 400-millisecond delay. Each infants was observed in both conditions, and the percent of the time they attended to the person speaking was recorded.
+Data from a study that investigated if 10- to 16-week old infants are aware of the synchrony between lip movements and speech sounds. Infants were placed in a soundproof room with a window through which they could see a person speaking. The sound of the speech (delivered through a microphone and speaker in the room with the infant) was either synchronous or out of synchrony due to a 400-millisecond delay. Each infants was observed in both conditions, and the percent of the time they attended to the person speaking was recorded.
 }
 \note{
 The data are from Dodd (1979) and were featured in Siegel and Castellan (1988).
