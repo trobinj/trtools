@@ -25,7 +25,7 @@
 #' stratify(x, strata = 4, breaks = 25)
 #' @importFrom graphics hist
 #' @export
-stratify <- function(x, strata, breaks, plot = TRUE) {
+stratify <- function(x, strata, breaks) {
 h <- hist(x, plot = FALSE, breaks = breaks)
 g <- length(h$counts)
 z <- data.frame(

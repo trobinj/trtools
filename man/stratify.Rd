@@ -9,7 +9,7 @@ Cochran, W. G. (1977). \emph{Sampling techniques} (3rd Edition). New York: Wiley
 Dalenius, T. & Hodges, J. L. Jr. (1959). Minimum variance stratification. \emph{Journal of the American Statistical Assocation}, \emph{54}, 88-101.
 }
 \usage{
-stratify(x, strata, breaks, plot = TRUE)
+stratify(x, strata, breaks)
 }
 \arguments{
 \item{x}{An auxiliary variable to be used for stratification.}
