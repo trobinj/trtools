@@ -53,5 +53,6 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B =
     out <- cbind(pe, se, lw, up)
   }
   colnames(out) <- c("estimate", "se", "lower", "upper")
+  rownames(out) <- " "
   return(out)
 }
