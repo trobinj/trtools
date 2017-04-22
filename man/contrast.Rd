@@ -2,12 +2,19 @@
 % Please edit documentation in R/contrast.R
 \name{contrast}
 \alias{contrast}
-\title{Inferences for contrasts for linear models (experimental).}
+\alias{contrast.lm}
+\alias{contrast.glm}
+\alias{contrast.lmerMod}
+\alias{contrast.glmerMod}
+\title{Inferences for contrasts for (generalized) linear models (experimental).}
 \usage{
-contrast(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
+\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
+\method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
+\method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
 }
 \arguments{
-\item{model}{Model object. Currently only objects of class \code{lm} are accepted.}
+\item{model}{Model object. Currently objects of classes \code{lm}, \code{glm}, \code{lmerMod}, and \code{glmerMod} are accepted.}
 
 \item{a}{List or data frame defining a linear combination.}
 
@@ -17,7 +24,7 @@ contrast(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 
 \item{v}{List or data frame defining a linear combination.}
 
-\item{df}{Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.}
+\item{df}{Optional manual specification of the degrees of freedom. This defaults to the residual degrees of freedom for linear and generalized linear models, except when \code{family = binomial} or \code{family = poisson} where the degrees of freedom is infinite. Linear and generalized linear mixed models also use infinite degrees of freedom by default.}
 
 \item{tf}{Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios).}
 
@@ -26,12 +33,10 @@ contrast(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \item{level}{Confidence level in (0,1).}
 
 \item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
-
-\item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters.
 }
 \details{
-Assuming a (generalized) linear model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified.
+Assuming a (generalized) linear (mixed) model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. Note that for (generalized) linear mixed model, the expectation is computed conditional on setting all random effects equal to zero.
 }
