@@ -77,7 +77,7 @@ lincon.lm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ..
   }
   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
-    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
   else if (is.logical(cnames) && !cnames) {
     rownames(out) <- rep("", nrow(a))
@@ -124,7 +124,7 @@ lincon.nls <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
   }
   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
-    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
   else if (is.logical(cnames) && !cnames) {
     rownames(out) <- rep("", nrow(a))
@@ -176,7 +176,7 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
   }
   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
-    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
   else if (is.logical(cnames) && !cnames) {
     rownames(out) <- rep("", nrow(a))
@@ -189,9 +189,9 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
 #' @export
 lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
-    a <- diag(length(fixef(model)))
+    a <- diag(length(lme4::fixef(model)))
     if (missing(cnames)) {
-      cnames <- names(fixef(model))  
+      cnames <- names(lme4::fixef(model))  
     }
   }
   else if (is.vector(a)) {
@@ -201,7 +201,7 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
     b <- 0 
   }
   se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
-  pe <- a %*% fixef(model) + b
+  pe <- a %*% lme4::fixef(model) + b
   if (missing(df)) {
     df <- Inf
   }
@@ -223,7 +223,7 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
   }
   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
-    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
   else if (is.logical(cnames) && !cnames) {
     rownames(out) <- rep("", nrow(a))
@@ -236,9 +236,9 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
 #' @export 
 lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
-    a <- diag(length(fixef(model)))
+    a <- diag(length(lme4::fixef(model)))
     if (missing(cnames)) {
-      cnames <- names(fixef(model))  
+      cnames <- names(lme4::fixef(model))  
     }
   }
   else if (is.vector(a)) {
@@ -270,7 +270,7 @@ lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vc
   }
   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
-    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
   else if (is.logical(cnames) && !cnames) {
     rownames(out) <- rep("", nrow(a))
