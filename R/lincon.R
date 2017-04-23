@@ -35,7 +35,7 @@
 #' @details For a regression model with a linear component (e.g., linear and generalized linear models) with parameters \eqn{\beta_0, \beta_1, \dots, \beta_p} a linear combination is defined as \deqn{a_0\beta_0 + a_1\beta_1 + \cdots + a_p\beta_p + b.} For a nonlinear regression model with parameters \eqn{\theta_1, \theta_2, \dots, \theta_q} a linear combination is defined as \deqn{a_1\theta_1 + a_2\theta_2 + \cdots + a_q\theta_q + b.} Inferences for the linear combination are based on either exact (normal theory) or Wald (asymptotic) test statistics and confidence intervals. The estimated standard error(s) of the linear combinations are computed using any specified function for estimating the variance-covariance matrix of the model parameters. 
 #' @importFrom stats vcov coef family qt pt
 #' @importFrom MASS fractions
-#' @importFrom lme4 fixef
+#' @import lme4
 #' @export
 lincon <- function(model, ...) {
   UseMethod("lincon", model)
