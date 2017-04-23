@@ -9,11 +9,11 @@
 \alias{lincon.glmerMod}
 \title{Linear combinations of regression model parameters.}
 \usage{
-\method{contrast}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-\method{contrast}{nls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-\method{contrast}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-\method{contrast}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-\method{contrast}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{nls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
