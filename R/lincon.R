@@ -200,7 +200,7 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
   if (missing(b)) {
     b <- 0 
   }
-  se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
+  se <- sqrt(diag(a %*% vcov.merMod(model) %*% t(a)))
   pe <- a %*% lme4::fixef(model) + b
   if (missing(df)) {
     df <- Inf
@@ -247,7 +247,7 @@ lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vc
   if (missing(b)) {
     b <- 0 
   }
-  se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
+  se <- sqrt(diag(a %*% vcov.merMod(model) %*% t(a)))
   pe <- a %*% fixef(model) + b
   if (missing(df)) {
     df <- Inf
