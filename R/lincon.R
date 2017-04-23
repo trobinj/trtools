@@ -189,9 +189,9 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
 #' @export
 lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
-    a <- diag(length(lme4::fixef(model)))
+    a <- diag(length(fixef(model)))
     if (missing(cnames)) {
-      cnames <- names(lme4::fixef(model))  
+      cnames <- names(fixef(model))  
     }
   }
   else if (is.vector(a)) {
@@ -200,8 +200,8 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
   if (missing(b)) {
     b <- 0 
   }
-  se <- sqrt(diag(a %*% vcov.merMod(model) %*% t(a)))
-  pe <- a %*% lme4::fixef(model) + b
+  se <- sqrt(diag(a %*% as.matrix(fcov(model)) %*% t(a)))
+  pe <- a %*% fixef(model) + b
   if (missing(df)) {
     df <- Inf
   }
@@ -236,9 +236,9 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
 #' @export 
 lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
-    a <- diag(length(lme4::fixef(model)))
+    a <- diag(length(fixef(model)))
     if (missing(cnames)) {
-      cnames <- names(lme4::fixef(model))  
+      cnames <- names(fixef(model))  
     }
   }
   else if (is.vector(a)) {
@@ -247,7 +247,7 @@ lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vc
   if (missing(b)) {
     b <- 0 
   }
-  se <- sqrt(diag(a %*% vcov.merMod(model) %*% t(a)))
+  se <- sqrt(diag(a %*% as.matrix(fcov(model)) %*% t(a)))
   pe <- a %*% fixef(model) + b
   if (missing(df)) {
     df <- Inf
