@@ -5,11 +5,11 @@
 #' @aliases lincon.lm lincon.nls lincon.glm lincon.lmerMod lincon.glmerMod
 #' 
 #' @usage
-#' \method{contrast}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{nls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{nls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' 
 #' @param model Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.
 #' @param a Vector or matrix defining the \eqn{a_j} coefficients of the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function. 
