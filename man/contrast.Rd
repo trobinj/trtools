@@ -8,13 +8,15 @@
 \alias{contrast.glmerMod}
 \title{Inferences for contrasts for (generalized) linear models (experimental).}
 \usage{
-\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
-\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
-\method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
-\method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov)
+\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently objects of classes \code{lm}, \code{glm}, \code{lmerMod}, and \code{glmerMod} are accepted.}
+
+\item{...}{Not used.}
 
 \item{a}{List or data frame defining a linear combination.}
 

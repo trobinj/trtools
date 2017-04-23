@@ -17,7 +17,7 @@
    \item{humerus:}{length (in) of the humerus}
    \item{femur:}{length (in) of the femur}
    \item{tibiotarsus:}{length (in) of the tibiotarsus}
-   \item{width:}{width (in) of skull "from the postorbital bone of one side to the postorbital bone of the other"}
+   \item{skull:}{width (in) of skull "from the postorbital bone of one side to the postorbital bone of the other"}
    \item{keel:}{length (in) of keel of the sternum}
 }}
 \source{

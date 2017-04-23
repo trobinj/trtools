@@ -2,12 +2,23 @@
 % Please edit documentation in R/lincon.R
 \name{lincon}
 \alias{lincon}
+\alias{lincon.lm}
+\alias{lincon.nls}
+\alias{lincon.glm}
+\alias{lincon.lmerMod}
+\alias{lincon.glmerMod}
 \title{Linear combinations of regression model parameters.}
 \usage{
-lincon(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{nls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
+
+\item{...}{Not used.}
 
 \item{a}{Vector or matrix defining the \eqn{a_j} coefficients of the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function.}
 
@@ -22,8 +33,6 @@ lincon(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \item{level}{Confidence level in (0,1). Default is 0.95.}
 
 \item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
-
-\item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.

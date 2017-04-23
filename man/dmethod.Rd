@@ -2,7 +2,7 @@
 % Please edit documentation in R/dmethod.R
 \name{dmethod}
 \alias{dmethod}
-\title{Delta method for model objects (experimental).}
+\title{Delta method for regression model objects (experimental).}
 \source{
 Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 }
@@ -33,5 +33,5 @@ dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B = 0,
 This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical (not symbolic) differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013).
 }
 \details{
-By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) which avoids needing to compute derivatives. Note that both methods are based on the usual asymptotic arguments.
+By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) which avoids needing to compute derivatives.
 }
