@@ -281,7 +281,7 @@ contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fc
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
   pe <- pa - pb - pu + pv
   if (missing(df)) {
     df <- Inf
@@ -373,7 +373,7 @@ contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, f
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
   pe <- pa - pb - pu + pv
   if (missing(df)) {
     df <- Inf
