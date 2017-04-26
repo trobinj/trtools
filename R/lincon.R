@@ -148,7 +148,7 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
   if (missing(b)) {
     b <- 0 
   }
-  se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
+  se <- sqrt(diag(a %*% as.matrix(fcov(model)) %*% t(a)))
   pe <- a %*% coef(model) + b
   if (missing(df)) {
     if (family(model)[1] %in% c("binomial","poisson")) {
