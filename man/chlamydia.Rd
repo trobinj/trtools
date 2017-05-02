@@ -6,6 +6,7 @@
 \title{Screening tests for \emph{Chlamydia trachomatis}.}
 \format{A data frame 4583 women and six variables.
 \describe{
+   \item{count:}{number of samples}
    \item{Syva-DFA:}{test result from Syva-DFA test}
    \item{Syva-EIA:}{test result from Syva-EIA test}
    \item{Abbott-EIA:}{test result from Abott-EIA test}
@@ -25,6 +26,6 @@ chlamydia
 Results of six tests for \emph{Chlamydia trachomatis} using samples from 4583 women.
 }
 \note{
-All test results are binary indicator variables for positive test results. The data are from Hadgu and Qu (1998) but are also featured in Lindsey (1999) who considers latent class models with and without random effects, and with and without treating the cell culture as a gold standard.
+Note that the data are in aggregated form showing the number of samples that resulted in a particular profile of test results. All test results are binary indicator variables for positive test results. The data are from Hadgu and Qu (1998) but are also featured in Lindsey (1999) who considers latent class models with and without random effects, and with and without treating the cell culture as a gold standard.
 }
 \keyword{datasets}

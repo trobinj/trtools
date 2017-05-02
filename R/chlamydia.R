@@ -4,6 +4,7 @@
 #'
 #' @format A data frame 4583 women and six variables.
 #' \describe{
+#'    \item{count:}{number of samples}
 #'    \item{Syva-DFA:}{test result from Syva-DFA test}
 #'    \item{Syva-EIA:}{test result from Syva-EIA test}
 #'    \item{Abbott-EIA:}{test result from Abott-EIA test}
@@ -12,7 +13,7 @@
 #'    \item{culture:}{test result from cell culture}
 #' }
 #'
-#' @note All test results are binary indicator variables for positive test results. The data are from Hadgu and Qu (1998) but are also featured in Lindsey (1999) who considers latent class models with and without random effects, and with and without treating the cell culture as a gold standard. 
+#' @note Note that the data are in aggregated form showing the number of samples that resulted in a particular profile of test results. All test results are binary indicator variables for positive test results. The data are from Hadgu and Qu (1998) but are also featured in Lindsey (1999) who considers latent class models with and without random effects, and with and without treating the cell culture as a gold standard. 
 #'
 #' @source Hadgu, A. & Qu, Y. (1998). A biomedical application of latent class models with random effects. \emph{Applied Statistics}, \emph{47}, 603-616.
 #' 
