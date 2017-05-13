@@ -1,0 +1,26 @@
+---
+title: "Delta Method With Numerical Integration"
+author: "Timothy R. Johnson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+fontsize: 12pt
+vignette: >
+  %\VignetteIndexEntry{Delta Method With Numerical Integration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = "")
+```
+
+The `dmethod` function from the **trtools** package is designed to be a relatively flexible function for implementing the delta method based on model objects. Provided that a vector of parameter estimates and their associated covariance matrix can be extracted from a model object, the function will compute the approximate standard error of a differentiable function of the model parameters as well as the f
+
+```{r, echo = FALSE}
+library(trtools)
+```
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({  "HTML-CSS": { minScaleAdjust: 125, availableFonts: [] }  });
+</script>
