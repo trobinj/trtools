@@ -11,7 +11,7 @@
 #'    \item{responding:}{number of plates exhibiting radiactiviation} 
 #' }
 #'
-#' @note Piegorsch (1992) uses these data to motivate a generalized linear model with a complementary log-log link function since the response may have (approximately) truncated Poisson distribution, although he found that the logit link function may provide a better fit to the data. 
+#' @note Piegorsch (1992) uses these data to motivate a generalized linear model with a complementary log-log link function since the response may have (approximately) truncated Poisson distribution. However I have not been able to replicate Piergorsch's results with these data.
 #' 
 #' Piegorsch, W. W. (1992). Complementary log-log regression for generalized linear models. \emph{The American Statistician}, \emph{46}, 94-99.
 #' 
