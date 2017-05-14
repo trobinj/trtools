@@ -1,6 +1,6 @@
 #' Rodent tissue radioactiviation from in vitro exposure to asbestos dust.
 #'
-#' Piergorsch (1992) describes the data as "a laboratory experiment where rodent alveolar/bronchiolar tissue was exposed in vitro to asbestos dust, to examine the inflammatory effects of asbestos exposure to mammalian lung tissue. The alveolar/bronchiolar cells were pretreated with an assumed-benign radioactive marker that is released after asbestos dust exposure, indicating whether any cell "activated," that is, generated an inflammatory response. Of interest was the effect of time (as hours after exposure, t) on the inflammatory response; additional explanatory variables of interest included cell type (epithelial or interstitial) and original cell location (terminal bronchial airway, alveolar duct, or bifurcation duct), which were arranged in a 2 x 3 factorial design." He notes that the number of cells activiting on a given plate could not be observed. It could only be observed if there was any radioactiviation on a given plate. 
+#' Piergorsch (1992) describes the data as "a laboratory experiment where rodent alveolar/bronchiolar tissue was exposed in vitro to asbestos dust, to examine the inflammatory effects of asbestos exposure to mammalian lung tissue. The alveolar/bronchiolar cells were pretreated with an assumed-benign radioactive marker that is released after asbestos dust exposure, indicating whether any cell "activated," that is, generated an inflammatory response. Of interest was the effect of time (as hours after exposure, t) on the inflammatory response; additional explanatory variables of interest included cell type (epithelial or interstitial) and original cell location (terminal bronchial airway, alveolar duct, or bifurcation duct), which were arranged in a 2 x 3 factorial design." He notes that the number of cells activiting on a given plate could not be observed. It could only be observed if there was any radioactiviation on a given plate.  
 #'
 #' @format A data frame of 24 observations and five variables.
 #' \describe{
@@ -11,9 +11,9 @@
 #'    \item{responding:}{number of plates exhibiting radiactiviation} 
 #' }
 #'
-#' @note Piegorsch (1992) uses these data to motivate a generalized linear model with a complementary log-log link function since the response may have (approximately) truncated Poisson distribution. However I have not been able to replicate Piergorsch's results with these data.
+#' @note Piegorsch (1992) uses these data to motivate a generalized linear model with a complementary log-log link function since the response might be assummed to have a truncated Poisson distribution. However I have not been able to replicate Piergorsch's results using these data.
 #' 
-#' Piegorsch, W. W. (1992). Complementary log-log regression for generalized linear models. \emph{The American Statistician}, \emph{46}, 94-99.
+#' @source Piegorsch, W. W. (1992). Complementary log-log regression for generalized linear models. \emph{The American Statistician}, \emph{46}, 94-99.
 #' 
 "dust"
 
