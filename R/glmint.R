@@ -1,6 +1,6 @@
 #' Confidence intervals for the estimated expected response of generalized linear models (experimental).
 #' 
-#' This function computes the estimated expected response and the confidence interval for the estimated expected response for (generalized) linear models. 
+#' This function computes the estimated expected response and the confidence interval for the expected response for (generalized) linear models. 
 #' 
 #' @param object Model object of class \code{glm}.
 #' @param newdata An optional data frame in which to look for variables with which to predict. If omitted the data frame used in creating the model object is used. 

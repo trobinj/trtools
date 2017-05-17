@@ -16,7 +16,7 @@ glmint(object, newdata, df, level = 0.95)
 \item{level}{Confidence level in (0,1).}
 }
 \description{
-This function computes the estimated expected response and the confidence interval for the estimated expected response for (generalized) linear models.
+This function computes the estimated expected response and the confidence interval for the expected response for (generalized) linear models.
 }
 \details{
 This function simplifies the process of computing the endpoints of the confidence interval for the expected response on the scale of the response variable for generalized linear models using the \code{predict} function with \code{se.fit = TRUE}. It computes the Wald confidence interval on the scale of the linear predictor and then uses the inverse of the link function to map the interval to the scale of the response variable.

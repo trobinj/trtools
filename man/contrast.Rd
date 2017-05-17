@@ -42,3 +42,42 @@ This is a function allows one to obtain standard inferences (i.e., point estimat
 \details{
 Assuming a (generalized) linear (mixed) model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. Note that for (generalized) linear mixed model, the expectation is computed conditional on setting all random effects equal to zero.
 }
+\examples{
+m <- lm(Gas ~ Temp * Insul, data = MASS::whiteside)
+# estimate expected gas consumption at zero degrees 
+# before and after insulation was added
+contrast(m, a = list(Temp = 0, Insul = c("Before","After")),
+ cnames = c("Before at 0","After at 0"))
+# estimate slopes of regression of gas consultion on
+# before and after insulation was added
+contrast(m,
+ a = list(Temp = 1, Insul = c("Before","After")),
+ b = list(Temp = 0, Insul = c("Before","After")),
+ cnames = c("Slope Before","Slope After"))
+# estimate difference in expected gas consumption between
+# before and after insulation at different temperatures
+contrast(m,
+ a = list(Temp = c(0,5,10), Insul = "Before"),
+ b = list(Temp = c(0,5,10), Insul = "After"),
+ cnames = c("at 5","at 5","at 10"))
+
+m <- glm(cbind(deaths,total-deaths) ~ insecticide * log2(deposit),
+ family = binomial, data = insecticide)
+# estimate odds ratios for the effect of doubling the 
+# deposit for each insecticide
+types <- levels(insecticide$insecticide)
+contrast(m,
+ a = list(insecticide = types, deposit = 2),
+ b = list(insecticide = types, deposit = 1),
+ cnames = types, tf = exp)
+# odds ratios to compare insecticides at a deposit of 5
+contrast(m,
+ a = list(insecticide = "both", deposit = 5),
+ b = list(insecticide = c("DDT","g-BHC"), deposit = 5),
+ cnames = c("both vs DDT","both vs g-BHC"), tf = exp)
+# estimate response probabilities for each insecticide
+# at a deposit level of 5
+contrast(m, a = list(insecticide = types, deposit = 5),
+ cnames = types, tf = plogis)
+
+}

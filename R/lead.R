@@ -1,11 +1,11 @@
 #' Lead absorption in children.
 #' 
-#' Data from a study in Oklahoma in 1978 that used a matched-pairs design to compare the blood lead levels of children (12 to 83 months) of employees in a lead-related industry to that of children of parents who were not in a lead-related industry (Morton et al., 1982). Children were matched based on age, neighborhood, and nature of the residence (e.g., same apartment complex, proximity to the street).
+#' Data from a study in Oklahoma in 1978 that used a matched-pairs design to compare the blood lead levels of children (12 to 83 months) of employees in a lead-related industry to that of children of parents who were not in a lead-related industry (Morton et al., 1982). Children were matched based on age, neighborhood, and nature of the residence (e.g., same apartment complex, proximity to the street). Blood lead levels are in micrograms per dl. 
 #'
 #' @format A data frame of 33 observations and four variables.
 #' \describe{
-#'    \item{level:}{blood lead level (in micrograms per dl) of exposed children (i.e., children with a parent in a lead-related industry)}
-#'    \item{control:}{blood lead level (in micrograms per dl) of child with a parent not in a lead-related industry}
+#'    \item{level:}{blood lead level of exposed children (i.e., children with a parent in a lead-related industry)}
+#'    \item{control:}{blood lead level of child with a parent not in a lead-related industry}
 #'    \item{hygiene:}{parent compliance with hygienic practice to reduce child exposure to lead dust}
 #'    \item{exposure:}{parent level of exposure to lead}
 #' }

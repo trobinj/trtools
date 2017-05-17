@@ -11,11 +11,10 @@
 #' @param delta Divisor for the marginal effect (default is one). This has no effect unless \code{type = "difference"}. 
 #' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
-#' @param ... Arguments to pass to \code{fcov}.
 #' 
 #' @details A (discrete) marginal effect is defined as the difference \eqn{[E(Y|X = a) - E(Y|X = b)]/\delta} where \eqn{a} and \eqn{b} represent specified values of the explanatory variables. Typically these differ only in terms of the value of one explanatory variable to estimate the marginal effect of changing that explanatory variable when the other explanatory variables are held constant at specified values. Also typically \eqn{\delta} would be set to one unless a change of scale is desired or one wishes to approximate the instantaneous marginal effect (see below). 
 #' 
-#' For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated accurately by setting \eqn{\delta} to a sufficiently small number.
+#' For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated numerically by setting \eqn{\delta} to a relatively small number.
 #' 
 #' A marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
 #' 
@@ -87,7 +86,7 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
     factor = pa/pb)
   gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
     type = type, delta = delta)
-  se <- sqrt(diag(gr %*% fcov(model, ...) %*% t(gr)))
+  se <- sqrt(diag(gr %*% fcov(model) %*% t(gr)))
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 
   ts <- pe/se
