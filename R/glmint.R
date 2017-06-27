@@ -17,8 +17,8 @@
 #' @importFrom stats predict
 #' @export
 glmint <- function(object, newdata, df, level = 0.95) {
-  if (!(all(class(object) %in% c("lm","glm")))) {
-    stop("object not of class lm or glm")
+  if (!(all(class(object) %in% c("lm","glm","negbin")))) {
+    stop("object not of class lm, glm, or negbin")
   }
   if (missing(newdata)) {
     tmp <- predict(object, se.fit = TRUE)
@@ -28,6 +28,9 @@ glmint <- function(object, newdata, df, level = 0.95) {
   }
   if (missing(df)) {
     if (("glm" %in% class(object)) && (family(object)[1] %in% c("binomial","poisson"))) {
+      df <- Inf
+    }
+    if ("negbin" %in% class(object)) {
       df <- Inf
     }
     else {
