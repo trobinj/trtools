@@ -26,6 +26,9 @@ beall
 Data from several studies using randomized block designs to investigate the effect of several fungal insecticides.
 }
 \note{
-The data are from Beall (1942) but the data and methods are also described in Beall (1939) and Beall, Stirrett, and Conners (1939). The counts were obtained using random sampling within plots. Beall et al. (1939) describe the treatments for the first two experiments as different amounts of grams of fungal spores per acre (10, 40, 10, 40, 10, 40, 0, respectively) and date of application (July 9, July 9, July 15, July 15, July 20, July 20, and none, respectively). Furthermore the data from the first two experiments are observations from two different time points as described in Beall et al. (1939). Beall (1942) implies that a similar structure holds for the experiments for the other two species, although it is not clear if the treatments were the same for these experiments.
+The data are from Beall (1942) but the data and methods are also described in Beall (1939) and Beall, Stirrett, and Conners (1939). The counts were obtained using random sampling within plots. Beall et al. (1939) describe the treatments for the first two experiments as different amounts of grams of fungal spores per acre (10, 40, 10, 40, 10, 40, 0, respectively) and date of application (July 9, July 9, July 15, July 15, July 20, July 20, and none, respectively). Furthermore the data from the first two experiments are observations from two different time points as described in Beall et al. (1939). Beall (1942) implies that a similar structure holds for the experiments for the other two species, although it is not clear if the treatments were the same for these experiments. The data from experiment 7 also appear in \code{\link{InsectSprays}} although without the block information.
+}
+\seealso{
+\code{\link{InsectSprays}}
 }
 \keyword{datasets}
