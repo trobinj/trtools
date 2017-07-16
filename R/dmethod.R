@@ -12,7 +12,7 @@
 #' @param level Confidence level in (0,1) (default is 0.95). 
 #' @param ... Optional arguments for \code{jacobian}. 
 #' 
-#' @details By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) which avoids needing to compute derivatives.
+#' @details By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) is used which avoids needing to compute derivatives.
 #' 
 #' @source Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 #' 

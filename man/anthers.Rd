@@ -25,6 +25,6 @@ anthers
 Data from an experiment investigating the effects of storage temperature and centrifuge force on obtaining embryogenic anthers from \emph{Datura innoxia}. Each anther was stored for 48 hours in either normal or cold (3 degrees celsius) temperatures, and were then subjected to one of three levels of force in a centrifuge.
 }
 \note{
-The data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008).
+These data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008).
 }
 \keyword{datasets}

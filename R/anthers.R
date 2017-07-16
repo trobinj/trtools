@@ -10,7 +10,7 @@
 #'    \item{n:}{total number of anthers}
 #' }
 #'
-#' @note The data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008). 
+#' @note These data are originally from Sangwan-Norrell (1977) and are featured in Wood (1978) and Dobson and Barnett (2008). 
 #'
 #' @source Dobson, A. J. & Barnett, A. G. (2008). \emph{An introduction to generalized linear models} (3rd Edition). Boca Raton, FL: CRC Press.
 #' 
