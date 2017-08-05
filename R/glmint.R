@@ -30,7 +30,7 @@ glmint <- function(object, newdata, df, level = 0.95) {
     if (("glm" %in% class(object)) && (family(object)[1] %in% c("binomial","poisson"))) {
       df <- Inf
     }
-    if ("negbin" %in% class(object)) {
+    else if ("negbin" %in% class(object)) {
       df <- Inf
     }
     else {
