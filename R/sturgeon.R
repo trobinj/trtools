@@ -1,0 +1,19 @@
+#' White sturgeon sexual maturity.
+#'
+#' Data from a study of that classified samples of male and female white sturgeon by size class and sexual maturity.   
+#'
+#' @format A data frame of 24 observations and six variables:
+#' \describe{
+#'    \item{size:}{size class as determined by fork length (cm)}
+#'    \item{midpoint:}{size class midpoint}
+#'    \item{sex:}{sex of sturgeon (F or M)}
+#'    \item{count:}{number of sturgeon of a given size class and sex}
+#'    \item{immature:}{proportion of sturgeon classified as immature}
+#'    \item{mature:}{proportion of sturgeon classified as mature}
+#'    \item{ripe:}{proportion of sturgeon classified as ripe}
+#' }
+#'
+#' @note See Chapman et al. (1996) for details on the sampling, measurement, and classification of the sturgeon.
+#'
+#' @source Chapman, F. A., Van Eenennaam, J. P., & Doroshov, S. I. (1996). The reproductive condition of white sturgeon, \emph{Acipenser transmontanus}, in San Francisco Bay, California. \emph{Fishery Bulletin}, \emph{94}, 628-634.
+"sturgeon"
