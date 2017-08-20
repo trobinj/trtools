@@ -1,0 +1,15 @@
+#' Acid rain and tree roots.
+#'
+#' Memory recall response latencies of a single subject. The subject was presented 48 words and asked to recall a memory associated with each word. For half of the words the subject was asked to recall a pleasant memory, and for the other half the subject was asked to recall an unpleasant memory. The two types of memories were alternated when going throug the words. The time between word presentation and memory recall was recorded, but censored at 15 seconds. 
+#'
+#' @format A data frame 48 observations and two variables:
+#' \describe{
+#'    \item{type:}{memory type (pleasant or unpleasant)}
+#'    \item{time:}{time (in seconds) to memory recall, with right censoring at 15 seconds}
+#' }
+#' 
+#' @note See Dunn (1987) for details. 
+#'
+#' @source Dunn, G. (1987). The analysis of response latencies. In D. J. Hand & B. S. Everitt (Eds.), \emph{The statistical consultant in action} (72-79). Cambridge: Cambridge University Press.
+#' 
+"memoryrecall"
