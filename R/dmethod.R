@@ -1,6 +1,6 @@
 #' Delta method for regression model objects (experimental).
 #' 
-#' This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical (not symbolic) differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). 
+#' This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). 
 #' 
 #' @param object Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.
 #' @param pfunc Character object that is function of the parameters that can be evaluated by R. The function can return a scalar or a vector. Parameters must be referenced by name as specified by \code{pname}. 
