@@ -8,6 +8,7 @@
 #' @param cfunc Function for extracting the parameter estimates from \code{object} (default is \code{coef}).
 #' @param vfunc Function for extracting the estimated covariance matrix of the estimator from \code{object} (default is \code{vcov}).
 #' @param tfunc Function for transforming the result of \code{pfunc} for cases when the sampling distribution is thought to be more approximately normal on some other scale (e.g., log).
+#' @param fname Character string(s) for function names for output. 
 #' @param B Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead. 
 #' @param level Confidence level in (0,1) (default is 0.95). 
 #' @param ... Optional arguments for \code{jacobian}. 
@@ -16,12 +17,19 @@
 #' 
 #' @source Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 #' 
+#' @examples 
+#' # estimation of LD50 for each type of insecticide
+#' m <- glm(cbind(deaths, total - deaths) ~ insecticide * log2(deposit),
+#'   family = binomial, data = insecticide)
+#' dmethod(m, "2^c(-b0/b3, -(b0+b1)/(b3+b4), -(b0+b2)/(b3+b5))",
+#'   paste("b", 0:5, sep = ""), fname = c("BHC","both","DDT"))
+#' 
 #' @importFrom numDeriv jacobian
 #' @importFrom MASS mvrnorm
 #' @importFrom stats qnorm
 #' @importFrom lme4 fixef
 #' @export
-dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B = 0, level = 0.95, ...) {
+dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, level = 0.95, ...) {
   f <- function(theta, pfunc, pname) {
     theta <- as.list(theta)
     names(theta) <- pname
@@ -54,6 +62,11 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B =
     out <- cbind(pe, se, lw, up)
   }
   colnames(out) <- c("estimate", "se", "lower", "upper")
-  rownames(out) <- " "
+  if (missing(fname)) {
+    rownames(out) <- rep("", nrow(out))
+  }
+  else {
+    rownames(out) <- fname
+  }
   return(out)
 }

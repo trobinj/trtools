@@ -7,8 +7,8 @@
 Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 }
 \usage{
-dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B = 0,
-  level = 0.95, ...)
+dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname,
+  B = 0, level = 0.95, ...)
 }
 \arguments{
 \item{object}{Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.}
@@ -23,6 +23,8 @@ dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, B = 0,
 
 \item{tfunc}{Function for transforming the result of \code{pfunc} for cases when the sampling distribution is thought to be more approximately normal on some other scale (e.g., log).}
 
+\item{fname}{Character string(s) for function names for output.}
+
 \item{B}{Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead.}
 
 \item{level}{Confidence level in (0,1) (default is 0.95).}
@@ -34,4 +36,12 @@ This function applies the "delta method" to functions of parameters of model obj
 }
 \details{
 By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) is used which avoids needing to compute derivatives.
+}
+\examples{
+# estimation of LD50 for each type of insecticide
+m <- glm(cbind(deaths, total - deaths) ~ insecticide * log2(deposit),
+  family = binomial, data = insecticide)
+dmethod(m, "2^c(-b0/b3, -(b0+b1)/(b3+b4), -(b0+b2)/(b3+b5))",
+  paste("b", 0:5, sep = ""), fname = c("BHC","both","DDT"))
+
 }

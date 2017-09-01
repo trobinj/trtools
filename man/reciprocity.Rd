@@ -17,7 +17,7 @@ Rutte, C. & Taborsky, M. (2007). Generalized reciprocity in rats. \emph{PLoS Bio
 reciprocity
 }
 \description{
-Data from a study investigating generalized reciprocity in wild-type rats (Rattus norvegicus). The rats were trained to pull a stick to produce food for an unfamiliar partner rat. The rats were then put into two conditions in a cross-over design. In one condition the focal rat received help from other rats, while in the other condition they did not. The treatment order was randomized and separated by a four day interval. The number of pulls per minute was recorded for each treatment condition.
+Data from a study investigating generalized reciprocity in wild-type rats (\emph{Rattus norvegicus}). The rats were trained to pull a stick to produce food for an unfamiliar partner rat. The rats were then put into two conditions in a cross-over design. In one condition the focal rat received help from other rats, while in the other condition they did not. The treatment order was randomized and separated by a four day interval. The number of pulls per minute was recorded for each treatment condition.
 }
 \note{
 Rats with the same first digit in their identifier were from the same litter.
