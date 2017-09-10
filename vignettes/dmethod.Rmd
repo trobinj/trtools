@@ -46,7 +46,7 @@ or transform the estimate of $-\beta_0/\beta_3$,
 ```{r}
 dmethod(m, "-b0/b3", pname = paste("b", 0:5, sep = ""), tfunc = function(x) 2^x)
 ```
-Note that the endpoints of the confidence interval are transformed as well, but the standard error is on the scale of $-\beta_0/\beta_3$, not $2^{-\beta_0/\beta_3}$. Which approach is preferable would depend on which scale the sampling distribution is better approximated by a normal distribution. This could be investigated empirically by using the bootstrap approach and `sample = TRUE`, although this assumes that the sampling distribution of the model parameters (i.e., $\beta_0, \beta_1, \dots, \beta_5$) is approximately multivariate normal. 
+Note that the endpoints of the confidence interval are transformed as well, but the standard error is on the scale of $-\beta_0/\beta_3$, not $2^{-\beta_0/\beta_3}$. Which approach is preferable would depend on which scale the sampling distribution is better approximated by a normal distribution. This could be investigated empirically by using the bootstrap approach and `sample = TRUE`, although this assumes that the sampling distribution of the model parameter estimators (i.e., $\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_5$) is approximately multivariate normal. 
 
 The `dmethod` function can also be applied to vector-valued functions. For example, the LD50 values (on the log2 scale) can be estimated simultaneously with
 ```{r}
