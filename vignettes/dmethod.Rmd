@@ -1,5 +1,5 @@
 ---
-title: "Delta Method With Numerical Integration"
+title: "Delta Method With Numerical Differentiation"
 author: "Timothy R. Johnson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
