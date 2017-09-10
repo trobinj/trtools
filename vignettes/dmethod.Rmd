@@ -14,11 +14,52 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, comment = "")
 ```
 
-The `dmethod` function from the **trtools** package is designed to be a relatively flexible function for implementing the delta method based on model objects. Provided that a vector of parameter estimates and their associated covariance matrix can be extracted from a model object, the function will compute the approximate standard error of a differentiable function of the model parameters as well as the f
+The `dmethod` function from the **trtools** package is designed to be a relatively flexible function for implementing the delta method based on model objects. Provided that a vector of parameter estimates and their associated covariance matrix can be extracted from a model object, the function will compute the approximate standard error of a specified (differentiable) function of the model parameters. The function is designed to be flexible in terms of letting the user, if necessary, specify functions for extracting the model parameter estimates and the (estimated) covariance matrix of their estimators. Numerical rather than analytical derivatives are used to avoid cases where R is unable to differentiate the function analytically. 
 
-```{r, echo = FALSE}
+## Estimation of LD50
+
+Consider the following logistic regression model for modelling the effect of three insecticides at various doses. 
+```{r, echo = TRUE}
 library(trtools)
+m <- glm(cbind(deaths, total - deaths) ~ insecticide * log2(deposit),
+  family = binomial, data = insecticide)
+summary(m)
 ```
+From the output of `summary` it can be seen that the model is parameterized such that
+$$
+  \log[\pi_i/(1-\pi_i)] =
+  \begin{cases}
+    \beta_0 + \beta_3 \log(d_i), & \text{if insecticide is BHC}, \\
+    \beta_0 + \beta_1 + (\beta_3 + \beta_4) \log(d_i), & \text{if insecticide is BHC+DDT}, \\
+    \beta_0 + \beta_2 + (\beta_3 + \beta_5) \log(d_i), & \text{if insecticide is DDT},
+  \end{cases}
+$$
+where $\pi_i$ is the probability of death for the $i$-th batch, and $d_i$ is the dose administered to the $i$-th batch. A little algebra shows that the LD50 value for BHC is $-\beta_0/\beta_3$ on the $\log_2$ scale. This can be estimated as
+```{r}
+dmethod(m, "-b0/b3", pname = paste("b", 0:5, sep = ""))
+```
+To get the value of LD50 on the original scale of dose we can either estimate $2^{-\beta_0/\beta_3}$ directly,
+```{r}
+dmethod(m, "2^(-b0/b3)", pname = paste("b", 0:5, sep = ""))
+```
+or transform the estimate of $-\beta_0/\beta_3$,
+```{r}
+dmethod(m, "-b0/b3", pname = paste("b", 0:5, sep = ""), tfunc = function(x) 2^x)
+```
+Note that the endpoints of the confidence interval are transformed as well, but the standard error is on the scale of $-\beta_0/\beta_3$, not $2^{-\beta_0/\beta_3}$. Which approach is preferable would depend on which scale the sampling distribution is better approximated by a normal distribution. This could be investigated empirically by using the bootstrap approach and `sample = TRUE`, although this assumes that the sampling distribution of the model parameters (i.e., $\beta_0, \beta_1, \dots, \beta_5$) is approximately multivariate normal. 
+
+The `dmethod` function can also be applied to vector-valued functions. For example, the LD50 values (on the log2 scale) can be estimated simultaneously with
+```{r}
+dmethod(m, "c(-b0/b3, -(b0+b1)/(b3+b4), -(b0+b2)/(b3+b5))",
+  paste("b", 0:5, sep = ""), fname = c("BHC","both","DDT"))
+```
+
+
+
+
+
+
+
 
 
 <script type="text/x-mathjax-config">

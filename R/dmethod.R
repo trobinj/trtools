@@ -9,7 +9,8 @@
 #' @param vfunc Function for extracting the estimated covariance matrix of the estimator from \code{object} (default is \code{vcov}).
 #' @param tfunc Function for transforming the result of \code{pfunc} for cases when the sampling distribution is thought to be more approximately normal on some other scale (e.g., log).
 #' @param fname Character string(s) for function names for output. 
-#' @param B Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead. 
+#' @param B Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead.
+#' @param sample Return sample of simulated realizations from sampling distribution when B > 0. 
 #' @param level Confidence level in (0,1) (default is 0.95). 
 #' @param ... Optional arguments for \code{jacobian}. 
 #' 
@@ -29,7 +30,7 @@
 #' @importFrom stats qnorm
 #' @importFrom lme4 fixef
 #' @export
-dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, level = 0.95, ...) {
+dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, ...) {
   f <- function(theta, pfunc, pname) {
     theta <- as.list(theta)
     names(theta) <- pname
@@ -44,7 +45,8 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
     y <- data.frame(MASS::mvrnorm(B, cfunc(object), vfunc(object)))
     colnames(y) <- pname
     y <- lapply(split(y, seq(B)), function(z) with(z, eval(parse(text = pfunc))))
-    va <- apply(sweep(do.call("rbind", y), 2, pe), 2, function(z) sum(z^2)/B)
+    y <- do.call("rbind", y)
+    va <- apply(sweep(y, 2, pe), 2, function(z) sum(z^2)/B)
   }  
   se <- sqrt(va)
   lw <- pe - qnorm(level + (1 - level)/2) * se
@@ -67,6 +69,12 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
   }
   else {
     rownames(out) <- fname
+    if (sample) {
+      colnames(y) <- fname
+    }
   }
-  return(out)
+  if (B > 0 & sample) {
+    return(list(estimates = out, sample = y))
+  }
+  else return(out)
 }
