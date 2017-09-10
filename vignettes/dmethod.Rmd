@@ -29,9 +29,9 @@ From the output of `summary` it can be seen that the model is parameterized such
 $$
   \log[\pi_i/(1-\pi_i)] =
   \begin{cases}
-    \beta_0 + \beta_3 \log(d_i), & \text{if insecticide is BHC}, \\
-    \beta_0 + \beta_1 + (\beta_3 + \beta_4) \log(d_i), & \text{if insecticide is BHC+DDT}, \\
-    \beta_0 + \beta_2 + (\beta_3 + \beta_5) \log(d_i), & \text{if insecticide is DDT},
+    \beta_0 + \beta_3 \log_2(d_i), & \text{if insecticide is BHC}, \\
+    \beta_0 + \beta_1 + (\beta_3 + \beta_4) \log_2(d_i), & \text{if insecticide is BHC+DDT}, \\
+    \beta_0 + \beta_2 + (\beta_3 + \beta_5) \log_2(d_i), & \text{if insecticide is DDT},
   \end{cases}
 $$
 where $\pi_i$ is the probability of death for the $i$-th batch, and $d_i$ is the dose administered to the $i$-th batch. A little algebra shows that the LD50 value for BHC is $-\beta_0/\beta_3$ on the $\log_2$ scale. This can be estimated as
