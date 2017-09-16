@@ -258,7 +258,7 @@ contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
   return(out)
 }
 #' @export 
-contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, avg = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -319,8 +319,16 @@ contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fc
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
-  pe <- pa - pb - pu + pv
+  if (avg) {
+    tmp <- mm %*% as.matrix(fcov(model)) %*% t(mm)
+    tmp <- matrix(1/nrow(tmp), 1, nrow(tmp)) %*% tmp %*% matrix(1/nrow(tmp), nrow(tmp), 1)
+    se <- sqrt(diag(tmp))
+    pe <- mean(pa - pb - pu + pv)
+  }
+  else {
+    se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
+    pe <- pa - pb - pu + pv
+  }
   if (missing(df)) {
     df <- Inf
   }
