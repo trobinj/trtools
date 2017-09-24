@@ -3,7 +3,7 @@
 \docType{data}
 \name{memoryrecall}
 \alias{memoryrecall}
-\title{Acid rain and tree roots.}
+\title{Effect of memory on type on response latencies.}
 \format{A data frame 48 observations and two variables:
 \describe{
    \item{type:}{memory type (pleasant or unpleasant)}

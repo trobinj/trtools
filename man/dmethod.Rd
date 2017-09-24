@@ -8,7 +8,7 @@ Mandel, M. (2013). Simulation-based confidence intervals for functions with comp
 }
 \usage{
 dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname,
-  B = 0, level = 0.95, ...)
+  B = 0, sample = FALSE, level = 0.95, ...)
 }
 \arguments{
 \item{object}{Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.}
@@ -26,6 +26,8 @@ dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname,
 \item{fname}{Character string(s) for function names for output.}
 
 \item{B}{Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead.}
+
+\item{sample}{Return sample of simulated realizations from sampling distribution when B > 0.}
 
 \item{level}{Confidence level in (0,1) (default is 0.95).}
 
