@@ -11,7 +11,7 @@
 #'    \item{smokes:}{smoking (yes or no)}
 #'    \item{alcohol:}{alcohol use (yes or no)}
 #'    \item{exercise:}{frequency of exercise (high, moderate, or low)}
-#'    \item{ran:}{whether or not the subject ran in place between pulse measurements}
+#'    \item{treatment:}{activity between pulse measurements (ran or sat)}
 #'    \item{pulse1:}{first pulse measurement (per minute)}
 #'    \item{pulse2:}{second pulse measurement (per minute)}
 #'    \item{year:}{year of class}
