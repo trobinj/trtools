@@ -1,6 +1,6 @@
 #' Mortality of cancer cells.
 #'
-#' Data from an experiment investigating the mortality of cancer cells after exposure to radiation. These data are from the control condition where the cells were not irradiated so as to estimate natural mortality. On each of nine occasions, three dishes of 400 cells were observed. 
+#' Data from an experiment investigating the mortality of cancer cells after exposure to radiation. These data are from the control condition where the cells were not irradiated so as to estimate natural mortality. On each of nine occasions, three dishes of 400 cells each were observed. 
 #'
 #' @format A data frame with 27 observations and 3 variables:
 #' \describe{
