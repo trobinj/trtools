@@ -8,8 +8,6 @@
 #'    \item{field}{count of dead trees from the field}
 #' }
 #'
-#' @note These data can be treated as a census of the land parcel. 
-#'
 #' @source Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
 #'
 #' Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources and the environment}. Boca Raton, FL: Chapman & Hall/CRC.

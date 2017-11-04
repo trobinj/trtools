@@ -15,7 +15,7 @@ aucpoly(x, f, a, b, ...)
 
 \item{b}{Upper bound of the interval.}
 
-\item{...}{Additional arguments to polygon.}
+\item{...}{Additional arguments to \code{polygon}.}
 }
 \description{
 This is a utility function mainly for drawing/coloring/shading the area under the curve of a fuction (typically a probability density function).

@@ -6,7 +6,7 @@
 #' @param f Function for the curve.
 #' @param a Lower bound of the interval.
 #' @param b Upper bound of the interval.
-#' @param ... Additional arguments to polygon. 
+#' @param ... Additional arguments to \code{polygon}. 
 #' 
 #' @export
 aucpoly <- function(x, f, a, b, ...) {
