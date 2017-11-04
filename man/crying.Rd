@@ -8,8 +8,8 @@
 \describe{
    \item{day:}{day of observation (1-18)}
    \item{treatment:}{whether or not baby was rocked}
-   \item{babies:}{total number of babies observed}
-   \item{crying:}{total number of babies crying}
+   \item{babies:}{number of babies observed}
+   \item{crying:}{number of babies crying}
 }}
 \source{
 Gordon, T. & Foss, B. M. (1965). The role of stimulation in the delay of onset of crying in the newborn infant. \emph{Quarterly Journal of Experimental Psychology}, \emph{18(1)}, 79--81.
