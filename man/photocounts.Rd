@@ -20,7 +20,4 @@ photocounts
 \description{
 Counts of dead trees using aerial photographs and field counts in a 80ha parcel of land divided into 80 units. Field counts are more costly but also more accurate than those based on aerial photographs.
 }
-\note{
-These data can be treated as a census of the land parcel.
-}
 \keyword{datasets}

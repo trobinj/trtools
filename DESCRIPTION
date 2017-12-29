@@ -1,6 +1,6 @@
 Package: trtools
 Type: Package
-Title: Miscellaneous tools for teaching statistics
+Title: Miscellaneous Tools for Teaching Statistics
 Version: 0.1.0
 Authors@R: person("Timothy", "Johnson", email = "trobinj@gmail.com", role = c("aut", "cre"))
 Description: This package includes data sets and a few utility functions that I use in my regression, survey sampling, and introductory statistics courses. This package is currently in development. 
