@@ -1,6 +1,6 @@
 #' Ear infections in swimmers.
 #'
-#' Data from an observational study of ear infections in swimmers. 
+#' Data from an observational study of the frequency of ear infections in swimmers. 
 #'
 #' @format A data frame with 287 observations and five variables:
 #' \describe{
