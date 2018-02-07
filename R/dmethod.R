@@ -12,6 +12,7 @@
 #' @param B Number of bootstrap samples. The default (\code{B = 0}) results in numerical differentiation instead.
 #' @param sample Return sample of simulated realizations from sampling distribution when B > 0. 
 #' @param level Confidence level in (0,1) (default is 0.95). 
+#' @param df Degrees of freedom (infinite by default).
 #' @param ... Optional arguments for \code{jacobian}. 
 #' 
 #' @details By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) is used which avoids needing to compute derivatives.
@@ -30,7 +31,7 @@
 #' @importFrom stats qnorm
 #' @importFrom lme4 fixef
 #' @export
-dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, ...) {
+dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
   f <- function(theta, pfunc, pname) {
     theta <- as.list(theta)
     names(theta) <- pname
@@ -52,7 +53,7 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
   lw <- pe - qnorm(level + (1 - level)/2) * se
   up <- pe + qnorm(level + (1 - level)/2) * se
   ts <- pe/se
-  pv <- 2*pt(-abs(ts), df)
+  pv <- 2*pt(-abs(ts), Inf)
   if (!missing(tfunc)) {
     if (any(tfunc(lw) > tfunc(up))) {
       tmp <- lw
