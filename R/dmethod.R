@@ -51,19 +51,21 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
   se <- sqrt(va)
   lw <- pe - qnorm(level + (1 - level)/2) * se
   up <- pe + qnorm(level + (1 - level)/2) * se
+  ts <- pe/se
+  pv <- 2*pt(-abs(ts), df)
   if (!missing(tfunc)) {
     if (any(tfunc(lw) > tfunc(up))) {
       tmp <- lw
       lw <- up
       up <- tmp
     }
-    out <- cbind(tfunc(pe), se, tfunc(lw), tfunc(up))
+    out <- cbind(tfunc(pe), se, tfunc(lw), tfunc(up), ts, df, pv)
     message("Note: Point estimates and confidence interval endpoints have been transformed.")
   }
   else {
-    out <- cbind(pe, se, lw, up)
+    out <- cbind(pe, se, lw, up, ts, df, pv)
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper")
+  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(fname)) {
     rownames(out) <- rep("", nrow(out))
   }
