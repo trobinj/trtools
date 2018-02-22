@@ -5,11 +5,12 @@
 #' @param object Model object of class \code{nls}.
 #' @param newdata An optional data frame in which to look for variables with which to predict. If omitted the data frame used in creating the model object is used. 
 #' @param interval Type of interval calculation (confidence or prediction). 
-#' @param level Confidence level in (0,1).
 #' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
+#' @param level Confidence level in (0,1).
+#' @param residuals Logical to compute leverage values and standardized residuals. 
 #' @param ... Arguments to pass to \code{fcov}.
 #' 
-#' @details Standard errors for confidence intervals are estimated using the delta method. Derivatives are computed numerically rather than analytically to permit a wider range of models. Prediction intervals assume normally-distributed responses with variance inversely proportional to any specified weights, or homoscedastic error if no weights are specified.
+#' @details Standard errors for confidence intervals are estimated using the delta method. Derivatives are computed numerically rather than analytically to permit a wider range of models. Prediction intervals assume normally-distributed responses with variance inversely proportional to any specified weights, or homoscedastic error if no weights are specified. The approximate leverage ("hat") values are computed using the jacobian matrix and the approximate standardized residuals are equivalent to the "internally" standardized residuals in a linear model (i.e., as would be returned by rstandard or rstandard with type = "pearson" in a GLM).
 #' 
 #' @examples 
 #' myreg <- nls(rate ~ (t1 + t3 * (state == "treated")) * conc /
@@ -19,7 +20,7 @@
 #' @importFrom stats pt formula weights
 #' @importFrom numDeriv jacobian
 #' @export
-nlsint <- function(object, newdata = eval(object$call$data), interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, ...) {
+nlsint <- function(object, newdata = eval(object$call$data), interval = c("confidence", "prediction"), fcov = vcov, level = 0.95, residuals = FALSE, ...) {
   if (class(object) != "nls") stop("nls objects only")
   type <- match.arg(interval)
   f <- function(theta, object, data) {
@@ -45,6 +46,10 @@ nlsint <- function(object, newdata = eval(object$call$data), interval = c("confi
   lw <- yh - qt(level + (1 - level)/2, df) * se
   up <- yh + qt(level + (1 - level)/2, df) * se 
   out <- data.frame(fit = yh, se = se, lwr = lw, upr = up)
+  if (residuals) { # note: need to redo this up to avoid sparse weight matrix
+    out$hat <- diag(dmat %*% solve(t(dmat) %*% diag(wi) %*% dmat) %*% t(dmat) %*% diag(wi))
+    out$res <- residuals(object)/sqrt((1 - out$hat) * summary(object)$sigma^2/wi)
+  }
   rownames(out) <- NULL
   return(out)
 }

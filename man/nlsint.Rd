@@ -5,7 +5,7 @@
 \title{Confidence and prediction intervals for the (expected) response of a nonlinear regression model (experimental).}
 \usage{
 nlsint(object, newdata = eval(object$call$data), interval = c("confidence",
-  "prediction"), fcov = vcov, level = 0.95, ...)
+  "prediction"), fcov = vcov, level = 0.95, residuals = FALSE, ...)
 }
 \arguments{
 \item{object}{Model object of class \code{nls}.}
@@ -18,13 +18,15 @@ nlsint(object, newdata = eval(object$call$data), interval = c("confidence",
 
 \item{level}{Confidence level in (0,1).}
 
+\item{residuals}{Logical to compute leverage values and standardized residuals.}
+
 \item{...}{Arguments to pass to \code{fcov}.}
 }
 \description{
 This function computes approximate confidence intervals for the expected response as well as prediction intervals for a nonlinear regression model. It is designed to behave similarly to the \code{predict} function.
 }
 \details{
-Standard errors for confidence intervals are estimated using the delta method. Derivatives are computed numerically rather than analytically to permit a wider range of models. Prediction intervals assume normally-distributed responses with variance inversely proportional to any specified weights, or homoscedastic error if no weights are specified.
+Standard errors for confidence intervals are estimated using the delta method. Derivatives are computed numerically rather than analytically to permit a wider range of models. Prediction intervals assume normally-distributed responses with variance inversely proportional to any specified weights, or homoscedastic error if no weights are specified. The approximate leverage ("hat") values are computed using the jacobian matrix and the approximate standardized residuals are equivalent to the "internally" standardized residuals in a linear model (i.e., as would be returned by rstandard or rstandard with type = "pearson" in a GLM).
 }
 \examples{
 myreg <- nls(rate ~ (t1 + t3 * (state == "treated")) * conc /
