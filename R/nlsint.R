@@ -46,8 +46,9 @@ nlsint <- function(object, newdata = eval(object$call$data), interval = c("confi
   lw <- yh - qt(level + (1 - level)/2, df) * se
   up <- yh + qt(level + (1 - level)/2, df) * se 
   out <- data.frame(fit = yh, se = se, lwr = lw, upr = up)
-  if (residuals) { # note: need to redo this up to avoid sparse weight matrix
-    out$hat <- diag(dmat %*% solve(t(dmat) %*% diag(wi) %*% dmat) %*% t(dmat) %*% diag(wi))
+  if (residuals) {
+    dw <- sweep(t(dmat), 2, wi, "*")
+    out$hat <- diag(dmat %*% solve(dw %*% dmat) %*% dw)
     out$res <- residuals(object)/sqrt((1 - out$hat) * summary(object)$sigma^2/wi)
   }
   rownames(out) <- NULL
