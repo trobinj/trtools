@@ -5,7 +5,7 @@
 #' @param data The data frame containing the time variable.
 #' @param y Name of the time variable in \code{data}.
 #' @param event Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.
-#' @param case.name Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time). 
+#' @param unit.name Variable name for observational units. 
 #' @param time.name Variable name prefix for the time point of each binary response.
 #' @param resp.name Variable name for the binary response variables.
 #' @param open Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.
@@ -25,10 +25,10 @@
 #' d <- data.frame(time = rep(1:5, 2), x = rnorm(10))
 #' dsurvbin(d, "time", open = TRUE, reverse = TRUE)
 #' @export
-dsurvbin <- function(data, y, event, case.name = "case", time.name = "t", resp.name = "y", 
+dsurvbin <- function(data, y, event, unit.name = "unit", time.name = "t", resp.name = "y", 
   open = FALSE, reverse = FALSE) {
-  if (length(intersect(names(data), case.name)) > 0) {
-    stop("variable name conflict, change case.name")
+  if (length(intersect(names(data), unit.name)) > 0) {
+    stop("variable name conflict, change unit.name")
   }
   if (length(intersect(names(data), time.name)) > 0) {
     stop("variable name conflict, change time.name")
@@ -52,7 +52,7 @@ dsurvbin <- function(data, y, event, case.name = "case", time.name = "t", resp.n
     stop(paste("variable name conflict, change time.name"))
   }
   out <- cbind(data, z)
-  out[[case.name]] <- 1:nrow(out)
+  out[[unit.name]] <- 1:nrow(out)
   out <- reshape2::melt(out, measure.var = names(z), variable.name = time.name, value.name = resp.name)
   out <- dplyr::arrange(out, rep(1:nrow(data), k))
   out <- out[!is.na(out[[resp.name]]),]

@@ -4,7 +4,7 @@
 \alias{dsurvbin}
 \title{Create data frame with binary response variables for discrete survival analysis (experimental).}
 \usage{
-dsurvbin(data, y, event, case.name = "case", time.name = "t",
+dsurvbin(data, y, event, unit.name = "unit", time.name = "t",
   resp.name = "y", open = FALSE, reverse = FALSE)
 }
 \arguments{
@@ -14,7 +14,7 @@ dsurvbin(data, y, event, case.name = "case", time.name = "t",
 
 \item{event}{Indicator variable for observed (i.e., not censored) events where \code{event = 1} if the event was observed at \code{y} and \code{event = 0} if the event had not yet occurred by time \code{y}. If missing then it is assumed that no observations are censored.}
 
-\item{case.name}{Variable name for cases of binary responses (i.e., all binary responses corresponding to a single survival time).}
+\item{unit.name}{Variable name for observational units.}
 
 \item{time.name}{Variable name prefix for the time point of each binary response.}
 
