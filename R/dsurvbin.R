@@ -47,7 +47,7 @@ dsurvbin <- function(data, y, event, unit.name = "unit", time.name = "t", resp.n
   if (!missing(event)) {
     z <- sweep(z, 1, data[[event]], "*")
   }
-  names(z) <- paste(time.name, 1:k, sep = "")
+  names(z) <- as.character(1:k)
   if (length(intersect(names(data), names(z))) > 0) {
     stop(paste("variable name conflict, change time.name"))
   }
