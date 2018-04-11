@@ -1,6 +1,6 @@
 #' Create data frame with binary response variables for discrete survival analysis (experimental).
 #' 
-#' This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function.
+#' This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function. It can also be use to code binary responses for a sequential (continuation ratio) regression model.
 #' 
 #' @param data The data frame containing the time variable.
 #' @param y Name of the time variable in \code{data}.
@@ -10,6 +10,7 @@
 #' @param resp.name Variable name for the binary response variables.
 #' @param open Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.
 #' @param reverse Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE. 
+#' @param long Should the data be output in long-form (one binary response per row) (default is TRUE). 
 #' 
 #' @details Assuming survival time is integer-valued as \eqn{T = 1,2,\dots,k}, the probability of a given response can be modeled as \eqn{P(T = 1) = \lambda(1)} and \deqn{P(T = t) = \lambda(t)(1 - \lambda(j-1))(1 - \lambda(j-2))\dots(1 - \lambda(1))} for \eqn{T > 1}, where \eqn{\lambda(t) = P(T = t|T \ge t)} is the hazard function. If we define a set of binary response variables as \eqn{Y_k = 1} if \eqn{k = t} and \eqn{Y_k = 0} if \eqn{t > k}, then \eqn{P(T = 1) = P(Y_1 = 1)} and \deqn{P(T = t) = P(Y_t = 1)P(Y_{t-1} = 0)P(Y_{t-2} = 0)\dots P(Y_1 = 0)} for \eqn{T > 1}. If \eqn{Y} is censored at \eqn{T = t}, meaning that it is only known that \eqn{T > t}, then \deqn{P(T = t) = (1 - \lambda(t))(1 - \lambda(t-1))\dots (1 - \lambda(1)) = P(Y_t = 0)P(Y_{t-1} = 0) \dots P(Y_1 = 0).} Because the likelihood function for \eqn{T} is equivalent to that of the product of \eqn{T} independent binary responses, discrete survival time can be modeled as a set of binary response variables using logistic regression or other models for independent binary responses to model the hazard function. 
 #' 
@@ -25,8 +26,9 @@
 #' d <- data.frame(time = rep(1:5, 2), x = rnorm(10))
 #' dsurvbin(d, "time", open = TRUE, reverse = TRUE)
 #' @export
-dsurvbin <- function(data, y, event, unit.name = "unit", time.name = "t", resp.name = "y", 
-  open = FALSE, reverse = FALSE) {
+dsurvbin <- function (data, y, event, unit.name = "unit", time.name = "t", 
+  resp.name = "y", open = FALSE, reverse = FALSE, long = TRUE) 
+{
   if (length(intersect(names(data), unit.name)) > 0) {
     stop("variable name conflict, change unit.name")
   }
@@ -47,15 +49,24 @@ dsurvbin <- function(data, y, event, unit.name = "unit", time.name = "t", resp.n
   if (!missing(event)) {
     z <- sweep(z, 1, data[[event]], "*")
   }
-  names(z) <- as.character(1:k)
-  if (length(intersect(names(data), names(z))) > 0) {
-    stop(paste("variable name conflict, change time.name"))
+  if (!long) {
+    names(z) <- paste(time.name, 1:k, sep = "")
+    if (length(intersect(names(data), names(z))) > 0) {
+      stop(paste("variable name conflict, change time.name"))
+    }            
+    if (reverse) {
+      z <- 1 - z
+    }
+    return(cbind(data, z))
   }
+  names(z) <- as.character(1:k)
   out <- cbind(data, z)
   out[[unit.name]] <- 1:nrow(out)
-  out <- reshape2::melt(out, measure.var = names(z), variable.name = time.name, value.name = resp.name)
+  out <- reshape2::melt(out, measure.var = names(z),
+    variable.name = time.name, value.name = resp.name)
   out <- dplyr::arrange(out, rep(1:nrow(data), k))
-  out <- out[!is.na(out[[resp.name]]),]
-  if (reverse) out[[resp.name]] <- 1 - out[[resp.name]]
+  out <- out[!is.na(out[[resp.name]]), ]
+  if (reverse) 
+    out[[resp.name]] <- 1 - out[[resp.name]]
   return(out)
 }

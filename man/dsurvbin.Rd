@@ -5,7 +5,7 @@
 \title{Create data frame with binary response variables for discrete survival analysis (experimental).}
 \usage{
 dsurvbin(data, y, event, unit.name = "unit", time.name = "t",
-  resp.name = "y", open = FALSE, reverse = FALSE)
+  resp.name = "y", open = FALSE, reverse = FALSE, long = TRUE)
 }
 \arguments{
 \item{data}{The data frame containing the time variable.}
@@ -23,9 +23,11 @@ dsurvbin(data, y, event, unit.name = "unit", time.name = "t",
 \item{open}{Logical for whether the maximum observed time point (\eqn{k}) should be considered as corresponding to an interval where the right endpoint is infinity so that \eqn{P(T = k|T \ge k) = 1}. It is assumed in this case that all observations of \eqn{Y = k} are effectively censored at \eqn{Y = k - 1}. This requires one less binary response variable. Default is FALSE.}
 
 \item{reverse}{Reverse the binary indicator so that \eqn{P(Y_t = 1) = P(T > t|T \ge t)}. Default is FALSE.}
+
+\item{long}{Should the data be output in long-form (one binary response per row) (default is TRUE).}
 }
 \description{
-This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function.
+This is a function takes an existing data frame with a discrete time variable and coverts the time variable into a set of binary response variables for modeling discrete survival time using the binary variables to model the discrete hazard function. It can also be use to code binary responses for a sequential (continuation ratio) regression model.
 }
 \details{
 Assuming survival time is integer-valued as \eqn{T = 1,2,\dots,k}, the probability of a given response can be modeled as \eqn{P(T = 1) = \lambda(1)} and \deqn{P(T = t) = \lambda(t)(1 - \lambda(j-1))(1 - \lambda(j-2))\dots(1 - \lambda(1))} for \eqn{T > 1}, where \eqn{\lambda(t) = P(T = t|T \ge t)} is the hazard function. If we define a set of binary response variables as \eqn{Y_k = 1} if \eqn{k = t} and \eqn{Y_k = 0} if \eqn{t > k}, then \eqn{P(T = 1) = P(Y_1 = 1)} and \deqn{P(T = t) = P(Y_t = 1)P(Y_{t-1} = 0)P(Y_{t-2} = 0)\dots P(Y_1 = 0)} for \eqn{T > 1}. If \eqn{Y} is censored at \eqn{T = t}, meaning that it is only known that \eqn{T > t}, then \deqn{P(T = t) = (1 - \lambda(t))(1 - \lambda(t-1))\dots (1 - \lambda(1)) = P(Y_t = 0)P(Y_{t-1} = 0) \dots P(Y_1 = 0).} Because the likelihood function for \eqn{T} is equivalent to that of the product of \eqn{T} independent binary responses, discrete survival time can be modeled as a set of binary response variables using logistic regression or other models for independent binary responses to model the hazard function. 
