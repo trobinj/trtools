@@ -16,7 +16,7 @@
 #' 
 #' A related case is the continuation ratio or sequential regression model for ordinal response variables. There \eqn{T} represents an ordinal response (not necessarily time) and typically one models \eqn{P(T > t|T \ge t)} and assumes that a response will necessarily be in the last category if it is not in the previous category meaning that \eqn{P(T = k|T \ge k) = 1} if \eqn{k} is the highest "value" of \eqn{T}. This is effectively equivalent to a discrete survival model for the probability that the event does not occur at time \eqn{T} given that it has not yet occurred, and all observations of \eqn{Y = k} are censored at \eqn{Y = k - 1}. This can be achieved by using the \code{open = TRUE} and \code{reverse = TRUE} (see the example below). 
 #' 
-#' @importFrom reshape2 melt
+#' @importFrom tidyr gather
 #' @importFrom dplyr arrange
 #' @examples 
 #' # setup for discrete survival model where the first five times are right-censored
@@ -62,8 +62,7 @@ dsurvbin <- function (data, y, event, unit.name = "unit", time.name = "t",
   names(z) <- as.character(1:k)
   out <- cbind(data, z)
   out[[unit.name]] <- 1:nrow(out)
-  out <- reshape2::melt(out, measure.var = names(z),
-    variable.name = time.name, value.name = resp.name)
+  out <- tidyr::gather(out, key = time.name, value = resp.name, names(z))
   out <- dplyr::arrange(out, rep(1:nrow(data), k))
   out <- out[!is.na(out[[resp.name]]), ]
   if (reverse) 

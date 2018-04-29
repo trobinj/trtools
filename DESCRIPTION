@@ -7,7 +7,7 @@ Description: This package includes data sets and a few utility functions that I 
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Imports: numDeriv (>= 2016.8-1), MASS (>= 7.3-45), dplyr(>= 0.5.0), reshape2 (>= 1.4.2), lme4 (>= 1.1-13)
+Imports: numDeriv (>= 2016.8-1), MASS (>= 7.3-45), dplyr(>= 0.5.0), tidyr (>= 0.8.0), lme4 (>= 1.1-13)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues
 Suggests: knitr,
