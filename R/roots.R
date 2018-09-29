@@ -1,0 +1,18 @@
+#' Infection of roots by soil-borne pathogens. 
+#'
+#' Roots were planted in samples in two types of soil, conducive or suppressive, infected with different densities of an inoculum. The number of infected roots was later observed. Note that there are three replicates for each combination of density and soil type. 
+#'
+#' @format A data frame with 30 observations and four variables:
+#' \describe{
+#'    \item{soil}{soil type (conducive or suppressive)}
+#'    \item{density}{inoculum density (units unknown)}
+#'    \item{infected}{number of infected roots}
+#'    \item{total}{number of roots exposed}
+#' }
+#'
+#' @note The data are from Garthwaite et al. (2002) who use the data to motivate the complementary log-log link by assuming that the number of infections has an approximately Poisson distribution where the rate of infection is proportional to a power function of the inoculum density. They cite Gilligan (1983) as the original source for these data but note that these data are not reported there. 
+#' 
+#' @source Garthwaite, P. H., Jolliffe, I. T., & Jones, B. (2002). \emph{Statistical inference (2nd edition)}. Oxford, UK: Oxford University Press.
+#' 
+#' Gilligan, C. A. (1983). A test of randomness of infection by soilborne pathogens. \emph{Phytopathology}, \emph{73}, 300-303. 
+"roots"

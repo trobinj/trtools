@@ -1,0 +1,18 @@
+#' Effect of experience on the brain. 
+#'
+#' Data from a randomized experiment investigating the effect of experience on brain development. Rats were randomized within litter to two groups: a treatment condition in which the rat lived in an enriched environment with other rats and toys that were regularly changed, and a control condition in which the rat lived in isolation without any toys. After one month each rats was sacrificed and the weight of its cortex was measured. Note that five such experiments were conducted.  
+#'
+#' @format A data frame with 118 observations and four variables:
+#' \describe{
+#'    \item{weight}{weight of the cortex in milligrams}
+#'    \item{group}{the treatment group (treatment or control)}
+#'    \item{experiment}{id for the experiment (1-5)}
+#'    \item{litter}{id for the litter (1-59)}
+#' }
+#'
+#' @note The data are from Freedman, Pisanai, and Purves (1998). They cite Rosenzweig, Bennett, and Diamond (1964) as the original study, but that source does not provide the data.
+#' 
+#' @source Rosenzweig, M., Bennett, E. L., & Diamond, M. C. (1964). Brain changes in response to experience. \emph{Scientific American}, \emph{210}, 22-29.
+#' 
+#' Freedman, D., Pisani, R., & Purves, R. (1998). Statistics (3rd edition). New York: Norton. 
+"cortex"

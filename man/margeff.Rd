@@ -4,8 +4,8 @@
 \alias{margeff}
 \title{Estimation of marginal effects of regression models (experimental).}
 \usage{
-margeff(model, a, b, df, cnames, type = c("difference", "percent", "factor"),
-  delta = 1, level = 0.95, fcov = vcov, ...)
+margeff(model, a, b, df, cnames, type = c("difference", "percent",
+  "factor"), delta = 1, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
 \item{model}{Model object of class \code{lm}, \code{glm}, or \code{nls}.}
