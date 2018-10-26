@@ -10,15 +10,15 @@
    \item{method:}{method of isolating the nitrogen gas}
 }}
 \source{
-Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
+Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emdph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
 }
 \usage{
 rayleigh
 }
 \description{
-Lord Rayleigh (John William Strutt) conducted several experiments in which he tried to isolate samples of nitrogen gas at fixed volumes, temperature, and pressure by removing oxygen from dry air or through the decomposition of nitrogen compounds.
+Lord Rayleigh (John William Strutt) conducted several experiments in which he tried to isolate samples of nitrogen gas at a fixed volume, temperature, and pressure by removing oxygen from dry air or through the decomposition of nitrogen compounds.
 }
 \note{
-The difference in the mass of nitrogen isolated from atmospheric air (using the "hot iron" or "ferrous hydrate" methods) with nitrogen obtained from chemical decompositions (i.e., from nitric oxide, nitrous oxide, or ammonium nitrate) is assumed to be due to the presence of other elements or compounds in the atmospheric air, namely argon.
+The difference in the mass of nitrogen isolated from atmospheric air (using the "hot iron" or "ferrous hydrate" methods) with nitrogen obtained from chemical decompositions (from nitric oxide, nitrous oxide, or ammonium nitrate) is assumed to be due to the presence of other elements or compounds in the atmospheric air, namely argon.
 }
 \keyword{datasets}
