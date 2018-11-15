@@ -41,8 +41,8 @@
 #' @importFrom stats predict
 #' @export
 margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "factor"), delta = 1, level = 0.95, fcov = vcov, ...) {
-  if (!any(class(model) %in% c("lm","glm","nls"))) {
-    stop("function currently only works for lm, glm, and nls objects")
+  if (!any(class(model) %in% c("lm","glm","nls","lmerMod","glmerMod"))) {
+    stop("function currently only works for lm, glm, nls, lmerMod, and glmerMod objects")
   }
   type <- match.arg(type)
   if ("nls" %in% class(model)) {
@@ -55,6 +55,22 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
        difference = (pa - pb)/delta,
        percent = 100 * (pa/pb - 1),
        factor = pa/pb)
+      return(out)
+    }
+  }
+  else if (class(model) %in% c("lmerMod","glmerMod")) {
+    print("hello")
+    f <- function(theta, model, a, b, type, delta) {
+      if (summary(model)$useScale) {
+        pa <- predict(model, as.data.frame(a), re.form = NA,
+          newparams = list(beta = theta, sigma = sigma(model), theta = getME(model, "theta")))
+        pb <- predict(model, as.data.frame(b), re.form = NA,
+          newparams = list(beta = theta, sigma = sigma(model), theta = getME(model, "theta")))
+      }
+      out <- switch(type,
+        difference = (pa - pb)/delta,
+        percent = 100 * (pa/pb - 1),
+        factor = pa/pb)
       return(out)
     }
   }
@@ -74,18 +90,33 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
     if (("glm" %in% class(model)) && (family(model)[1] %in% c("binomial","poisson"))) {
       df <- Inf
     }
+    else if (class(model) %in% c("lmerMod","glmerMod")) {
+      df <- Inf
+    }
     else {
       df <- summary(model)$df[2]
     }
   }
-  pa <- predict(model, as.data.frame(a), type = "response")
-  pb <- predict(model, as.data.frame(b), type = "response")
+  if (class(model) %in% c("lmerMod","glmerMod")) {
+    if (summary(m)$useScale) {
+      paramlist <- list(beta = fixef(model), sigma = sigma(model), theta = getME(model, "theta"))
+    } else {
+      paramlist <- list(beta = fixef(model), theta = getME(model, "theta"))
+    }
+    pa <- predict(model, as.data.frame(a), re.form = NA, newparams = paramlist)
+    pb <- predict(model, as.data.frame(b), re.form = NA, newparams = paramlist)
+    gr <- numDeriv::jacobian(f, fixef(model), model = model, a = a, b = b, 
+      type = type, delta = delta)
+  } else {
+    pa <- predict(model, as.data.frame(a), type = "response")
+    pb <- predict(model, as.data.frame(b), type = "response")
+    gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
+      type = type, delta = delta)
+  }
   pe <- switch(type,
     difference = (pa - pb)/delta,
     percent = 100 * (pa/pb - 1),
     factor = pa/pb)
-  gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
-    type = type, delta = delta)
   se <- sqrt(diag(gr %*% fcov(model) %*% t(gr)))
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 

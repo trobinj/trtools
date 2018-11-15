@@ -29,7 +29,6 @@
 #' @importFrom numDeriv jacobian
 #' @importFrom MASS mvrnorm
 #' @importFrom stats qnorm
-#' @importFrom lme4 fixef
 #' @export
 dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
   f <- function(theta, pfunc, pname) {

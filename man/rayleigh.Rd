@@ -10,7 +10,7 @@
    \item{method:}{method of isolating the nitrogen gas}
 }}
 \source{
-Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emdph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
+Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
 }
 \usage{
 rayleigh

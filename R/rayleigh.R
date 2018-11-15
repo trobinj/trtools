@@ -10,5 +10,5 @@
 #' 
 #' @note The difference in the mass of nitrogen isolated from atmospheric air (using the "hot iron" or "ferrous hydrate" methods) with nitrogen obtained from chemical decompositions (from nitric oxide, nitrous oxide, or ammonium nitrate) is assumed to be due to the presence of other elements or compounds in the atmospheric air, namely argon. 
 #'
-#' @source Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emdph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
+#' @source Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
 "rayleigh"
