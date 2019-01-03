@@ -8,7 +8,7 @@
 #'    \item{women:}{population of white women in 1960}
 #' }
 #' 
-#' @note These data were obtained from \link{http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html}. They are featured in Royall and Cumberland (1981a, 1981b) and Valliant, Dorfman, and Royall (2000). The population data are from the U.S. Census. The mortality data are from Mason and McKay (1974). 
+#' @note These data were obtained from http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html. They are featured in Royall and Cumberland (1981a, 1981b) and Valliant, Dorfman, and Royall (2000). The population data are from the U.S. Census. The mortality data are from Mason and McKay (1974). 
 #'
 #' @source Mason, T. J. & McKay, F. W. (1974). \emph{U.S. cancer mortality by county: 1950-1969}. DHEW publication no. (NIH) 74-615. Washington, DC: U.S. Government Printing Office.
 #' 

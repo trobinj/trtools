@@ -69,13 +69,13 @@ lincon.lm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ..
       lw <- up
       up <- tmp
     }
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
@@ -116,13 +116,13 @@ lincon.nls <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
       lw <- up
       up <- tmp
     }
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
@@ -168,13 +168,13 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
       lw <- up
       up <- tmp
     }
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
@@ -215,13 +215,13 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
       lw <- up
       up <- tmp
     }
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }
@@ -262,13 +262,13 @@ lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vc
       lw <- up
       up <- tmp
     }
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
   }

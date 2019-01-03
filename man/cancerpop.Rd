@@ -25,6 +25,6 @@ cancerpop
 These data are county-level breast cancer mortality for white women in counties in North Carolina, South Carolina, and Georgia with populations of less than 100,000 white women.
 }
 \note{
-These data were obtained from \link{http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html}. They are featured in Royall and Cumberland (1981a, 1981b) and Valliant, Dorfman, and Royall (2000). The population data are from the U.S. Census. The mortality data are from Mason and McKay (1974).
+These data were obtained from http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471293415.html. They are featured in Royall and Cumberland (1981a, 1981b) and Valliant, Dorfman, and Royall (2000). The population data are from the U.S. Census. The mortality data are from Mason and McKay (1974).
 }
 \keyword{datasets}

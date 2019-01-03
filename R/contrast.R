@@ -145,13 +145,13 @@ contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = 
       lw <- up
       up <- tmp
     }
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
@@ -242,13 +242,13 @@ contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
       lw <- up
       up <- tmp
     }
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
@@ -342,13 +342,13 @@ contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fc
       lw <- up
       up <- tmp
     }
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
@@ -434,13 +434,13 @@ contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, f
       lw <- up
       up <- tmp
     }
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
-    out <- cbind(tf(pe), se, tf(lw), tf(up), ts, df, pv)
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }

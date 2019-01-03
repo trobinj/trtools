@@ -59,13 +59,13 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
       lw <- up
       up <- tmp
     }
-    out <- cbind(tfunc(pe), se, tfunc(lw), tfunc(up), ts, df, pv)
-    message("Note: Point estimates and confidence interval endpoints have been transformed.")
+    out <- cbind(tfunc(pe), tfunc(lw), tfunc(up))
+    colnames(out) <- c("estimate", "lower", "upper")
   }
   else {
     out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   }
-  colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
   if (missing(fname)) {
     rownames(out) <- rep("", nrow(out))
   }
