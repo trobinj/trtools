@@ -1,4 +1,4 @@
-#' Pock lesions on chick embroyos.
+#' Pock lesions on chicken embryos.
 #'
 #' Data from a study of the number of lesions from viruses of the pox group at several dilutions of the viral medium.
 #'

@@ -3,7 +3,7 @@
 \docType{data}
 \name{pock}
 \alias{pock}
-\title{Pock lesions on chick embroyos.}
+\title{Pock lesions on chicken embryos.}
 \format{A data frame of 58 observations on two variables.
 \describe{
    \item{Dilution:}{dilution of the viral medium}
