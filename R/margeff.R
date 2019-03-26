@@ -89,7 +89,7 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
     if (("glm" %in% class(model)) && (family(model)[1] %in% c("binomial","poisson"))) {
       df <- Inf
     }
-    else if (class(model) %in% c("lmerMod","glmerMod")) {
+    else if (length(intersect(class(model), c("lmerMod","glmerMod")) > 0)) {
       df <- Inf
     }
     else {
