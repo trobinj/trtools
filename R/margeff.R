@@ -96,7 +96,7 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
       df <- summary(model)$df[2]
     }
   }
-  if (class(model) %in% c("lmerMod","glmerMod")) {
+  if (length(intersect(class(model), c("lmerMod","glmerMod")) > 0)) {
     if (summary(m)$useScale) {
       paramlist <- list(beta = fixef(model), sigma = sigma(model), theta = getME(model, "theta"))
     } else {
