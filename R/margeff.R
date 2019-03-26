@@ -58,8 +58,7 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
       return(out)
     }
   }
-  else if (class(model) %in% c("lmerMod","glmerMod")) {
-    print("hello")
+  else if (length(intersect(class(model), c("lmerMod","glmerMod")) > 0)) {
     f <- function(theta, model, a, b, type, delta) {
       if (summary(model)$useScale) {
         pa <- predict(model, as.data.frame(a), re.form = NA,
