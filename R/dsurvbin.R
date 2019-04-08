@@ -62,7 +62,7 @@ dsurvbin <- function (data, y, event, unit.name = "unit", time.name = "t",
   names(z) <- as.character(1:k)
   out <- cbind(data, z)
   out[[unit.name]] <- 1:nrow(out)
-  out <- tidyr::gather(out, key = time.name, value = resp.name, names(z))
+  out <- tidyr::gather(out, key = !!time.name, value = !!resp.name, names(z))
   out <- dplyr::arrange(out, rep(1:nrow(data), k))
   out <- out[!is.na(out[[resp.name]]), ]
   if (reverse) 
