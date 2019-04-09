@@ -39,31 +39,29 @@ dsurvbin <- function (data, y, event, unit.name = "unit", time.name = "t",
     stop("variable name conflict, change resp.name")
   }
   z <- data[[y]]
+  tpoints <- sort(unique(z))
   if (open) {
-    k <- max(z) - 1
+    tpoints <- tpoints[-length(tpoints)]
   }
-  else {
-    k <- max(z)
-  }
-  z <- data.frame(outer(z, 1:k, function(z, u) ifelse(z == u, 1, ifelse(z > u, 0, NA))))
+  z <- data.frame(outer(z, tpoints, function(z, u) ifelse(z == u, 1, ifelse(z > u, 0, NA))))
   if (!missing(event)) {
     z <- sweep(z, 1, data[[event]], "*")
   }
   if (!long) {
-    names(z) <- paste(time.name, 1:k, sep = "")
+    names(z) <- paste(time.name, tpoints, sep = "")
     if (length(intersect(names(data), names(z))) > 0) {
       stop(paste("variable name conflict, change time.name"))
-    }            
+    }
     if (reverse) {
       z <- 1 - z
     }
     return(cbind(data, z))
   }
-  names(z) <- as.character(1:k)
+  names(z) <- as.character(tpoints)
   out <- cbind(data, z)
   out[[unit.name]] <- 1:nrow(out)
-  out <- tidyr::gather(out, key = !!time.name, value = !!resp.name, names(z))
-  out <- dplyr::arrange(out, rep(1:nrow(data), k))
+  out <- tidyr::gather(out, key = !!time.name, value = !!resp.name, names(z), factor_key = TRUE)
+  out <- dplyr::arrange(out, rep(1:nrow(data), length(tpoints)))
   out <- out[!is.na(out[[resp.name]]), ]
   if (reverse) 
     out[[resp.name]] <- 1 - out[[resp.name]]
