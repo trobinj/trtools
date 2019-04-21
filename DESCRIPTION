@@ -13,3 +13,4 @@ BugReports: http://github.com/trobinj/trtools/issues
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+Encoding: UTF-8
