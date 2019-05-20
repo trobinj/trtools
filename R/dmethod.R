@@ -48,6 +48,9 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
     y <- do.call("rbind", y)
     va <- apply(sweep(y, 2, pe), 2, function(z) sum(z^2)/B)
   }  
+  if (length(pe) != length(pnames)) {
+    stop("number of parameter names must equal the number of parameters")
+  }
   se <- sqrt(va)
   lw <- pe - qnorm(level + (1 - level)/2) * se
   up <- pe + qnorm(level + (1 - level)/2) * se

@@ -14,6 +14,7 @@
 \method{lincon}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{lincon}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{lincon}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{default}(model, a, b, df = Inf, tf, cnames, level = 0.95, fcov = vcov, fest = coef, ...)
 }
 \arguments{
 \item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
@@ -24,7 +25,7 @@
 
 \item{b}{A scalar or vector defining the \eqn{b} coefficient(s) of the linear combination. Assumed to be zero if missing.}
 
-\item{df}{Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.}
+\item{df}{Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used. Defaults to infinity for Wald tests/intervals when using the default method.}
 
 \item{tf}{Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios).}
 
@@ -32,7 +33,9 @@
 
 \item{level}{Confidence level in (0,1). Default is 0.95.}
 
-\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
+\item{fcov}{Function for estimating the covariance matrix of the model parameters.}
+
+\item{fest}{Function for extracting the model parameter estimates (must be same as order of the covariance matrix).}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning any linear combination of regression model parameters.

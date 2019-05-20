@@ -10,15 +10,17 @@
 #' \method{lincon}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{lincon}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{lincon}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{lincon}{default}(model, a, b, df = Inf, tf, cnames, level = 0.95, fcov = vcov, fest = coef, ...)
 #' 
 #' @param model Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.
 #' @param a Vector or matrix defining the \eqn{a_j} coefficients of the linear combination(s). If omitted then this defaults to the identity matrix to provide inferences for each parameter similar to the \code{summary} function. 
 #' @param b A scalar or vector defining the \eqn{b} coefficient(s) of the linear combination. Assumed to be zero if missing. 
-#' @param df Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used.  
+#' @param df Optional degrees of freedom. If left missing the residual degrees of freedom will be used except for GLMs with \code{family = poisson} or \code{family = binomial} in which case an infinite degrees of freedom is used. Defaults to infinity for Wald tests/intervals when using the default method.
 #' @param tf Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios). 
 #' @param cnames Optional vector of contrast names. If left missing the contrast coefficients are shown. If FALSE then no names are shown. 
 #' @param level Confidence level in (0,1). Default is 0.95.
-#' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
+#' @param fcov Function for estimating the covariance matrix of the model parameters.
+#' @param fest Function for extracting the model parameter estimates (must be same as order of the covariance matrix). 
 #' @param ... Not used.
 #' 
 #' @examples
@@ -41,6 +43,50 @@ lincon <- function(model, ...) {
   UseMethod("lincon", model)
 }
 #' @export 
+lincon.default <- function(model, a, b, df = Inf, tf, cnames, level = 0.95, fcov = vcov, fest = coef, ...) {
+  if (missing(a)) {
+    a <- diag(length(fest(model)))
+    if (missing(cnames)) {
+      cnames <- names(fest(model))  
+    }
+  }
+  else if (is.vector(a)) {
+    a <- matrix(a, nrow = 1)
+  }
+  if (missing(b)) {
+    b <- 0 
+  }
+  se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
+  pe <- a %*% fest(model) + b
+  lw <- pe - qt(level + (1 - level)/2, df) * se
+  up <- pe + qt(level + (1 - level)/2, df) * se 
+  ts <- pe/se
+  pv <- 2*pt(-abs(ts), df)
+  if (!missing(tf)) {
+    if (any(tf(lw) > tf(up))) {
+      tmp <- lw
+      lw <- up
+      up <- tmp
+    }
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
+  }
+  else {
+    out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  }
+  if (missing(cnames)) {
+    rownames(out) <- paste(apply(a, 1, function(x) paste("(", paste(MASS::fractions(as.vector(x)), collapse = ","), ")", sep = "")), ",", b, sep = "")
+  }
+  else if (is.logical(cnames) && !cnames) {
+    rownames(out) <- rep("", nrow(a))
+  }
+  else {
+    rownames(out) <- cnames
+  }
+  return(out)
+}
+#' @export
 lincon.lm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (missing(a)) {
     a <- diag(length(coef(model)))
