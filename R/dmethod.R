@@ -31,7 +31,7 @@
 #' @importFrom stats qnorm
 #' @export
 dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
-  if (cfunc(object) != length(pname)) {
+  if (length(cfunc(object)) != length(pname)) {
     stop("number of parameter names must equal the number of model parameters")
   }
   f <- function(theta, pfunc, pname) {
