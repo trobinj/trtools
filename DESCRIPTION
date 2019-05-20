@@ -7,10 +7,11 @@ Description: This package includes data sets and a few utility functions that I 
 License: GPL-3
 LazyData: TRUE
 RoxygenNote: 6.1.1
-Imports: numDeriv (>= 2016.8-1), MASS (>= 7.3-45), dplyr(>= 0.5.0), tidyr (>= 0.8.0), lme4 (>= 1.1-13)
+Imports: numDeriv (>= 2016.8-1), MASS (>= 7.3-51.4), dplyr(>= 0.8.1), tidyr (>= 0.8.3), lme4 (>= 1.1-21)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
+Depends: R (>= 3.5.0)
