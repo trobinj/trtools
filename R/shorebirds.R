@@ -1,0 +1,17 @@
+#' Survey of the density of nesting birds. 
+#'
+#' A two-phase sampling design for the density of nesting birds. In the first phase a sample was selected from 2130 plots. A rapid search method was used to obtain an approximate count of the number of nests in these plots. Then a sample of plots was selected from this first sample, and the number of nests was counted in these plots using an intensive method.
+#'
+#' @format A data frame 201 observations and two variables:
+#' \describe{
+#'    \item{rapid:}{number of birds counted using a rapid search method}
+#'    \item{intense:}{number of nests counted using an intensive method}
+#' }
+#' 
+#' @note That data are from Lohr (2010), reconstructed from summary statistics reported by Bart and Earnst (2002). 
+#' 
+#' @source Bart, J. & Earnst, S. (2002). Double-sampling to estimate density and population trends in birds. \emph{The Auk}, \emph{119}, 36--45.
+#' 
+#' Lohr, S. L. (2010). \emph{Sampling: Design and analysis} (2nd edition). Boston: Brooks/Cole.
+#' 
+"shorebirds"
