@@ -4,7 +4,7 @@
 \name{televisions}
 \alias{televisions}
 \title{Survey of households for televisions.}
-\format{A data frame 132 observations and two variables:
+\format{A data frame of 132 observations and two variables:
 \describe{
    \item{households:}{number of households in the sampling unit}
    \item{tv:}{number of households with televisions in the sampling unit}
