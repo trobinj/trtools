@@ -64,7 +64,7 @@
 #'  cnames = types, tf = plogis)
 #' 
 #' @importFrom stats formula as.formula model.frame model.matrix pt
-#' @import lme4 nlme
+#' @import lme4
 #' @export
 contrast <- function(model, ...) {
   UseMethod("contrast", model)
@@ -161,6 +161,7 @@ contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = 
   }
   return(out)
 }
+#' @export 
 contrast.gls <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
