@@ -6,7 +6,7 @@ Authors@R: person("Timothy", "Johnson", email = "trobinj@gmail.com", role = c("a
 Description: This package includes data sets and a few utility functions that I use in my regression, survey sampling, and introductory statistics courses. This package is currently in development. 
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Imports: numDeriv (>= 2016.8-1), MASS (>= 7.3-51.4), dplyr(>= 0.8.1), tidyr (>= 0.8.3), lme4 (>= 1.1-21)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues

@@ -4,8 +4,17 @@
 \alias{dsurvbin}
 \title{Create data frame with binary response variables for discrete survival analysis (experimental).}
 \usage{
-dsurvbin(data, y, event, unit.name = "unit", time.name = "t",
-  resp.name = "y", open = FALSE, reverse = FALSE, long = TRUE)
+dsurvbin(
+  data,
+  y,
+  event,
+  unit.name = "unit",
+  time.name = "t",
+  resp.name = "y",
+  open = FALSE,
+  reverse = FALSE,
+  long = TRUE
+)
 }
 \arguments{
 \item{data}{The data frame containing the time variable.}

@@ -2,15 +2,16 @@
 #' 
 #' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters. 
 #' 
-#' @aliases contrast.lm contrast.glm contrast.lmerMod contrast.glmerMod
+#' @aliases contrast.lm contrast.glm contrast.lmerMod contrast.glmerMod contrast.gls
 #' 
 #' @usage
 #' \method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' 
-#' @param model Model object. Currently objects of classes \code{lm}, \code{glm}, \code{lmerMod}, and \code{glmerMod} are accepted.
+#' @param model Model object.
 #' @param a List or data frame defining a linear combination. 
 #' @param b List or data frame defining a linear combination. 
 #' @param u List or data frame defining a linear combination. 
@@ -63,7 +64,7 @@
 #'  cnames = types, tf = plogis)
 #' 
 #' @importFrom stats formula as.formula model.frame model.matrix pt
-#' @import lme4 
+#' @import lme4 nlme
 #' @export
 contrast <- function(model, ...) {
   UseMethod("contrast", model)
@@ -134,6 +135,97 @@ contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = 
   pe <- pa - pb - pu + pv
   if (missing(df)) {
     df <- summary(model)$df[2]
+  }
+  lw <- pe - qt(level + (1 - level)/2, df) * se
+  up <- pe + qt(level + (1 - level)/2, df) * se 
+  ts <- pe/se
+  pv <- 2*pt(-abs(ts), df)
+  if (!missing(tf)) {
+    if (any(tf(lw) > tf(up))) {
+      tmp <- lw
+      lw <- up
+      up <- tmp
+    }
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    colnames(out) <- c("estimate", "lower", "upper")
+  }
+  else {
+    out <- cbind(pe, se, lw, up, ts, df, pv)
+    colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  }
+  if (missing(cnames)) {
+    rownames(out) <- rep("", nrow(out))
+  }
+  else {
+    rownames(out) <- cnames
+  }
+  return(out)
+}
+contrast.gls <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+  if (all(missing(a), missing(b), missing(u), missing(v))) {
+    stop("no contrast(s) specified")
+  }
+  eta <- function(theta, model, data) {
+    model$coefficients <- theta
+    predict(model, as.data.frame(data))
+  }
+  if (!missing(a)) {
+    ma <- numDeriv::jacobian(eta, coef(model), model = model, data = a)
+    pa <- predict(model, as.data.frame(a))
+  }
+  else {
+    ma <- 0
+    pa <- 0
+  }
+  if (!missing(b)) {
+    mb <- numDeriv::jacobian(eta, coef(model), model = model, data = b)
+    pb <- predict(model, as.data.frame(b))
+  }
+  else {
+    mb <- 0
+    pb <- 0
+  }
+  if (!missing(u)) {
+    mu <- numDeriv::jacobian(eta, coef(model), model = model, data = u)
+    pu <- predict(model, as.data.frame(u))
+  }
+  else {
+    mu <- 0
+    pu <- 0
+  }
+  if (!missing(v)) {
+    mv <- numDeriv::jacobian(eta, coef(model), model = model, data = v)
+    pv <- predict(model, as.data.frame(v))
+  }
+  else {
+    mv <- 0
+    pv <- 0
+  }
+  rowmax <- max(unlist(lapply(list(ma, mb, mu, mv), function(x) ifelse(is.matrix(x), nrow(x), 0))))
+  if (is.matrix(ma) && nrow(ma) == 1) {
+    ma <- ma[rep(1, rowmax),]
+    pa <- pa[rep(1, rowmax)]
+  }
+  if (is.matrix(mb) && nrow(mb) == 1) {
+    mb <- mb[rep(1, rowmax),]
+    pb <- pb[rep(1, rowmax)]
+  }
+  if (is.matrix(mu) && nrow(mu) == 1) {
+    mu <- mu[rep(1, rowmax),]
+    pu <- pu[rep(1, rowmax)]
+  }
+  if (is.matrix(mv) && nrow(mv) == 1) {
+    mv <- mv[rep(1, rowmax),]
+    pv <- pv[rep(1, rowmax)]
+  }
+  mm <- as.matrix(ma - mb - mu + mv)
+  if (ncol(mm) == 1) {
+    mm <- t(mm)
+  }
+  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  pe <- pa - pb - pu + pv
+  if (missing(df)) {
+    df <- summary(model)$dims$N - summary(model)$dims$p # not sure about this in general
   }
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 

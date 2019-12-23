@@ -4,9 +4,15 @@
 \alias{nlsint}
 \title{Confidence and prediction intervals for the (expected) response of a nonlinear regression model (experimental).}
 \usage{
-nlsint(object, newdata = eval(object$call$data),
-  interval = c("confidence", "prediction"), fcov = vcov,
-  level = 0.95, residuals = FALSE, ...)
+nlsint(
+  object,
+  newdata = eval(object$call$data),
+  interval = c("confidence", "prediction"),
+  fcov = vcov,
+  level = 0.95,
+  residuals = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{Model object of class \code{nls}.}

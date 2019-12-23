@@ -1,4 +1,4 @@
-#' Weight and area of a population of leaves.
+#' Weight and area of leaves.
 #'
 #' Weight and area of all the leaves from a sapling. 
 #'

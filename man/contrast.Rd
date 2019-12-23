@@ -6,15 +6,17 @@
 \alias{contrast.glm}
 \alias{contrast.lmerMod}
 \alias{contrast.glmerMod}
+\alias{contrast.gls}
 \title{Inferences for contrasts for (generalized) linear models (experimental).}
 \usage{
 \method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 }
 \arguments{
-\item{model}{Model object. Currently objects of classes \code{lm}, \code{glm}, \code{lmerMod}, and \code{glmerMod} are accepted.}
+\item{model}{Model object.}
 
 \item{...}{Not used.}
 

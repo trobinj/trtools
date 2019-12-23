@@ -7,8 +7,20 @@
 Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
 }
 \usage{
-dmethod(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname,
-  B = 0, sample = FALSE, level = 0.95, df = Inf, ...)
+dmethod(
+  object,
+  pfunc,
+  pname,
+  cfunc = coef,
+  vfunc = vcov,
+  tfunc,
+  fname,
+  B = 0,
+  sample = FALSE,
+  level = 0.95,
+  df = Inf,
+  ...
+)
 }
 \arguments{
 \item{object}{Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.}

@@ -7,6 +7,7 @@
 \alias{lincon.glm}
 \alias{lincon.lmerMod}
 \alias{lincon.glmerMod}
+\alias{lincon.gls}
 \title{Linear combinations of regression model parameters.}
 \usage{
 \method{lincon}{lm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
@@ -14,10 +15,11 @@
 \method{lincon}{glm}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{lincon}{lmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{lincon}{glmerMod}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{lincon}{gls}(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{lincon}{default}(model, a, b, df = Inf, tf, cnames, level = 0.95, fcov = vcov, fest = coef, ...)
 }
 \arguments{
-\item{model}{Model object. Currently only objects of class \code{lm} and \code{nls} are accepted.}
+\item{model}{Model object.}
 
 \item{...}{Not used.}
 
