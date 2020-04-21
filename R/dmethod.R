@@ -52,8 +52,8 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
     va <- apply(sweep(y, 2, pe), 2, function(z) sum(z^2)/B)
   }  
   se <- sqrt(va)
-  lw <- pe - qnorm(level + (1 - level)/2) * se
-  up <- pe + qnorm(level + (1 - level)/2) * se
+  lw <- pe - qt(level + (1 - level)/2, df = df) * se
+  up <- pe + qt(level + (1 - level)/2, df = df) * se
   ts <- pe/se
   pv <- 2*pt(-abs(ts), Inf)
   if (!missing(tfunc)) {
