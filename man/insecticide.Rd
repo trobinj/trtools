@@ -4,13 +4,15 @@
 \name{insecticide}
 \alias{insecticide}
 \title{Flour beetle response to three insecticides.}
-\format{A data frame 18 observations and four variables:
+\format{
+A data frame 18 observations and four variables:
 \describe{
    \item{insecticide:}{insecticide to which the beetles were exposed (DDT, g-BHC, or both)}
    \item{deposit:}{amount of insecticide in mg per 10 square cm}
    \item{deaths:}{number of beetles in the batch that died}
    \item{total:}{total number of beetles in batch}
-}}
+}
+}
 \source{
 Collett, D. (2003). \emph{Modelling binary data} (2nd Edition). Boca Raton: Chapman & Hall/CRC. 
 

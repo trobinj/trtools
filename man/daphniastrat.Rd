@@ -4,11 +4,13 @@
 \name{daphniastrat}
 \alias{daphniastrat}
 \title{Stratified random sample of daphnia counts.}
-\format{A data frame with 45 observations and two variables:
+\format{
+A data frame with 45 observations and two variables:
 \describe{
    \item{layer:}{layer from which the water sample was taken}
    \item{count:}{number of daphnia in the liter of water}
-}}
+}
+}
 \source{
 Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
 

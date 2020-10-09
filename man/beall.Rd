@@ -4,14 +4,16 @@
 \name{beall}
 \alias{beall}
 \title{Insecticide randomized block experiments.}
-\format{A data frame 550 observations and five variables:
+\format{
+A data frame 550 observations and five variables:
 \describe{
    \item{treatment:}{treatment conditions (see below)}
    \item{experiment:}{experiment number and table from Beall (1942)}
    \item{species:}{insect species counted as Pyrausta nubilalis (Pn), Leptinotarsa decemlineata (Ld), or Phlegethontius quinquemaculata (Pq)}
    \item{block:}{block of plots}
    \item{count:}{number of insects}
-}}
+}
+}
 \source{
 Beall, G. (1939). Methods for estimating the population of insects in a field. \emph{Biometrika}, \emph{30}, 422-439.
 

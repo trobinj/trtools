@@ -4,13 +4,15 @@
 \name{naevi}
 \alias{naevi}
 \title{Case-control study of children with spina bifida.}
-\format{A data frame of 42 observations and four variables:
+\format{
+A data frame of 42 observations and four variables:
 \describe{
    \item{sex:}{child's sex (male or female)}
    \item{age:}{child's age in years}
    \item{case:}{number of naevi for the case child}
    \item{control:}{number of naevi for the control child}
-}}
+}
+}
 \source{
 Pawitan, Y. (2013). \emph{In all likelihood: Statistical modeling and inference using likelihood}. Oxford University Press.
 }

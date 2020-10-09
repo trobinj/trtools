@@ -4,13 +4,15 @@
 \name{lead}
 \alias{lead}
 \title{Lead absorption in children.}
-\format{A data frame of 33 observations and four variables.
+\format{
+A data frame of 33 observations and four variables.
 \describe{
    \item{level:}{blood lead level of exposed children (i.e., children with a parent in a lead-related industry)}
    \item{control:}{blood lead level of child with a parent not in a lead-related industry}
    \item{hygiene:}{parent compliance with hygienic practice to reduce child exposure to lead dust}
    \item{exposure:}{parent level of exposure to lead}
-}}
+}
+}
 \source{
 Morton, D. E., Saah, A. J., Silberg, S. L., Owens, W. L., Roberts, M. A., & Saah, M. D. (1982). Lead absorption in children of employees in a lead-related industry. \emph{American Journal of Epidemiology}, \emph{115}, 549-555.
 }

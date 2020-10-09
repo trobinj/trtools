@@ -4,7 +4,8 @@
 \name{sturgeon}
 \alias{sturgeon}
 \title{White sturgeon sexual maturity.}
-\format{A data frame of 24 observations and six variables:
+\format{
+A data frame of 24 observations and six variables:
 \describe{
    \item{size:}{size class as determined by fork length (cm)}
    \item{midpoint:}{size class midpoint}
@@ -13,7 +14,8 @@
    \item{immature:}{proportion of sturgeon classified as immature}
    \item{mature:}{proportion of sturgeon classified as mature}
    \item{ripe:}{proportion of sturgeon classified as ripe}
-}}
+}
+}
 \source{
 Chapman, F. A., Van Eenennaam, J. P., & Doroshov, S. I. (1996). The reproductive condition of white sturgeon, \emph{Acipenser transmontanus}, in San Francisco Bay, California. \emph{Fishery Bulletin}, \emph{94}, 628-634.
 }

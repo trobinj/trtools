@@ -44,9 +44,9 @@ A (discrete) marginal effect is defined as the difference \eqn{[E(Y|X = a) - E(Y
 
 For continuous explanatory variables the "instantaneous" marginal effect is a limiting case of the discrete marginal effect. For example, if there are two explanatory variables --- \eqn{X_1} and \eqn{X_2} --- the marginal effect of \eqn{X_1} at \eqn{X_1 = x_1} and \eqn{X_2 = x_2} can be defined as the limit of \eqn{[E(Y|X_1 = x_1 + \delta, X_2 = x_2) - E(Y|X_1 = x_1, X_2 = x_2)]/\delta} as \eqn{\delta} goes to zero (i.e., the derivative \eqn{E(Y|X_1=x_1,X_2=x_2)} with respect to \eqn{x_1}). This can be approximated numerically by setting \eqn{\delta} to a relatively small number.
 
-A marginal effect can also be defined as the percent change in the expected response,  \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
+A marginal effect can also be defined as the percent change in the expected response, \eqn{100[E(Y|X = a) - E(Y|X = b)]/E(Y|X = b)}. A positive value is the percent increase in the expected response, and a negative value is the percent decrease in the expected response. 
 
-Finally the marginal effect can be defined by the factor \eqn{[E(Y|X = a)/E(Y|X = b)]}.
+Finally the marginal effect can be defined by the factor \eqn{E(Y|X = a)/E(Y|X = b)}.
 }
 \examples{
 m <- glm(cbind(deaths, total - deaths) ~ insecticide * log2(deposit), 

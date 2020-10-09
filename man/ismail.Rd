@@ -4,13 +4,15 @@
 \name{ismail}
 \alias{ismail}
 \title{Survey of prevalence of psychiatric disorders in Gulf War veterans.}
-\format{A data frame 3453 observations and four variables:
+\format{
+A data frame 3453 observations and four variables:
 \describe{
    \item{disabled:}{classification of respondent based on SF-36 questionnaire (disabled or not-disabled)}
    \item{alcohol:}{alcohol related disorder (yes or no)}
    \item{sleep:}{sleep related disorder (yes or no)}
    \item{psych:}{psychiatric related disorder (yes or no)}
-}}
+}
+}
 \source{
 Ismail et al. (2002). The mental health of UK gulf war veterans: Phase 2 of a two phase cohort study. \emph{British Medical Journal}, \emph{325}, 576--579.
 

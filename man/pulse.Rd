@@ -4,7 +4,8 @@
 \name{pulse}
 \alias{pulse}
 \title{Pulse rates before and after exercise.}
-\format{A data frame with 110 observations and 11 variables:
+\format{
+A data frame with 110 observations and 11 variables:
 \describe{
    \item{height:}{height (cm)}
    \item{weight:}{weight (kg)}
@@ -17,7 +18,8 @@
    \item{pulse1:}{first pulse measurement (per minute)}
    \item{pulse2:}{second pulse measurement (per minute)}
    \item{year:}{year of class}
-}}
+}
+}
 \source{
 http://www.statsci.org/data/oz/ms212.html
 }

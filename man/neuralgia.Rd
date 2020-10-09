@@ -4,14 +4,16 @@
 \name{neuralgia}
 \alias{neuralgia}
 \title{Treatment of post-herpetic neuralgia.}
-\format{A data frame of 18 observations and five variables.
+\format{
+A data frame of 18 observations and five variables.
 \describe{
    \item{pain:}{reported pain cessation at six weeks}
    \item{treatment:}{treatment condition (vincristine or saline)}
    \item{age:}{patient age (in years) at treatment}
    \item{sex:}{patient sex}
    \item{complaint:}{duration (months) of pre-treatment complaint} 
-}}
+}
+}
 \source{
 Layman, P. R., Argyras, E., & Glynn, C. J. (1986). Iontophoresis of vincristine versus saline in post-herpetic neuralgia. A controlled trial. \emph{Pain}, \emph{25}, 165-170.
 

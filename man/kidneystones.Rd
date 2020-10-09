@@ -4,13 +4,15 @@
 \name{kidneystones}
 \alias{kidneystones}
 \title{Comparison of treatments for kidney stones.}
-\format{A data frame with 12 observations and four variables:
+\format{
+A data frame with 12 observations and four variables:
 \describe{
    \item{size:}{kidney stone size (less or greater than or equal to 2cm)}
    \item{treatment:}{treatment method as a combination of nephrolithotomy and pyelolithotomy (nephr/pyelo), pyelolithotomy (pyelo), ureterolithotomy (uretero), percutaneous nephrolithotomy (perc/nephro), ESWL (extracorporeal shock wave lithotripsy), or percutaneous nephrolithotomy with extracorporeal shock wave lithotripsy (perc/nephro/ESWL)}
    \item{success:}{number of successful treatments}
    \item{total:}{total number of treatments}
-}}
+}
+}
 \source{
 Charig, C. R., Webb, D. R., Payne, S. R., & Wickham, J. E. A. (1986). Comparison of treatment of renal calculi by open surgery, percutaneous nephrolithotomy, and extracorporeal shockwave lithotripsy. \emph{British Medical Journal}, \emph{292}, 879-882.
 

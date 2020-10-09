@@ -73,6 +73,7 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
     rownames(out) <- rep("", nrow(out))
   }
   else {
+    fname <- as.character(fname)
     rownames(out) <- fname
     if (sample) {
       colnames(y) <- fname

@@ -4,11 +4,13 @@
 \name{larkspur}
 \alias{larkspur}
 \title{Sample of transects of pale white larkspur.}
-\format{A data frame with 20 observations and two variables:
+\format{
+A data frame with 20 observations and two variables:
 \describe{
    \item{plants}{abundance in a sampled transect}
    \item{area}{sampled transect area in square meters}
-}}
+}
+}
 \source{
 Stehman, S. V., & Salzer, D. W. 2000. Estimating density from surveys employing unequal-area belt transects. \emph{Wetlands}, \emph{20}, 512-519.
 

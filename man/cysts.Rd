@@ -4,13 +4,15 @@
 \name{cysts}
 \alias{cysts}
 \title{Settling time of amoebic cysts in water.}
-\format{A data frame with 21 observations and four variables.
+\format{
+A data frame with 21 observations and four variables.
 \describe{
    \item{diameter:}{average diameter of cysts in micrometers}
    \item{temp:}{temperature in degrees Celsius}
    \item{time:}{settling time in seconds}
    \item{n:}{number of observations}
-}}
+}
+}
 \source{
 Chang, S. L. (1945). Sedimentation in water and the specific gravity of cysts of \emph{Entamoeba histolytica}. \emph{American Journal of Epidemiology}, \emph{41}, 156--163.
 

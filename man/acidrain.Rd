@@ -4,7 +4,8 @@
 \name{acidrain}
 \alias{acidrain}
 \title{Acid rain and tree roots.}
-\format{A data frame 168 observations and 15 variables:
+\format{
+A data frame 168 observations and 15 variables:
 \describe{
    \item{lysimeter:}{number identifier of lysimeter used (5, 6, 7, or 8)}
    \item{condition:}{treatment condition (control or simulated acid rain)}
@@ -21,7 +22,8 @@
    \item{24-27:}{count at depth of 24-27 cm}
    \item{27-30:}{count at depth of 27-30 cm}
    \item{30-33:}{count at depth of 30-33 cm}
-}}
+}
+}
 \source{
 Jeffers, J. N. R. (1987). Acid rain and tree roots: An analysis of an experiment. In D. J. Hand & B. S. Everitt (Eds.), \emph{The statistical consultant in action} (80-107). Cambridge: Cambridge University Press.
 }

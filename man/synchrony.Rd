@@ -4,12 +4,14 @@
 \name{synchrony}
 \alias{synchrony}
 \title{Infant attention to speech in and out of synchrony.}
-\format{A data frame 12 observations and three variables:
+\format{
+A data frame 12 observations and three variables:
 \describe{
    \item{subject:}{infant identifier}
    \item{insync:}{percent of time attending to the person speaking in the in-synchrony condition}
    \item{outsync:}{percent of time attending to the person speaking in the out-of-synchrony condition}
-}}
+}
+}
 \source{
 Dodd, B. (1979). Lip reading in infants: Attention to speech presented in- and out-of-synchrony. \emph{Cognitive Psychology}, \emph{11}, 478-484.
 

@@ -4,13 +4,15 @@
 \name{backpain}
 \alias{backpain}
 \title{Risk of driving on herniated discs.}
-\format{A data frame with 434 observations and four variables.
+\format{
+A data frame with 434 observations and four variables.
 \describe{
    \item{group:}{case or control}
    \item{driver:}{whether or not the individual is a driver (no or yes)}
    \item{residence:}{residence of individual (city or suburban)}
    \item{set:}{integer-valued identifier for a matched pair of individuals}
-}}
+}
+}
 \source{
 Holford, T. R., White, C., & Kelsey, J. L. (1978). Multivariate analysis for matched case-control studies. \emph{American Journal of Epidemiology}, \emph{107}, 245-256.
 

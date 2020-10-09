@@ -4,13 +4,15 @@
 \name{dungcrabs}
 \alias{dungcrabs}
 \title{Change in carapace size of female dungeness crabs after molting.}
-\format{A data frame with 472 observations and four variables:
+\format{
+A data frame with 472 observations and four variables:
 \describe{
    \item{presz:}{carapace size (mm) before molting}
    \item{postsz:}{carapace size (mm) after molting}
    \item{year:}{fishing season for captive crabs}
    \item{source:}{source of crab (re-capture or captive)}
-}}
+}
+}
 \source{
 Nolan, D. & Speed, T. P. (2009). \emph{Stat Labs: Mathematical statistics through applications}. New York: Springer. See also the references cited therein.
 

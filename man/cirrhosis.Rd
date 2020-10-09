@@ -4,13 +4,15 @@
 \name{cirrhosis}
 \alias{cirrhosis}
 \title{Meta-analysis of treatments to prevent bleeding from cirrhosis.}
-\format{A data frame with 54 observations and four variables.
+\format{
+A data frame with 54 observations and four variables.
 \describe{
    \item{study:}{integer identifier for the study}
    \item{treatment:}{treatment condition (beta-blockers, sclerotherapy, or control group)}
    \item{bleeding:}{number of patients that showed bleeding}
    \item{total:}{total number of patients}
-}}
+}
+}
 \source{
 Pagliaro, L. et al. (1992). Prevention of first bleeding in cirrhosis: a meta-analysis of randomised trials of nonsurgical treatment. \emph{Annals of Internal Medicine}, \emph{117}, 59-70.
 

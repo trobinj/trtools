@@ -4,12 +4,14 @@
 \name{gallfly}
 \alias{gallfly}
 \title{Truncated counts of gallfly eggs and gall-cells.}
-\format{A data frame 1411 observations and three variables:
+\format{
+A data frame 1411 observations and three variables:
 \describe{
    \item{y:}{number of eggs or gall-cells}
    \item{year:}{year of observations (1935 or 1936)}
    \item{stage:}{developmental stage observed (egg or gall)}
-}}
+}
+}
 \source{
 Finney, D. J. & Varley, G. C. (1955). An example of the truncated Poisson distribution. \emph{Biometrics}, \emph{11}, 387-394.
 

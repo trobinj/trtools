@@ -4,13 +4,15 @@
 \name{rotifer}
 \alias{rotifer}
 \title{Rotifer relative density experiment.}
-\format{A data frame with 40 observations and four variables:
+\format{
+A data frame with 40 observations and four variables:
 \describe{
    \item{density}{density of solution}
    \item{species}{species of rotifer: \emph{Polyathra major} (pm) or \emph{Keratella cochlearis} (kc)}
    \item{y}{number of rotifers remaining in suspension}
    \item{total}{total number of rotifers}
-}}
+}
+}
 \source{
 Collett, D. (2003). \emph{Modelling binary data} (Second Edition). Boca Raton, FL: Chapman & Hall/CRC.
 

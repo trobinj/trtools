@@ -4,14 +4,16 @@
 \name{otitis}
 \alias{otitis}
 \title{Effect of antibotics on acute otitis media in children.}
-\format{A data frame with 30 observations and five variables:
+\format{
+A data frame with 30 observations and five variables:
 \describe{
    \item{age}{age group of child (less than two, between two and five, and older than five)}
    \item{treatment}{antibiotic treatment (amoxicillin or cefaclor)}
    \item{clear}{number of ears clear of AOM 14 days after treatment}
    \item{affected}{number of ears affected by AOM before treatment (unilateral or bilateral)}
    \item{count}{number of children}
-}}
+}
+}
 \source{
 Rosner, B. (1989). Multivariate methods for clustered binary data with more than one level of nesting. \emph{Journal of the American Statistical Association}, \emph{84}, 373-380.
 

@@ -4,11 +4,13 @@
 \name{rayleigh}
 \alias{rayleigh}
 \title{Lord Rayleigh's measurements of nitrogen gas.}
-\format{A data frame with 15 observations and 2 variables:
+\format{
+A data frame with 15 observations and 2 variables:
 \describe{
    \item{mass:}{mass of gas sample in grams}
    \item{method:}{method of isolating the nitrogen gas}
-}}
+}
+}
 \source{
 Larsen, R. D. (1990). Lessons learned from Lord Rayleigh on the importance of data analysis. \emph{Journal of Chemical Education}, \emph{67(11)}, 925--928.
 }

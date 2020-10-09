@@ -4,13 +4,15 @@
 \name{skylark}
 \alias{skylark}
 \title{Impact of pesticides on skylark reproductivity.}
-\format{A data frame with 16 observations and four variables:
+\format{
+A data frame with 16 observations and four variables:
 \describe{
    \item{year:}{year on which the observation was made}
    \item{field:}{identifier for the field}
    \item{spray:}{was the field sprayed that year?}
    \item{count:}{number of skylark fledglings}
-}}
+}
+}
 \source{
 Odderskær, P., Prang, A., Eknegaard, N., & Andersen, P. N. (1997). Skylark reproduction in pesticide treated fields (Comparative studies of Alauda arvensis breeding performance in sprayed and unsprayed barley fields). Bekæmpelsesmiddelforskning fra Miljøstyrelsennr. 32, National Environmental Research Institute, Ministry of the Environmnent and Energy, Denmark: Danish Environmental Protection Agency. 
 

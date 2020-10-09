@@ -4,13 +4,15 @@
 \name{crying}
 \alias{crying}
 \title{Effect of stimulation on crying in newborn infants.}
-\format{A data frame 32 observations and four variables:
+\format{
+A data frame 32 observations and four variables:
 \describe{
    \item{day:}{day of observation (1-18)}
    \item{treatment:}{whether or not baby was rocked}
    \item{babies:}{number of babies observed}
    \item{crying:}{number of babies crying}
-}}
+}
+}
 \source{
 Gordon, T. & Foss, B. M. (1965). The role of stimulation in the delay of onset of crying in the newborn infant. \emph{Quarterly Journal of Experimental Psychology}, \emph{18(1)}, 79--81.
 }

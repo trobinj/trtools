@@ -4,11 +4,13 @@
 \name{acfail}
 \alias{acfail}
 \title{Failures of air conditioning equipment.}
-\format{A data frame of 213 observations on two variables.
+\format{
+A data frame of 213 observations on two variables.
 \describe{
    \item{aircraft:}{identifier of the aircraft}
    \item{time:}{time until failure (hours)}
-}}
+}
+}
 \source{
 Gaver, D. P. & O'Muircheartaigh, I. G. (1987). Robust empirical Bayes analysis of event rates. \emph{Technometrics}, \emph{29}, 1--15.
 

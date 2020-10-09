@@ -4,7 +4,8 @@
 \name{timss}
 \alias{timss}
 \title{Third International Mathematics and Science Study.}
-\format{A data frame with 2427 observations on 10 variables:
+\format{
+A data frame with 2427 observations on 10 variables:
 \describe{
    \item{region}{geographic region of the U.S. (northeast, south, central, or west)}
    \item{school}{integer identifier of school}
@@ -16,7 +17,8 @@
    \item{science}{science test score}
    \item{community}{type of locatin of school (village or rural area, outskirts of town or city, close to center of a town or city}
    \item{enrollment}{number of students enrolled at the school}
-}}
+}
+}
 \source{
 TIMSS International Study Center (1999). \emph{Third International Mathematics and Science Study: Technical Report, Volume 1 Design and Development}. Chestnut Hill, MA: Boston College. 
 

@@ -4,11 +4,13 @@
 \name{bole}
 \alias{bole}
 \title{Tree bole volume fixed area plot survey.}
-\format{A data frame with 60 observations and two variables:
+\format{
+A data frame with 60 observations and two variables:
 \describe{
    \item{volume:}{total plot tree bole volume in cubic meters}
    \item{stratum:}{sampling stratum (softwood, mixed, or hardwood stratum)}
-}}
+}
+}
 \source{
 Cunia, T. (1979). \emph{Basic designs for survey sampling: Simple stratified, cluster, and systematic sampling}. Forest Biometry Monograph Series 3, College of Environmental Science and Forestry, State University of New York, Syracuse, New York. 
 

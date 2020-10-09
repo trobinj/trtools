@@ -4,11 +4,13 @@
 \name{leafarea}
 \alias{leafarea}
 \title{Survey of leaf surface area.}
-\format{A data frame with 20 observations and two variables:
+\format{
+A data frame with 20 observations and two variables:
 \describe{
    \item{area:}{leaf surface area (cubic cm)}
    \item{lengthwidth:}{leaf length times width (cubic cm)}
-}}
+}
+}
 \source{
 Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural resources and the environment}. Boca Raton, FL: Chapman & Hall/CRC.
 }

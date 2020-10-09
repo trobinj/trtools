@@ -4,12 +4,14 @@
 \name{aberrations}
 \alias{aberrations}
 \title{Chromosome aberrations in survivors of Hiroshima and Nagasaki.}
-\format{A data frame 1052 observations and three variables:
+\format{
+A data frame 1052 observations and three variables:
 \describe{
    \item{cells:}{number of cells (out of 100) that exhibited chromosome aberrations}
    \item{radiation:}{approximate dose of radiation (in rads) }
    \item{city:}{city of residence}
-}}
+}
+}
 \source{
 Otake, M. & Prentice, R. L. (1984). The analysis of chromosomally aberrant cells based on beta-binomial distribution. \emph{Radiation Research}, \emph{98}, 456-470.
 }

@@ -4,7 +4,8 @@
 \name{bumpus}
 \alias{bumpus}
 \title{House sparrow survival data.}
-\format{A data frame of 136 observations and 13 variables:
+\format{
+A data frame of 136 observations and 13 variables:
 \describe{
    \item{line:}{line number from Bumpus' table}
    \item{sex:}{male (m) or female (f)}
@@ -19,7 +20,8 @@
    \item{tibiotarsus:}{length (in) of the tibiotarsus}
    \item{skull:}{width (in) of skull "from the postorbital bone of one side to the postorbital bone of the other"}
    \item{keel:}{length (in) of keel of the sternum}
-}}
+}
+}
 \source{
 Bumpus, H. C. (1898). Eleventh lecture. The elimination of the unfit as illustrated by the introduced sparrow, Passer domesticus. (A fourth contribution to the study of variation.) Biological Lectures: Woods Hole Marine Biological Laboratory, 209-225.
 }

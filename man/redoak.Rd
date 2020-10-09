@@ -4,12 +4,14 @@
 \name{redoak}
 \alias{redoak}
 \title{Measurements of red oaks.}
-\format{A data frame with 236 observations and three variables:
+\format{
+A data frame with 236 observations and three variables:
 \describe{
    \item{dbh:}{diameter at breast height (in)}
    \item{volume:}{tree volume (cubic ft)}
    \item{height:}{tree height (ft)}
-}}
+}
+}
 \source{
 Beers, T. W. & Gingrich, S. F. (1958). Construction of cubic-foot volume tables for red oak in Pennsylvania. \emph{Journal of Forestry}, \emph{56}, 210--214.
 

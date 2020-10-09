@@ -4,13 +4,15 @@
 \name{cortex}
 \alias{cortex}
 \title{Effect of experience on the brain.}
-\format{A data frame with 118 observations and four variables:
+\format{
+A data frame with 118 observations and four variables:
 \describe{
    \item{weight}{weight of the cortex in milligrams}
    \item{group}{the treatment group (treatment or control)}
    \item{experiment}{id for the experiment (1-5)}
    \item{litter}{id for the litter (1-59)}
-}}
+}
+}
 \source{
 Rosenzweig, M., Bennett, E. L., & Diamond, M. C. (1964). Brain changes in response to experience. \emph{Scientific American}, \emph{210}, 22-29.
 

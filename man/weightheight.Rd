@@ -4,11 +4,13 @@
 \name{weightheight}
 \alias{weightheight}
 \title{Weight/height ratio and ages of boys.}
-\format{A data frame with 72 observations and two variables:
+\format{
+A data frame with 72 observations and two variables:
 \describe{
    \item{ratio:}{weight/height ratio (lbs/in)}
    \item{age:}{age (months)}
-}}
+}
+}
 \source{
 Eppright, E. S., Fox, H. M., Fryer, B. A., Lamkin, G. H., Vivian, V. M., & Fuller, E. S. (1972). Nutrition of infants and preschool children in the north central region of the United States of America. \emph{World Review of Nutrition and Dietetics}, \emph{14}, 269--332.
 

@@ -4,7 +4,9 @@
 \name{loglog}
 \alias{loglog}
 \title{Log-log link function for generalized linear models.}
-\format{An object of class \code{link-glm} of length 6.}
+\format{
+An object of class \code{link-glm} of length 6.
+}
 \usage{
 loglog
 }

@@ -4,12 +4,14 @@
 \name{ironretention}
 \alias{ironretention}
 \title{Iron retention in mice.}
-\format{A data frame of 108 observations on three variables:
+\format{
+A data frame of 108 observations on three variables:
 \describe{
    \item{retention:}{percent of iron administered that was retained}
    \item{concentration:}{concentration of iron administered in millimolars}
    \item{ion:}{type of iron (ferrious or ferric)}
-}}
+}
+}
 \source{
 Rice, J. A. (1998). \emph{Mathematical statistics and data analysis}. Pacific Grove, CA: Wadsworth & Brook/Cole.
 }

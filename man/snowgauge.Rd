@@ -4,11 +4,13 @@
 \name{snowgauge}
 \alias{snowgauge}
 \title{Calibration study of a snow gauge.}
-\format{A data frame with 90 observations and two variables:
+\format{
+A data frame with 90 observations and two variables:
 \describe{
    \item{density}{density (grams per cubic centimeter)}
    \item{gain}{amplified measurement of gamma photon count}
-}}
+}
+}
 \source{
 Nolan, D. & Speed, T. P. (2009). \emph{Stat Labs: Mathematical statistics through applications}. New York: Springer. See also the references cited therein.
 }

@@ -4,14 +4,16 @@
 \name{dust}
 \alias{dust}
 \title{Rodent tissue radioactiviation from in vitro exposure to asbestos dust.}
-\format{A data frame of 24 observations and five variables.
+\format{
+A data frame of 24 observations and five variables.
 \describe{
    \item{time:}{time of observation (hours)}
    \item{location:}{cell location of T (terminal bronchial airway), A (alveolar duct), or B (bifurcation duct)}
    \item{type:}{cell type of E (epithelial) or N (interstitial)}
    \item{examined:}{number of plates examined}
    \item{responding:}{number of plates exhibiting radiactiviation} 
-}}
+}
+}
 \source{
 Piegorsch, W. W. (1992). Complementary log-log regression for generalized linear models. \emph{The American Statistician}, \emph{46}, 94-99.
 }

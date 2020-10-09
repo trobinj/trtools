@@ -4,13 +4,15 @@
 \name{roots}
 \alias{roots}
 \title{Infection of roots by soil-borne pathogens.}
-\format{A data frame with 30 observations and four variables:
+\format{
+A data frame with 30 observations and four variables:
 \describe{
    \item{soil}{soil type (conducive or suppressive)}
    \item{density}{inoculum density (units unknown)}
    \item{infected}{number of infected roots}
    \item{total}{number of roots exposed}
-}}
+}
+}
 \source{
 Garthwaite, P. H., Jolliffe, I. T., & Jones, B. (2002). \emph{Statistical inference (2nd edition)}. Oxford, UK: Oxford University Press.
 

@@ -4,11 +4,13 @@
 \name{photocounts}
 \alias{photocounts}
 \title{Aerial photograph and field counts of dead trees.}
-\format{A data frame with 80 observations and two variables:
+\format{
+A data frame with 80 observations and two variables:
 \describe{
    \item{photo}{count of dead trees from aerial photograph}
    \item{field}{count of dead trees from the field}
-}}
+}
+}
 \source{
 Barrett, J. P. & Nutt, M. E. (1979). \emph{Survey sampling in the environmental sciences: A computer approach}. Wentworth, NH: COMPress, Inc.
 

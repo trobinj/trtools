@@ -4,14 +4,16 @@
 \name{biomass}
 \alias{biomass}
 \title{Effects of fuel reduction on biomass.}
-\format{A data frame with 106 observations and five variables:
+\format{
+A data frame with 106 observations and five variables:
 \describe{
    \item{total:}{total biomass (kg/ha)}
    \item{suitable:}{suitable biomass (kg/ha)}
    \item{acceptable:}{acceptable biomass (kg/ha)}
    \item{selected:}{selected biomass (kg/ha)}
    \item{treatment:}{plot treated by fuel reduction (yes or no)}
-}}
+}
+}
 \source{
 Hull, I. T., Shipley, L. A., Berry, S. L., Loggers, C., & Johnson, T. R. (2020). Effects of fuel reduction timber harvests on forage resources for deer in northeastern Washington. \emph{Forest Ecology and Management}, \emph{458}.
 }

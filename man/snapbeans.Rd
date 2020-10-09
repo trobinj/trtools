@@ -4,12 +4,14 @@
 \name{snapbeans}
 \alias{snapbeans}
 \title{Loss of ascorbic acid in frozen snap beans.}
-\format{A data frame 12 observations and three variables:
+\format{
+A data frame 12 observations and three variables:
 \describe{
    \item{acid:}{total ascorbic acid (mg per 100g)}
    \item{weeks:}{weeks of storage}
    \item{temp:}{storage temperature (F)}
-}}
+}
+}
 \source{
 The data are from Snedecor and Cochran's book \emph{Statistical Methods}, but are also featured in McCullagh and Nelder's \emph{Generalized Linear Models}.
 }

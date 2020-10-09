@@ -4,12 +4,14 @@
 \name{baserun}
 \alias{baserun}
 \title{Data from a study of running times to second base.}
-\format{A data frame 22 observations and three variables.
+\format{
+A data frame 22 observations and three variables.
 \describe{
    \item{round:}{average run time (in seconds) for the round out route}
    \item{narrow:}{average run time (in seconds) for the narrow angle route}
    \item{wide:}{average run time (in seconds) for the wide angle route}
-}}
+}
+}
 \source{
 Woodward, W. F. (1970). A comparison of base running methods in baseball. MSc Thesis, Florida State University.
 

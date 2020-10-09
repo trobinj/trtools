@@ -4,12 +4,14 @@
 \name{fireants}
 \alias{fireants}
 \title{Study of the effect of attractant age on attracting fire ants.}
-\format{A data frame with 360 observations and three variables:
+\format{
+A data frame with 360 observations and three variables:
 \describe{
    \item{day:}{day that trap was deployed, and age of attractant}
    \item{count:}{number of fire ants trapped}
    \item{group:}{traps with attractant (Treatment) or without (Control)}
-}}
+}
+}
 \source{
 These data were obtained from \url{http://people.stat.sfu.ca/~cschwarz/Stat-650/Notes/PDFbigbook-JMP/JMP-part018.pdf}.
 }

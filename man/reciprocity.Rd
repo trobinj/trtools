@@ -4,12 +4,14 @@
 \name{reciprocity}
 \alias{reciprocity}
 \title{Generalized reciprocity in rats.}
-\format{A data frame 19 observations and three variables:
+\format{
+A data frame 19 observations and three variables:
 \describe{
    \item{rat:}{identifier of focal rat}
    \item{help:}{rate of pulls per minute after receiving help}
    \item{nohelp:}{rate of pulls per minute after not receiving any help}
-}}
+}
+}
 \source{
 Rutte, C. & Taborsky, M. (2007). Generalized reciprocity in rats. \emph{PLoS Biol}, \emph{5(7)}: e196. doi:10.1371/journal.pbio.0050196.
 }

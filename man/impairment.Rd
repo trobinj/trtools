@@ -4,12 +4,14 @@
 \name{impairment}
 \alias{impairment}
 \title{Degree of mental impairment.}
-\format{A data frame of 40 observations and three variables:
+\format{
+A data frame of 40 observations and three variables:
 \describe{
    \item{impairment:}{degree of mental impairment (none, mild, moderate, impaired)}
    \item{ses:}{socioeconomic status (low or high)}
    \item{events:}{life events index score}
-}}
+}
+}
 \usage{
 impairment
 }

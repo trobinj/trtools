@@ -4,11 +4,13 @@
 \name{cycles}
 \alias{cycles}
 \title{Fecundability and smoking.}
-\format{A data frame of 586 observations and two variables:
+\format{
+A data frame of 586 observations and two variables:
 \describe{
    \item{cycles:}{number of menstrual cycles until pregnancy}
    \item{mother:}{smoking status of mother}
-}}
+}
+}
 \source{
 Baird, D. D. & Wilcox, A. J. (1985). Cigarette smoking associated with delayed conception. \emph{Journal of the American Medical Association}, \emph{253}, 2979-2983.
 

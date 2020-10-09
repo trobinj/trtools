@@ -4,13 +4,15 @@
 \name{grasshopper}
 \alias{grasshopper}
 \title{Assay of grasshopper insecticide and synergist.}
-\format{A data frame with 15 observations and four variables:
+\format{
+A data frame with 15 observations and four variables:
 \describe{
    \item{y:}{number of grasshoppers killed}
    \item{m:}{total number of grasshoppers}
    \item{insecticide:}{dose of insecticide (units unknown)}
    \item{synergist:}{dose of synergist (units unknown)}
-}}
+}
+}
 \source{
 McCullagh, P. & Nelder, J. A. (1989). \emph{Generalized linear models} (2nd Edition). Boca Raton: Chapman & Hall/CRC.
 }

@@ -4,12 +4,14 @@
 \name{mothprogeny}
 \alias{mothprogeny}
 \title{Sex ratios in moth progeny.}
-\format{A data frame 60 observations and three variables:
+\format{
+A data frame 60 observations and three variables:
 \describe{
    \item{male:}{number of male offspring}
    \item{female:}{number of female offspring}
    \item{locality:}{location the moth/progeny was sampled}
-}}
+}
+}
 \source{
 Lewis, T. (1987). Uneven sex ratios in the light-brown apple moth: A problem in outlier detection. In D. J. Hand & B. S. Everitt (Eds.), \emph{The statistical consultant in action} (121-133). Cambridge: Cambridge University Press.
 }

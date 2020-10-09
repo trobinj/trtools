@@ -4,11 +4,13 @@
 \name{dunn}
 \alias{dunn}
 \title{Survey of prevalence of psychiatric disorders.}
-\format{A data frame 1558 observations and two variables:
+\format{
+A data frame 1558 observations and two variables:
 \describe{
    \item{ghq:}{classification based on the GHQ score (low, medium, or high)}
    \item{cidi:}{classification based on the CIDI (case, non-case)}
-}}
+}
+}
 \source{
 Dunn, G., Pickles, A., Tansella, M., and Vazquez-Barquero, J. (1999). Two-phase epidemiological surveys in psychiatric research. \emph{British Journal of Psychiatry}, \emph{174}, 95--100. 
 

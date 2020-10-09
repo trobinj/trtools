@@ -4,11 +4,13 @@
 \name{memoryrecall}
 \alias{memoryrecall}
 \title{Effect of memory on type on response latencies.}
-\format{A data frame 48 observations and two variables:
+\format{
+A data frame 48 observations and two variables:
 \describe{
    \item{type:}{memory type (pleasant or unpleasant)}
    \item{time:}{time (in seconds) to memory recall, with right censoring at 15 seconds}
-}}
+}
+}
 \source{
 Dunn, G. (1987). The analysis of response latencies. In D. J. Hand & B. S. Everitt (Eds.), \emph{The statistical consultant in action} (72-79). Cambridge: Cambridge University Press.
 }

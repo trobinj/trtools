@@ -5,8 +5,8 @@
 #' @aliases contrast.lm contrast.glm contrast.lmerMod contrast.glmerMod contrast.gls
 #' 
 #' @usage
-#' \method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
+#' \method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
 #' \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 #' \method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
@@ -17,10 +17,11 @@
 #' @param u List or data frame defining a linear combination. 
 #' @param v List or data frame defining a linear combination.
 #' @param df Optional manual specification of the degrees of freedom. This defaults to the residual degrees of freedom for linear and generalized linear models, except when \code{family = binomial} or \code{family = poisson} where the degrees of freedom is infinite. Linear and generalized linear mixed models also use infinite degrees of freedom by default. 
-#' @param tf Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios). 
-#' @param cnames Labels for the contrasts.
-#' @param level Confidence level in (0,1).
-#' @param fcov Function for estimating the variance-covariance matrix of the model parameters.
+#' @param tf Optional transformation function to apply to the estimates. If \code{delta = FALSE} and an elementwise function is detected, then it is applied to the estimate(s) and confidence interval(s) and only those are reported. But if \code{delta = TRUE} or the function is not elementwise, the delta method is used to produce standard errors as well as Wald confidence intervals and tests. Detection of an elementwise function is done numerically so it may not be completely reliable. 
+#' @param cnames Labels for the contrasts. Default is none.
+#' @param level Confidence level in (0,1). Default is 95\%.
+#' @param fcov Function for estimating the variance-covariance matrix of the model parameters. Default is what is returned by the function \code{vcov}.
+#' @param delta Logical for if the delta method should be used with a transformation function (if provided). Default is \code{FALSE}.
 #' @param ... Not used.
 #' 
 #' @details Assuming a (generalized) linear (mixed) model of the for \eqn{g[E(Y_i)] = \eta_i} where \eqn{\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}}, many contrasts or linear combinations of the parameters can be written in the form \eqn{\eta_a - \eta_b - (\eta_u - \eta_v)} where the subscripts represent specified values of \eqn{x_{i1}, x_{i2}, \dots, x_{ip}}. The arguments a, b, u, and v correspond to these specified values, where a value of zero is assumed by default if one or more of these are not specified. Note that for (generalized) linear mixed model, the expectation is computed conditional on setting all random effects equal to zero. 
@@ -70,7 +71,7 @@ contrast <- function(model, ...) {
   UseMethod("contrast", model)
 }
 #' @export 
-contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -131,38 +132,55 @@ contrast.lm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = 
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  
   pe <- pa - pb - pu + pv
+  
   if (missing(df)) {
     df <- summary(model)$df[2]
   }
+
+  if (!missing(tf)) {
+    gr <- numDeriv::jacobian(tf, pe) 
+    if (any(diag(nrow(gr)) != (gr != 0) %*% t(gr != 0))) {
+      delta <- TRUE
+    }
+  }
+  if (delta & !missing(tf)) {
+    se <- sqrt(diag(gr %*% mm %*% fcov(model) %*% t(mm) %*% t(gr)))
+    pe <- tf(pe)
+  } else {
+    se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  }
+
   lw <- pe - qt(level + (1 - level)/2, df) * se
-  up <- pe + qt(level + (1 - level)/2, df) * se 
+  up <- pe + qt(level + (1 - level)/2, df) * se
+  
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  if (!missing(tf)) {
-    if (any(tf(lw) > tf(up))) {
-      tmp <- lw
-      lw <- up
-      up <- tmp
-    }
-    out <- cbind(tf(pe), tf(lw), tf(up))
-    colnames(out) <- c("estimate", "lower", "upper")
-  }
-  else {
+  
+  if (missing(tf) | delta) {
     out <- cbind(pe, se, lw, up, ts, df, pv)
     colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  } else {
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    for (i in 1:nrow(out)) {
+      if (out[i,2] > out[i,3]) {
+        out[i,2:3] <- out[i,3:2] 
+      }
+    }
+    colnames(out) <- c("estimate", "lower", "upper")
   }
+
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
 #' @export 
-contrast.gls <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+contrast.gls <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -223,38 +241,79 @@ contrast.gls <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
-  pe <- pa - pb - pu + pv
+  
   if (missing(df)) {
     df <- summary(model)$dims$N - summary(model)$dims$p # not sure about this in general
   }
+  
+  pe <- pa - pb - pu + pv
+  
+  if (!missing(tf)) {
+    gr <- numDeriv::jacobian(tf, pe) 
+    if (any(diag(nrow(gr)) != (gr != 0) %*% t(gr != 0))) {
+      delta <- TRUE
+    }
+  }
+  if (delta & !missing(tf)) {
+    se <- sqrt(diag(gr %*% mm %*% fcov(model) %*% t(mm) %*% t(gr)))
+    pe <- tf(pe)
+  } else {
+    se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  }
+  
   lw <- pe - qt(level + (1 - level)/2, df) * se
-  up <- pe + qt(level + (1 - level)/2, df) * se 
+  up <- pe + qt(level + (1 - level)/2, df) * se
+  
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  if (!missing(tf)) {
-    if (any(tf(lw) > tf(up))) {
-      tmp <- lw
-      lw <- up
-      up <- tmp
-    }
-    out <- cbind(tf(pe), tf(lw), tf(up))
-    colnames(out) <- c("estimate", "lower", "upper")
-  }
-  else {
+  
+  if (missing(tf) | delta) {
     out <- cbind(pe, se, lw, up, ts, df, pv)
     colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  } else {
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    for (i in 1:nrow(out)) {
+      if (out[i,2] > out[i,3]) {
+        out[i,2:3] <- out[i,3:2] 
+      }
+    }
+    colnames(out) <- c("estimate", "lower", "upper")
   }
+  
+  
+  # se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  # pe <- pa - pb - pu + pv
+  # if (missing(df)) {
+  #   df <- summary(model)$dims$N - summary(model)$dims$p # not sure about this in general
+  # }
+  # lw <- pe - qt(level + (1 - level)/2, df) * se
+  # up <- pe + qt(level + (1 - level)/2, df) * se 
+  # ts <- pe/se
+  # pv <- 2*pt(-abs(ts), df)
+  # if (!missing(tf)) {
+  #   if (any(tf(lw) > tf(up))) {
+  #     tmp <- lw
+  #     lw <- up
+  #     up <- tmp
+  #   }
+  #   out <- cbind(tf(pe), tf(lw), tf(up))
+  #   colnames(out) <- c("estimate", "lower", "upper")
+  # }
+  # else {
+  #   out <- cbind(pe, se, lw, up, ts, df, pv)
+  #   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  # }
+  
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
 #' @export 
-contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -315,8 +374,9 @@ contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  
   pe <- pa - pb - pu + pv
+  
   if (missing(df)) {
     if (family(model)[1] %in% c("binomial","poisson")) {
       df <- Inf
@@ -325,28 +385,64 @@ contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
       df <- summary(model)$df[2]
     }
   }
+  
+  if (!missing(tf)) {
+    gr <- numDeriv::jacobian(tf, pe) 
+    if (any(diag(nrow(gr)) != (gr != 0) %*% t(gr != 0))) {
+      delta <- TRUE
+    }
+  }
+  if (delta & !missing(tf)) {
+    se <- sqrt(diag(gr %*% mm %*% fcov(model) %*% t(mm) %*% t(gr)))
+    pe <- tf(pe)
+  } else {
+    se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  }
+  
   lw <- pe - qt(level + (1 - level)/2, df) * se
-  up <- pe + qt(level + (1 - level)/2, df) * se 
+  up <- pe + qt(level + (1 - level)/2, df) * se
+  
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  if (!missing(tf)) {
-    if (any(tf(lw) > tf(up))) {
-      tmp <- lw
-      lw <- up
-      up <- tmp
-    }
-    out <- cbind(tf(pe), tf(lw), tf(up))
-    colnames(out) <- c("estimate", "lower", "upper")
-  }
-  else {
+  
+  if (missing(tf) | delta) {
     out <- cbind(pe, se, lw, up, ts, df, pv)
     colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  } else {
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    for (i in 1:nrow(out)) {
+      if (out[i,2] > out[i,3]) {
+        out[i,2:3] <- out[i,3:2] 
+      }
+    }
+    colnames(out) <- c("estimate", "lower", "upper")
   }
+  
+  # se <- sqrt(diag(mm %*% fcov(model) %*% t(mm)))
+  # 
+  # lw <- pe - qt(level + (1 - level)/2, df) * se
+  # up <- pe + qt(level + (1 - level)/2, df) * se 
+  # ts <- pe/se
+  # pv <- 2*pt(-abs(ts), df)
+  # if (!missing(tf)) {
+  #   if (any(tf(lw) > tf(up))) {
+  #     tmp <- lw
+  #     lw <- up
+  #     up <- tmp
+  #   }
+  #   out <- cbind(tf(pe), tf(lw), tf(up))
+  #   colnames(out) <- c("estimate", "lower", "upper")
+  # }
+  # else {
+  #   out <- cbind(pe, se, lw, up, ts, df, pv)
+  #   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  # }
+  
   if (missing(cnames)) {
     rownames(out) <- rep("", nrow(out))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -446,7 +542,7 @@ contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fc
     rownames(out) <- rep("", nrow(out))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -538,7 +634,7 @@ contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, f
     rownames(out) <- rep("", nrow(out))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }

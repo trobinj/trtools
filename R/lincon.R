@@ -83,7 +83,7 @@ lincon.default <- function(model, a, b, df = Inf, tf, cnames, level = 0.95, fcov
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -130,7 +130,7 @@ lincon.lm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, ..
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -177,7 +177,7 @@ lincon.gls <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -224,7 +224,7 @@ lincon.nls <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -276,7 +276,7 @@ lincon.glm <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -323,7 +323,7 @@ lincon.lmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vco
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }
@@ -370,7 +370,7 @@ lincon.glmerMod <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vc
     rownames(out) <- rep("", nrow(a))
   }
   else {
-    rownames(out) <- cnames
+    rownames(out) <- as.character(cnames)
   }
   return(out)
 }

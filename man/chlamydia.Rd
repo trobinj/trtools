@@ -4,7 +4,8 @@
 \name{chlamydia}
 \alias{chlamydia}
 \title{Screening tests for \emph{Chlamydia trachomatis}.}
-\format{A data frame of 4583 observations and six variables.
+\format{
+A data frame of 4583 observations and six variables.
 \describe{
    \item{count:}{number of samples}
    \item{Syva-DFA:}{test result from Syva-DFA test}
@@ -13,7 +14,8 @@
    \item{GenProbe:}{test result from GenProbe test}
    \item{Sanofi-EIA:}{test result from Sanofi-EIA test}
    \item{culture:}{test result from cell culture}
-}}
+}
+}
 \source{
 Hadgu, A. & Qu, Y. (1998). A biomedical application of latent class models with random effects. \emph{Applied Statistics}, \emph{47}, 603-616.
 

@@ -4,11 +4,13 @@
 \name{jejunalcrypt}
 \alias{jejunalcrypt}
 \title{Effect of radiation on jejunal crypts in rats.}
-\format{A data frame with 126 observations on two variables:
+\format{
+A data frame with 126 observations on two variables:
 \describe{
    \item{dose:}{dose of radiation in Gy (gray)}
    \item{crypts:}{number of surviving jejunal crypts}
-}}
+}
+}
 \source{
 Kim, D. K. & Taylor, J. M. G. (1994). Transform-both-sides approach for overdispersed binomial data when N is unobserved. \emph{Journal of the American Statisical Association}, \emph{89}, 833-845.
 

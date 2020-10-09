@@ -9,8 +9,8 @@
 \alias{contrast.gls}
 \title{Inferences for contrasts for (generalized) linear models (experimental).}
 \usage{
-\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
+\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
 \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
 \method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
@@ -30,13 +30,15 @@
 
 \item{df}{Optional manual specification of the degrees of freedom. This defaults to the residual degrees of freedom for linear and generalized linear models, except when \code{family = binomial} or \code{family = poisson} where the degrees of freedom is infinite. Linear and generalized linear mixed models also use infinite degrees of freedom by default.}
 
-\item{tf}{Optional transformation function to apply to the point estimate(s) and confidence interval limits (e.g., \code{tf = exp} for a logistic model to estimate odds or odds ratios).}
+\item{tf}{Optional transformation function to apply to the estimates. If \code{delta = FALSE} and an elementwise function is detected, then it is applied to the estimate(s) and confidence interval(s) and only those are reported. But if \code{delta = TRUE} or the function is not elementwise, the delta method is used to produce standard errors as well as Wald confidence intervals and tests. Detection of an elementwise function is done numerically so it may not be completely reliable.}
 
-\item{cnames}{Labels for the contrasts.}
+\item{cnames}{Labels for the contrasts. Default is none.}
 
-\item{level}{Confidence level in (0,1).}
+\item{level}{Confidence level in (0,1). Default is 95\%.}
 
-\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters.}
+\item{fcov}{Function for estimating the variance-covariance matrix of the model parameters. Default is what is returned by the function \code{vcov}.}
+
+\item{delta}{Logical for if the delta method should be used with a transformation function (if provided). Default is \code{FALSE}.}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters.

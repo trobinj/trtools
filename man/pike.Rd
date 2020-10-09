@@ -4,11 +4,13 @@
 \name{pike}
 \alias{pike}
 \title{Creel surveys of Northern Pike.}
-\format{A data frame of 16 observations and two variables:
+\format{
+A data frame of 16 observations and two variables:
 \describe{
    \item{catch:}{number of fish caught}
    \item{tagged:}{number of tagged fish caught}
-}}
+}
+}
 \source{
 Jessen, R. J. (1978). \emph{Statistical survey techniques}. Wiley.
 }

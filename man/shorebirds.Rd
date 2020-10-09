@@ -4,11 +4,13 @@
 \name{shorebirds}
 \alias{shorebirds}
 \title{Survey of the density of nesting birds.}
-\format{A data frame 201 observations and two variables:
+\format{
+A data frame 201 observations and two variables:
 \describe{
    \item{rapid:}{number of birds counted using a rapid search method}
    \item{intense:}{number of nests counted using an intensive method}
-}}
+}
+}
 \source{
 Bart, J. & Earnst, S. (2002). Double-sampling to estimate density and population trends in birds. \emph{The Auk}, \emph{119}, 36--45.
 
