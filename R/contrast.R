@@ -7,9 +7,9 @@
 #' @usage
 #' \method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
 #' \method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
-#' \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
-#' \method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...)
+#' \method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
+#' \method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
+#' \method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
 #' 
 #' @param model Model object.
 #' @param a List or data frame defining a linear combination. 
@@ -447,7 +447,7 @@ contrast.glm <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov =
   return(out)
 }
 #' @export 
-contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, avg = FALSE, ...) {
+contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -508,46 +508,81 @@ contrast.lmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fc
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  if (avg) {
-    tmp <- mm %*% as.matrix(fcov(model)) %*% t(mm)
-    tmp <- matrix(1/nrow(tmp), 1, nrow(tmp)) %*% tmp %*% matrix(1/nrow(tmp), nrow(tmp), 1)
-    se <- sqrt(diag(tmp))
-    pe <- mean(pa - pb - pu + pv)
+  pe <- pa - pb - pu + pv
+  
+  if (!missing(tf)) {
+    gr <- numDeriv::jacobian(tf, pe) 
+    if (any(diag(nrow(gr)) != (gr != 0) %*% t(gr != 0))) {
+      delta <- TRUE
+    }
   }
-  else {
+  if (delta & !missing(tf)) {
+    se <- sqrt(diag(gr %*% mm %*% as.matrix(fcov(model)) %*% t(mm) %*% t(gr)))
+    pe <- tf(pe)
+  } else {
     se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
-    pe <- pa - pb - pu + pv
   }
+
   if (missing(df)) {
     df <- Inf
   }
+    
   lw <- pe - qt(level + (1 - level)/2, df) * se
-  up <- pe + qt(level + (1 - level)/2, df) * se 
+  up <- pe + qt(level + (1 - level)/2, df) * se
+  
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  if (!missing(tf)) {
-    if (any(tf(lw) > tf(up))) {
-      tmp <- lw
-      lw <- up
-      up <- tmp
-    }
-    out <- cbind(tf(pe), tf(lw), tf(up))
-    colnames(out) <- c("estimate", "lower", "upper")
-  }
-  else {
+  
+  if (missing(tf) | delta) {
     out <- cbind(pe, se, lw, up, ts, df, pv)
     colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  } else {
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    for (i in 1:nrow(out)) {
+      if (out[i,2] > out[i,3]) {
+        out[i,2:3] <- out[i,3:2] 
+      }
+    }
+    colnames(out) <- c("estimate", "lower", "upper")
   }
-  if (missing(cnames)) {
-    rownames(out) <- rep("", nrow(out))
-  }
-  else {
-    rownames(out) <- as.character(cnames)
-  }
+  
+  # if (avg) {
+  #   tmp <- mm %*% as.matrix(fcov(model)) %*% t(mm)
+  #   tmp <- matrix(1/nrow(tmp), 1, nrow(tmp)) %*% tmp %*% matrix(1/nrow(tmp), nrow(tmp), 1)
+  #   se <- sqrt(diag(tmp))
+  #   pe <- mean(pa - pb - pu + pv)
+  # }
+  # else {
+  #   se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
+  #   pe <- pa - pb - pu + pv
+  # }
+  # lw <- pe - qt(level + (1 - level)/2, df) * se
+  # up <- pe + qt(level + (1 - level)/2, df) * se 
+  # ts <- pe/se
+  # pv <- 2*pt(-abs(ts), df)
+  # if (!missing(tf)) {
+  #   if (any(tf(lw) > tf(up))) {
+  #     tmp <- lw
+  #     lw <- up
+  #     up <- tmp
+  #   }
+  #   out <- cbind(tf(pe), tf(lw), tf(up))
+  #   colnames(out) <- c("estimate", "lower", "upper")
+  # }
+  # else {
+  #   out <- cbind(pe, se, lw, up, ts, df, pv)
+  #   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  # }
+  # if (missing(cnames)) {
+  #   rownames(out) <- rep("", nrow(out))
+  # }
+  # else {
+  #   rownames(out) <- as.character(cnames)
+  # }
   return(out)
 }
 #' @export 
-contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, ...) {
+contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...) {
   if (all(missing(a), missing(b), missing(u), missing(v))) {
     stop("no contrast(s) specified")
   }
@@ -608,33 +643,67 @@ contrast.glmerMod <- function(model, a, b, u, v, df, tf, cnames, level = 0.95, f
   if (ncol(mm) == 1) {
     mm <- t(mm)
   }
-  se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
   pe <- pa - pb - pu + pv
+  
+  if (!missing(tf)) {
+    gr <- numDeriv::jacobian(tf, pe) 
+    if (any(diag(nrow(gr)) != (gr != 0) %*% t(gr != 0))) {
+      delta <- TRUE
+    }
+  }
+  if (delta & !missing(tf)) {
+    se <- sqrt(diag(gr %*% mm %*% as.matrix(fcov(model)) %*% t(mm) %*% t(gr)))
+    pe <- tf(pe)
+  } else {
+    se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
+  }
+  
   if (missing(df)) {
     df <- Inf
   }
+
   lw <- pe - qt(level + (1 - level)/2, df) * se
-  up <- pe + qt(level + (1 - level)/2, df) * se 
+  up <- pe + qt(level + (1 - level)/2, df) * se
+  
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
-  if (!missing(tf)) {
-    if (any(tf(lw) > tf(up))) {
-      tmp <- lw
-      lw <- up
-      up <- tmp
-    }
-    out <- cbind(tf(pe), tf(lw), tf(up))
-    colnames(out) <- c("estimate", "lower", "upper")
-  }
-  else {
+  
+  if (missing(tf) | delta) {
     out <- cbind(pe, se, lw, up, ts, df, pv)
     colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  } else {
+    out <- cbind(tf(pe), tf(lw), tf(up))
+    for (i in 1:nrow(out)) {
+      if (out[i,2] > out[i,3]) {
+        out[i,2:3] <- out[i,3:2] 
+      }
+    }
+    colnames(out) <- c("estimate", "lower", "upper")
   }
-  if (missing(cnames)) {
-    rownames(out) <- rep("", nrow(out))
-  }
-  else {
-    rownames(out) <- as.character(cnames)
-  }
+  
+  # se <- sqrt(diag(mm %*% as.matrix(fcov(model)) %*% t(mm)))
+  # lw <- pe - qt(level + (1 - level)/2, df) * se
+  # up <- pe + qt(level + (1 - level)/2, df) * se 
+  # ts <- pe/se
+  # pv <- 2*pt(-abs(ts), df)
+  # if (!missing(tf)) {
+  #   if (any(tf(lw) > tf(up))) {
+  #     tmp <- lw
+  #     lw <- up
+  #     up <- tmp
+  #   }
+  #   out <- cbind(tf(pe), tf(lw), tf(up))
+  #   colnames(out) <- c("estimate", "lower", "upper")
+  # }
+  # else {
+  #   out <- cbind(pe, se, lw, up, ts, df, pv)
+  #   colnames(out) <- c("estimate", "se", "lower", "upper", "tvalue", "df", "pvalue")
+  # }
+  # if (missing(cnames)) {
+  #   rownames(out) <- rep("", nrow(out))
+  # }
+  # else {
+  #   rownames(out) <- as.character(cnames)
+  # }
   return(out)
 }
