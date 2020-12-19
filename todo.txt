@@ -1,1 +1,1 @@
-Add option to contrast to compute approximate standard errors when a transformation is applied using the delta method, and then use those standard errors to compute Wald confidence intervals and test statistics. Note that this can be done relatively easily by appling numDeriv::jacobian to the tf argument. The easiest way might be to define the transformation function as the identity function f(x) {x} when it is missing? 
+to do:
