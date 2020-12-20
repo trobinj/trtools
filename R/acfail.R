@@ -8,7 +8,7 @@
 #'    \item{time:}{time until failure (hours)}
 #' }
 #'
-#' @note The data are from Proschan (1963) who reported the times between successive failures on each plane. Gaver and O'Muircheartaigh (1987) featured the same data but as the number of failures for each aircraft. 
+#' @note The data are from Proschan (1963) who reported times between successive failures on each plane. Gaver and O'Muircheartaigh (1987) featured the same data but as the number of failures for each aircraft. 
 #'
 #' @source Gaver, D. P. & O'Muircheartaigh, I. G. (1987). Robust empirical Bayes analysis of event rates. \emph{Technometrics}, \emph{29}, 1--15.
 #' 

@@ -23,6 +23,6 @@ acfail
 Successive times until failure of air conditioning equipment on Boeing 720 aircraft.
 }
 \note{
-The data are from Proschan (1963) who reported the times between successive failures on each plane. Gaver and O'Muircheartaigh (1987) featured the same data but as the number of failures for each aircraft.
+The data are from Proschan (1963) who reported times between successive failures on each plane. Gaver and O'Muircheartaigh (1987) featured the same data but as the number of failures for each aircraft.
 }
 \keyword{datasets}
