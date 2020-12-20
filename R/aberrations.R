@@ -4,7 +4,7 @@
 #'
 #' @format A data frame 1052 observations and three variables:
 #' \describe{
-#'    \item{cells:}{number of cells (out of 100) that exhibited chromosome aberrations}
+#'    \item{cells:}{number of cells (out of 100) exhibiting chromosome aberrations}
 #'    \item{radiation:}{approximate dose of radiation (in rads) }
 #'    \item{city:}{city of residence}
 #' }
