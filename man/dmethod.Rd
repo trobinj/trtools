@@ -10,7 +10,7 @@ Mandel, M. (2013). Simulation-based confidence intervals for functions with comp
 dmethod(
   object,
   pfunc,
-  pname,
+  pname = NULL,
   cfunc = coef,
   vfunc = vcov,
   tfunc,
@@ -25,7 +25,7 @@ dmethod(
 \arguments{
 \item{object}{Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.}
 
-\item{pfunc}{Character object that is function of the parameters that can be evaluated by R. The function can return a scalar or a vector. Parameters must be referenced by name as specified by \code{pname}.}
+\item{pfunc}{A character object that is function of the parameters that can be evaluated by R. Parameters must be referenced by name as specified by \code{pname}. Alternatively a function that takes as an argument the parameters. In either case the function can return a scalar or vector.}
 
 \item{pname}{Names of the parameters extracted by \code{cfunc}.}
 

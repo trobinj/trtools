@@ -1,1 +1,2 @@
-to do: nothing yet
+add ability to conduct joint tests in contrast and lincon
+let pfunc argument in dmethod be a function or string (done?)

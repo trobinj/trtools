@@ -3,7 +3,7 @@
 #' This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). 
 #' 
 #' @param object Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.
-#' @param pfunc Character object that is function of the parameters that can be evaluated by R. The function can return a scalar or a vector. Parameters must be referenced by name as specified by \code{pname}. 
+#' @param pfunc A character object that is function of the parameters that can be evaluated by R. Parameters must be referenced by name as specified by \code{pname}. Alternatively a function that takes as an argument the parameters. In either case the function can return a scalar or vector. 
 #' @param pname Names of the parameters extracted by \code{cfunc}.
 #' @param cfunc Function for extracting the parameter estimates from \code{object} (default is \code{coef}).
 #' @param vfunc Function for extracting the estimated covariance matrix of the estimator from \code{object} (default is \code{vcov}).
@@ -30,27 +30,38 @@
 #' @importFrom MASS mvrnorm
 #' @importFrom stats qnorm
 #' @export
-dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
-  if (length(cfunc(object)) != length(pname)) {
-    stop("number of parameter names must equal the number of model parameters")
+dmethod <- function(object, pfunc, pname = NULL, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
+  
+  if (!is.function(pfunc) & length(cfunc(object)) != length(pname)) {
+    stop("parameter names missing")
   }
-  f <- function(theta, pfunc, pname) {
-    theta <- as.list(theta)
-    names(theta) <- pname
-    return(with(theta, eval(parse(text = pfunc))))
+  
+  if (is.function(pfunc)) {
+    f <- pfunc
+  } else {
+    f <- function(theta) {
+      theta <- as.list(theta)
+      names(theta) <- pname
+      return(with(theta, eval(parse(text = pfunc))))
+    }
   }
-  pe <- f(cfunc(object), pfunc, pname)
+  
+  pe <- f(cfunc(object))
+  
   if (B == 0) {
-    ja <- numDeriv::jacobian(f, cfunc(object), pfunc = pfunc, pname = pname, ...)
+    ja <- numDeriv::jacobian(f, cfunc(object), ...)
     va <- diag(ja %*% vfunc(object) %*% t(ja))
   }
   else {
-    y <- data.frame(MASS::mvrnorm(B, cfunc(object), vfunc(object)))
-    colnames(y) <- pname
-    y <- lapply(split(y, seq(B)), function(z) with(z, eval(parse(text = pfunc))))
-    y <- do.call("rbind", y)
-    va <- apply(sweep(y, 2, pe), 2, function(z) sum(z^2)/B)
+    y <- apply(MASS::mvrnorm(B, cfunc(object), vfunc(object)), 1, f)
+    if (is.vector(y)) {
+      y <- as.matrix(y)
+    } else {
+      y <- t(y)
+    }
+    va <- apply(sweep(y, 2, pe), 2, function(z) sum(z^2) / B)
   }  
+  
   se <- sqrt(va)
   lw <- pe - qt(level + (1 - level)/2, df = df) * se
   up <- pe + qt(level + (1 - level)/2, df = df) * se
@@ -84,3 +95,4 @@ dmethod <- function(object, pfunc, pname, cfunc = coef, vfunc = vcov, tfunc, fna
   }
   else return(out)
 }
+
