@@ -48,7 +48,7 @@ dmethod(
 \item{...}{Optional arguments for \code{jacobian}.}
 }
 \description{
-This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013).
+This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). It is based on the \code{deltaMethod} function from the \strong{car} package, but uses numerical rather than analytical derivatives, and has a few other options.
 }
 \details{
 By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) is used which avoids needing to compute derivatives.

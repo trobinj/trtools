@@ -1,6 +1,6 @@
 #' Inferences for contrasts for (generalized) linear models (experimental).
 #' 
-#' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters. 
+#' This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters. It is similar to functions of the same name in the \strong{contrast} and \strong{rms} packages. 
 #' 
 #' @aliases contrast.lm contrast.glm contrast.lmerMod contrast.glmerMod contrast.gls
 #' 

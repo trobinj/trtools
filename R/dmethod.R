@@ -1,6 +1,6 @@
 #' Delta method for regression model objects (experimental).
 #' 
-#' This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). 
+#' This function applies the "delta method" to functions of parameters of model objects, provided that functions can be specified to extract the parameter estimates and the (estimated) covariance matrix of the estimator from the object. Derivatives are computed using numerical differentiation. Alternatively standard errors can be approximated using a bootstrap approach described by Mandel (2013). It is based on the \code{deltaMethod} function from the **car** package, but uses numerical rather than analytical derivatives, and has a few other options. 
 #' 
 #' @param object Model object. Just about any object can be specified provided that functions can also be specified to extract the parameter estimates and the estimated covariance matrix of the estimators.
 #' @param pfunc A character object that is function of the parameters that can be evaluated by R. Parameters must be referenced by name as specified by \code{pname}. Alternatively a function that takes as an argument the parameters. In either case the function can return a scalar or vector. 
@@ -17,7 +17,7 @@
 #' 
 #' @details By default the function applies the delta method using numerical differentiation. However if \code{B} > 0 then a bootstrap method described by Mandel (2013) is used which avoids needing to compute derivatives.
 #' 
-#' @source Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. \emph{The American Statistician}, \emph{62}, 76-81.
+#' @source Mandel, M. (2013). Simulation-based confidence intervals for functions with complicated derivatives. *The American Statistician*, *62*, 76-81.
 #' 
 #' @examples 
 #' # estimation of LD50 for each type of insecticide
@@ -30,6 +30,7 @@
 #' @importFrom MASS mvrnorm
 #' @importFrom stats qnorm
 #' @export
+#' @md
 dmethod <- function(object, pfunc, pname = NULL, cfunc = coef, vfunc = vcov, tfunc, fname, B = 0, sample = FALSE, level = 0.95, df = Inf, ...) {
   
   if (!is.function(pfunc) & length(cfunc(object)) != length(pname)) {
