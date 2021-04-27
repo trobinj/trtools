@@ -9,11 +9,11 @@
 \alias{contrast.gls}
 \title{Inferences for contrasts for (generalized) linear models (experimental).}
 \usage{
-\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
-\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
-\method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
-\method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
-\method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, ...)
+\method{contrast}{lm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, adjust = FALSE, ...)
+\method{contrast}{glm}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, adjust = FALSE, ...)
+\method{contrast}{lmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, adjust = FALSE, ...)
+\method{contrast}{glmerMod}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, adjust = FALSE, ...)
+\method{contrast}{gls}(model, a, b, u, v, df, tf, cnames, level = 0.95, fcov = vcov, delta = FALSE, adjust = FALSE, ...)
 }
 \arguments{
 \item{model}{Model object.}
@@ -34,11 +34,13 @@
 
 \item{cnames}{Labels for the contrasts. Default is none.}
 
-\item{level}{Confidence level in (0,1). Default is 95\%.}
+\item{level}{Confidence level in (0,1). Default is 95\%}
 
 \item{fcov}{Function for estimating the variance-covariance matrix of the model parameters. Default is what is returned by the function \code{vcov}.}
 
 \item{delta}{Logical for if the delta method should be used with a transformation function (if provided). Default is \code{FALSE}.}
+
+\item{adjust}{Option to adjust confidence intervals for a simultaneous confidence level and p-values for a family-wise Type I error rate using the multivariate t or normal distribution. Note that minor variation in these adjustments can happen due to Monte Carlo error in the algorithm used to compute the quantiles and probabilities. Default is \code{FALSE}.}
 }
 \description{
 This is a function allows one to obtain standard inferences (i.e., point estimates, standard errors, confidence intervals, etc.) concerning one or more contrasts expressed in terms of (differences among) linear combinations of the parameters. It is similar to functions of the same name in the \strong{contrast} and \strong{rms} packages.
