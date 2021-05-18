@@ -1,8 +1,8 @@
 add ability to conduct joint tests in contrast and lincon
-let pfunc argument in dmethod be a function or string (done?)
+
 change contrast, lincon, dmethod covariance argument from function to matrix?
+
 modify lincon and dmethod for simultaneous inference using mvtnorm
 
 Add transform option to margeff?
 
-add cnames argument to dmethod

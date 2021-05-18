@@ -13,16 +13,19 @@ logitnr(nrp = 0)
 Link function for logistic regression models with a (fixed/known) natural response parameter.
 }
 \details{
-The logit link function with a natural response parameter is defined as \eqn{\log((E(Y_i) - \pi_i)/(1 - E(Y_i))}, where \eqn{Y_i} is the response variable (i.e., a proportion in the case of a binomial distribution) and \eqn{0 \le \pi_i < 1} is the natural response parameter. Note that the usual logit link function is a special case where \eqn{\pi_i = 0}.
+The logit link function with a natural response parameter is defined as \eqn{log((E(Y) - \pi)/(1 - E(Y))} and inverse link function \eqn{E(Y) = \pi + (1 - \pi)/(1 + exp(-\eta))}, where \eqn{0 \le \pi < 1} is the natural response parameter. Note that the usual logit link function is a special case where \eqn{\pi = 0}. The link function implies a lower asymptote of \eqn{\pi} for \eqn{E(Y)} as \eqn{\eta} approaches negative infinity.
 }
 \note{
-User-specified starting values for the regression parameters may be required in cases where \eqn{\pi_i} is substantially larger than zero. One strategy is to obtain these from a model with a smaller value \eqn{\pi_i}.
+User-specified starting values for the regression parameters may be required in cases where \eqn{\pi} is substantially larger than zero. One strategy is to obtain these from a model with a smaller value \eqn{\pi}.
 }
 \examples{
-# obtain starting values with the natural respone parameter set to 0
+# obtain starting values with the natural response parameter set to 0
 tmp <- glm(cbind(total-y, y) ~ density + species, 
  family = binomial(link = logitnr(0)), data = rotifer)
 # use starting values with a fixed natural response parameter of 0.1
 glm(cbind(total-y, y) ~ density + species, 
  family = binomial(link = logitnr(0.1)), data = rotifer, start = coef(tmp))
+}
+\seealso{
+\code{\link{logitnnr}}
 }
