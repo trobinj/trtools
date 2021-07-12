@@ -6,3 +6,4 @@ modify lincon and dmethod for simultaneous inference using mvtnorm
 
 Add transform option to margeff?
 
+Add option to lincon to not have row label(s). 
