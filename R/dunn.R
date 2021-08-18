@@ -1,6 +1,6 @@
 #' Survey of prevalence of psychiatric disorders. 
 #'
-#' Two-phase stratified random sampling design for the prevalence of psychiatric disorders. Participants sampled in the first phase were classified as low, medium, or high based on their score on the General Health Questionnaire (GHQ). These were then used as strata for a stratified random sampling design in the second phase. Sampled partipants in the second phase were classified as having at least one psychiatric disorder (case) or having no psychiatric disorder (non-case) using the Composite International Diagnostic Interview (CIDI).
+#' Two-phase stratified random sampling design for the prevalence of psychiatric disorders. Participants sampled in the first phase were classified as low, medium, or high based on their score on the General Health Questionnaire (GHQ). These were then used as strata for a stratified random sampling design in the second phase. Sampled participants in the second phase were classified as having at least one psychiatric disorder (case) or having no psychiatric disorder (non-case) using the Composite International Diagnostic Interview (CIDI).
 #'
 #' @format A data frame 1558 observations and two variables:
 #' \describe{
