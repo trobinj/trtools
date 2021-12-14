@@ -1,6 +1,6 @@
 #' Measurements of red oaks. 
 #'
-#' Three measurements of red oaks (\emph{Quercus rubra}): diameter at breast height, volume, and heigh.
+#' Three measurements of red oak trees (\emph{Quercus rubra}): diameter at breast height, volume, and height.
 #'
 #' @format A data frame with 236 observations and three variables:
 #' \describe{

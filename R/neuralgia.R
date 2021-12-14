@@ -11,7 +11,7 @@
 #'    \item{complaint:}{duration (months) of pre-treatment complaint} 
 #' }
 #'
-#' @note The data are from Layman, Agyras, and Glynn (1986) and were featured in Piegorsch (1992) as an example of data for a generalized linear model with a complementary log-log link function since time to pain cessation was thought to follow an approximate exponential distribution. 
+#' @note The data are from Layman, Agyras, and Glynn (1986) and were featured in Piegorsch (1992) as an example of data for a generalized linear model with a complementary log-log link function since time to pain cessation was thought to follow an approximate exponential distribution. One issue with these data is that they appear to suffer from separation and models with treatment are not estimable, although this was not reported by Piegorsch (1992). 
 #' 
 #' @source Layman, P. R., Argyras, E., & Glynn, C. J. (1986). Iontophoresis of vincristine versus saline in post-herpetic neuralgia. A controlled trial. \emph{Pain}, \emph{25}, 165-170.
 #' 

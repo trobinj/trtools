@@ -21,7 +21,7 @@ Gregoire, T. G. & Valentine, H. T. (2007). \emph{Sampling strategies for natural
 redoak
 }
 \description{
-Three measurements of red oaks (\emph{Quercus rubra}): diameter at breast height, volume, and heigh.
+Three measurements of red oak trees (\emph{Quercus rubra}): diameter at breast height, volume, and height.
 }
 \note{
 The data are from Gregoire and Valentine (2007). They obtained the data from Beers and Gingrich (1958).

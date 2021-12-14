@@ -26,6 +26,6 @@ neuralgia
 These data are from a study in which patients with post-herpetic neuralgia were randomly assigned to receive iontophoresis of either vincristine or saline. The patients were interviewed six weeks after treatment to determine if there was any improvement in the neuralgia.
 }
 \note{
-The data are from Layman, Agyras, and Glynn (1986) and were featured in Piegorsch (1992) as an example of data for a generalized linear model with a complementary log-log link function since time to pain cessation was thought to follow an approximate exponential distribution.
+The data are from Layman, Agyras, and Glynn (1986) and were featured in Piegorsch (1992) as an example of data for a generalized linear model with a complementary log-log link function since time to pain cessation was thought to follow an approximate exponential distribution. One issue with these data is that they appear to suffer from separation and models with treatment are not estimable, although this was not reported by Piegorsch (1992).
 }
 \keyword{datasets}
