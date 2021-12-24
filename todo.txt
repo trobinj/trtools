@@ -7,3 +7,5 @@ modify lincon and dmethod for simultaneous inference using mvtnorm
 Add transform option to margeff?
 
 Add option to lincon to not have row label(s). 
+
+Include glm family (link and variance function) for a quasi-likelihood type model with an expected response bounded to [0,c] for any c > 0. This would be sort of like the Wedderburn quasi-likelihood models. 

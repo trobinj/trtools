@@ -14,4 +14,4 @@ Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
-Depends: R (>= 4.0.3)
+Depends: R (>= 4.1.2)
