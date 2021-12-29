@@ -29,3 +29,6 @@ d <- d \%>\% mutate(y = as.numeric(y > 0))
 m <- glm(y ~ x, family = binomial(link = logitcomp(d$m)), data = d)
 summary(m)$coefficients
 }
+\seealso{
+\code{\link[trtools]{logitexp}}
+}

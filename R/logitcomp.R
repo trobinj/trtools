@@ -3,6 +3,9 @@
 #' This link function is applicable to composite sampling designs. The assumption is that there exists an underlying binomially-distributed response \eqn{Z} that follows a logistic regression model, but we only observe \eqn{Y = I(Z > 0)}. Thus \eqn{log[E(Y/m)/(1-E(Y/m))] = \eta}, which implies that \eqn{E(Y) = 1 - (1 - \pi)^m} where \eqn{\pi = E(Y/m) = 1/(1 + exp(\eta))} and so the link function for \eqn{Y} is \eqn{\eta = log((1-\pi)^(-1/m) - 1)}.
 #' 
 #' @details The argument \code{m} specifies the number of trials for \eqn{Y}. This can be a scalar or a variable in the data frame, but if it is the latter then it is necessary explicitly specify the data frame (see example below). 
+#' 
+#' @seealso \code{\link[trtools]{logitexp}}
+#' 
 #' @examples
 #' library(dplyr)
 #'
