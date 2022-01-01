@@ -1,10 +1,12 @@
 #' Logistic-exposure link function. 
 #' 
-#' This is a link function motivated by Schaffer (2004) for modeling survival. Let \eqn{T} be the number of discrete time units until an event (e.g., days), and assume that for a given unit the hazard function \eqn{P(T > t | T \ge t) = \pi} for all \eqn{t} (i.e., the probability of surviving time unit \eqn{t} is \eqn{\pi}). Then the probability of survived \eqn{e} time units is \eqn{pi^e}. Assume a logistic regression model for survival on a given day so that \eqn{\pi = 1/(1 + exp(-\eta))}. Let \eqn{Y} be the number of observational units out of \eqn{m} that survive an exposure of \eqn{e} time units. Then the inverse link function is \eqn{E(Y/m) = 1/(1 + exp(-\eta))^e}, and the link function is \eqn{[\log(E(Y/m)^{1/e}/(1 - E(Y/m)^{1/e})] = \eta}.
+#' This is a link function proposed by Schaffer (2004) for discrete time survival modeling. Let \eqn{T} be the number of discrete time units until an event (e.g., days), and assume that for a given unit the hazard function \eqn{P(T > t | T \ge t) = \pi} for all \eqn{t} (i.e., the probability of surviving time unit \eqn{t} is \eqn{\pi}). Then the probability of survived \eqn{e} time units is \eqn{\pi^e}. Assume a logistic regression model for survival on a given day so that \eqn{\pi = 1/(1 + exp(-\eta))}. Let \eqn{Y} be the number of observational units out of \eqn{m} that survive an exposure of \eqn{e} time units. Then the inverse link function is \eqn{E(Y/m) = 1/(1 + exp(-\eta))^e}, and the link function is \eqn{[\log(E(Y/m)^{1/e}/(1 - E(Y/m)^{1/e})] = \eta}.
 #' 
 #' @details The argument \code{exposure} specifies the number of time units. To be consistent with the motivation given above this should be a positive integer. 
 #' 
 #' @seealso \code{\link[trtools]{logitcomp}}
+#' 
+#' @note The code for this link function is also given as an example in the documentation for \code{family}. 
 #' 
 #' @source Schaffer, T. L. (2004). A unified approach to analyzing nest success. \emph{The Auk}, \emph{121(2)}, 526-540.
 #' 

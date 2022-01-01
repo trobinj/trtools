@@ -1,6 +1,6 @@
 #' Effect of memory on type on response latencies.
 #'
-#' Memory recall response latencies of a single subject. The subject was presented 48 words and asked to recall a memory associated with each word. For half of the words the subject was asked to recall a pleasant memory, and for the other half the subject was asked to recall an unpleasant memory. The two types of memories were alternated when going throug the words. The time between word presentation and memory recall was recorded, but censored at 15 seconds. 
+#' Memory recall response latencies of a single subject. The subject was presented 48 words and asked to recall a memory associated with each word. For half of the words the subject was asked to recall a pleasant memory, and for the other half the subject was asked to recall an unpleasant memory. The two types of memories were alternated when going through the words. The time between word presentation and memory recall was recorded, but censored at 15 seconds. 
 #'
 #' @format A data frame 48 observations and two variables:
 #' \describe{
