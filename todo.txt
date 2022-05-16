@@ -1,3 +1,5 @@
+add methods to lincon for survreg and/or flexsurvreg
+
 add ability to conduct joint tests in contrast and lincon
 
 change contrast, lincon, dmethod covariance argument from function to matrix?
@@ -9,3 +11,5 @@ Add transform option to margeff?
 Add option to lincon to not have row label(s). 
 
 Include glm family (link and variance function) for a quasi-likelihood type model with an expected response bounded to [0,c] for any c > 0. This would be sort of like the Wedderburn quasi-likelihood models. 
+
+Include stringsAsFactors = TRUE and change as.data.frame to data.frame in margeff (mainly in the nls part and the global calculations). Also check if this is the issue for gls objects and contrast. 

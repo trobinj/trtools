@@ -67,7 +67,7 @@ dmethod <- function(object, pfunc, pname = NULL, cfunc = coef, vfunc = vcov, tfu
   lw <- pe - qt(level + (1 - level)/2, df = df) * se
   up <- pe + qt(level + (1 - level)/2, df = df) * se
   ts <- pe/se
-  pv <- 2*pt(-abs(ts), Inf)
+  pv <- 2*pt(-abs(ts), df)
   if (!missing(tfunc)) {
     if (any(tfunc(lw) > tfunc(up))) {
       tmp <- lw

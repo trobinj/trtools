@@ -49,8 +49,8 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
     f <- function(theta, model, a, b, type, delta) {
       theta <- as.list(theta)
       names(theta) <- names(coef(model))
-      pa <- with(c(theta, as.data.frame(a)), eval(parse(text = as.character(formula(model)))))
-      pb <- with(c(theta, as.data.frame(b)), eval(parse(text = as.character(formula(model)))))
+      pa <- with(c(theta, data.frame(a, stringsAsFactors = TRUE)), eval(parse(text = as.character(formula(model)))))
+      pb <- with(c(theta, data.frame(b, stringsAsFactors = TRUE)), eval(parse(text = as.character(formula(model)))))
       out <- switch(type,
        difference = (pa - pb)/delta,
        percent = 100 * (pa/pb - 1),
@@ -61,9 +61,9 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
   else if (length(intersect(class(model), c("lmerMod","glmerMod")) > 0)) {
     f <- function(theta, model, a, b, type, delta) {
       if (summary(model)$useScale) {
-        pa <- predict(model, as.data.frame(a), re.form = NA,
+        pa <- predict(model, data.frame(a, stringsAsFactors = TRUE), re.form = NA,
           newparams = list(beta = theta, sigma = sigma(model), theta = getME(model, "theta")))
-        pb <- predict(model, as.data.frame(b), re.form = NA,
+        pb <- predict(model, data.frame(b, stringsAsFactors = TRUE), re.form = NA,
           newparams = list(beta = theta, sigma = sigma(model), theta = getME(model, "theta")))
       }
       out <- switch(type,
@@ -76,8 +76,8 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
   else {
     f <- function(theta, model, a, b, type, delta) {
       model$coefficients <- theta
-      pa <- predict(model, as.data.frame(a), type = "response")
-      pb <- predict(model, as.data.frame(b), type = "response")
+      pa <- predict(model, data.frame(a, stringsAsFactors = TRUE), type = "response")
+      pb <- predict(model, data.frame(b, stringsAsFactors = TRUE), type = "response")
       out <- switch(type,
         difference = (pa - pb)/delta,
         percent = 100 * (pa/pb - 1),
@@ -102,13 +102,13 @@ margeff <- function(model, a, b, df, cnames, type = c("difference", "percent", "
     } else {
       paramlist <- list(beta = fixef(model), theta = getME(model, "theta"))
     }
-    pa <- predict(model, as.data.frame(a), re.form = NA, newparams = paramlist)
-    pb <- predict(model, as.data.frame(b), re.form = NA, newparams = paramlist)
+    pa <- predict(model, data.frame(a, stringsAsFactors = TRUE), re.form = NA, newparams = paramlist)
+    pb <- predict(model, data.frame(b, stringsAsFactors = TRUE), re.form = NA, newparams = paramlist)
     gr <- numDeriv::jacobian(f, fixef(model), model = model, a = a, b = b, 
       type = type, delta = delta)
   } else {
-    pa <- predict(model, as.data.frame(a), type = "response")
-    pb <- predict(model, as.data.frame(b), type = "response")
+    pa <- predict(model, data.frame(a, stringsAsFactors = TRUE), type = "response")
+    pb <- predict(model, data.frame(b, stringsAsFactors = TRUE), type = "response")
     gr <- numDeriv::jacobian(f, coef(model), model = model, a = a, b = b, 
       type = type, delta = delta)
   }
