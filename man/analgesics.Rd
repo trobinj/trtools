@@ -8,7 +8,7 @@
 A data frame 14 observations and four variables:
 \describe{
    \item{analgesic:}{type of analgesic administered (morphine hydrochloride, amidone, phenadoxone, or pethidine hydrochloride)}
-   \item{deposit:}{amount of insecticide in mg per 10 square cm}
+   \item{dose:}{amount of analgesic in mg/kg}
    \item{responding:}{number of mice responding to the analgesic (see above)}
    \item{tested:}{number of mice tested}
 }
