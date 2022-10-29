@@ -27,6 +27,6 @@ sole
 Tanks of eggs of English sole (\emph{Parophrys vetulus}) were exposed to different levels of salinity and temperature. The number of eggs in each tank that hatched was counted.
 }
 \note{
-The data are originally from Woodward Alderdice and Forrester (1968), and are featured in Lindsey, Alderdice, and Pienaar (1970) and Lindsey (1975).
+The data are originally from Alderdice and Forrester (1968), and are featured in Lindsey, Alderdice, and Pienaar (1970) and Lindsey (1975).
 }
 \keyword{datasets}

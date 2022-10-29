@@ -6,7 +6,7 @@ Authors@R: person("Timothy", "Johnson", email = "trobinj@gmail.com", role = c("a
 Description: This package includes data sets and a utility functions that I use in teaching and research.
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Imports: numDeriv (>= 2016.8-1.1), MASS (>= 7.3-53), dplyr(>= 1.0.2), tidyr (>= 1.1.2), lme4 (>= 1.1-25), mvtnorm (>= 1.1-1)
 URL: http://github.com/trobinj/trtools
 BugReports: http://github.com/trobinj/trtools/issues

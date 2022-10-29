@@ -10,7 +10,7 @@
 #'    \item{total:}{number of eggs in tank}
 #' }
 #'
-#' @note The data are originally from Woodward Alderdice and Forrester (1968), and are featured in Lindsey, Alderdice, and Pienaar (1970) and Lindsey (1975). 
+#' @note The data are originally from Alderdice and Forrester (1968), and are featured in Lindsey, Alderdice, and Pienaar (1970) and Lindsey (1975). 
 #' 
 #' @source Alderdice, D. F., & Forrester, C. R. (1968). Some effects of salinity and temperature on early development and survival of the English sole (\emph{Parophyrys vetulus}). \emph{Journal of Fisheries Research Board of Canada}, \emph{25(3)}, 495--521.
 #' 
