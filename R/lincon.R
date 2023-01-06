@@ -197,13 +197,16 @@ lincon.nls <- function(model, a, b, df, tf, cnames, level = 0.95, fcov = vcov, .
   }
   se <- sqrt(diag(a %*% fcov(model) %*% t(a)))
   pe <- a %*% coef(model) + b
+  
   if (missing(df)) {
     df <- summary(model)$df[2]
   }
+  
   lw <- pe - qt(level + (1 - level)/2, df) * se
   up <- pe + qt(level + (1 - level)/2, df) * se 
   ts <- pe/se
   pv <- 2*pt(-abs(ts), df)
+  
   if (!missing(tf)) {
     if (any(tf(lw) > tf(up))) {
       tmp <- lw
